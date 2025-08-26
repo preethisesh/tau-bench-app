@@ -67,11 +67,21 @@ def clean_agent_response(text):
     if text is None:
         return ""
     
-    # Replace *word* with just word (removes italic formatting)
+    # Fix the *word* italic formatting (like *to*)
     text = re.sub(r'\*([^*\s]+)\*', r'\1', text)
     
-    # Alternatively, you could be more specific and just fix the "to" case:
-    # text = text.replace('*to*', 'to')
+    # Fix the "adecreaseof" and "aincreaseof" patterns
+    text = re.sub(r'\(adecreaseof(\d+\.?\d*)\)', r'(a decrease of $\1)', text)
+    text = re.sub(r'\(aincreaseof(\d+\.?\d*)\)', r'(an increase of $\1)', text)
+    
+    # Fix run-together words like "whileyourcurrentApple"
+    text = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
+    
+    # Fix run-together words followed by numbers
+    text = re.sub(r'([a-z])(\d)', r'\1 \2', text)
+    
+    # Fix number-to-number patterns like "46.66to53.48"
+    text = re.sub(r'(\d+\.?\d*)to(\d+\.?\d*)', r'\1 to \2', text)
     
     return text
 
