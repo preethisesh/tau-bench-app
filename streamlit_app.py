@@ -336,7 +336,7 @@ def main():
                             trial=0
                         )
                         
-                        st.success(f"✅ Conversation ended and saved to: {filename}")
+                        st.success(f"✅ Conversation ended. ")
                         
                     except Exception as e:
                         st.error(f"Error saving conversation: {str(e)}")
