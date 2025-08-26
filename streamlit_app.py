@@ -430,9 +430,15 @@ def main():
                         
                         else:
                             # Agent is responding to user - display response and break loop
+                            agent_content = agent_message["content"]
+                            
+                            # Handle case where agent content is None
+                            if agent_content is None or agent_content.strip() == "":
+                                agent_content = "I apologize, but I didn't understand your request. Could you please rephrase or provide more specific details about what you'd like me to help you with?"
+                            
                             with st.chat_message("assistant"):
-                                st.write(agent_message["content"])
-                            st.session_state.messages.append({"role": "assistant", "content": agent_message["content"]})
+                                st.write(agent_content)
+                            st.session_state.messages.append({"role": "assistant", "content": agent_content})
                             st.session_state.agent_messages.append(agent_message)
                             
                             # Check if conversation is done
