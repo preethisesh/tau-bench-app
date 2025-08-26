@@ -1,0 +1,16 @@
+#libevent pkg-config source file
+
+prefix=/Users/preethiseshadri/Documents/tau-bench/env
+exec_prefix=/Users/preethiseshadri/Documents/tau-bench/env
+libdir=/Users/preethiseshadri/Documents/tau-bench/env/lib
+includedir=/Users/preethiseshadri/Documents/tau-bench/env/include
+
+Name: libevent
+Description: libevent is an asynchronous notification event loop library
+Version: 2.1.12
+Requires:
+Conflicts:
+Libs: -L${libdir} -levent
+Libs.private: 
+Cflags: -I${includedir}
+

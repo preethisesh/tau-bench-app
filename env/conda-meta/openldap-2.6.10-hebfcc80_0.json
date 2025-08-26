@@ -1,0 +1,2351 @@
+{
+  "build": "hebfcc80_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/osx-arm64",
+  "constrains": [],
+  "depends": [
+    "__osx >=11.1",
+    "cyrus-sasl >=2.1.27",
+    "cyrus-sasl >=2.1.28,<3.0a0",
+    "libcxx >=14.0.6",
+    "libevent >=2.1.12,<2.1.13.0a0",
+    "libsodium >=1.0.18,<1.0.19.0a0",
+    "openssl >=3",
+    "openssl >=3.0.17,<4.0a0"
+  ],
+  "extracted_package_dir": "/opt/miniconda3/pkgs/openldap-2.6.10-hebfcc80_0",
+  "files": [
+    "bin/ldapadd",
+    "bin/ldapcompare",
+    "bin/ldapdelete",
+    "bin/ldapexop",
+    "bin/ldapmodify",
+    "bin/ldapmodrdn",
+    "bin/ldappasswd",
+    "bin/ldapsearch",
+    "bin/ldapurl",
+    "bin/ldapvc",
+    "bin/ldapwhoami",
+    "etc/openldap/ldap.conf",
+    "etc/openldap/ldap.conf.default",
+    "include/lber.h",
+    "include/lber_types.h",
+    "include/ldap.h",
+    "include/ldap_cdefs.h",
+    "include/ldap_features.h",
+    "include/ldap_schema.h",
+    "include/ldap_utf8.h",
+    "include/ldif.h",
+    "include/openldap.h",
+    "include/slapi-plugin.h",
+    "lib/liblber.2.dylib",
+    "lib/liblber.a",
+    "lib/liblber.dylib",
+    "lib/libldap.2.dylib",
+    "lib/libldap.a",
+    "lib/libldap.dylib",
+    "lib/pkgconfig/lber.pc",
+    "lib/pkgconfig/ldap.pc",
+    "share/man/man1/ldapadd.1",
+    "share/man/man1/ldapcompare.1",
+    "share/man/man1/ldapdelete.1",
+    "share/man/man1/ldapexop.1",
+    "share/man/man1/ldapmodify.1",
+    "share/man/man1/ldapmodrdn.1",
+    "share/man/man1/ldappasswd.1",
+    "share/man/man1/ldapsearch.1",
+    "share/man/man1/ldapurl.1",
+    "share/man/man1/ldapvc.1",
+    "share/man/man1/ldapwhoami.1",
+    "share/man/man3/ber_alloc_t.3",
+    "share/man/man3/ber_bvarray_add.3",
+    "share/man/man3/ber_bvarray_free.3",
+    "share/man/man3/ber_bvdup.3",
+    "share/man/man3/ber_bvecadd.3",
+    "share/man/man3/ber_bvecfree.3",
+    "share/man/man3/ber_bvfree.3",
+    "share/man/man3/ber_bvstr.3",
+    "share/man/man3/ber_bvstrdup.3",
+    "share/man/man3/ber_dupbv.3",
+    "share/man/man3/ber_first_element.3",
+    "share/man/man3/ber_flush.3",
+    "share/man/man3/ber_free.3",
+    "share/man/man3/ber_get_bitstring.3",
+    "share/man/man3/ber_get_boolean.3",
+    "share/man/man3/ber_get_enum.3",
+    "share/man/man3/ber_get_int.3",
+    "share/man/man3/ber_get_next.3",
+    "share/man/man3/ber_get_null.3",
+    "share/man/man3/ber_get_stringa.3",
+    "share/man/man3/ber_get_stringb.3",
+    "share/man/man3/ber_next_element.3",
+    "share/man/man3/ber_peek_tag.3",
+    "share/man/man3/ber_printf.3",
+    "share/man/man3/ber_put_enum.3",
+    "share/man/man3/ber_put_int.3",
+    "share/man/man3/ber_put_null.3",
+    "share/man/man3/ber_put_ostring.3",
+    "share/man/man3/ber_put_seq.3",
+    "share/man/man3/ber_put_set.3",
+    "share/man/man3/ber_put_string.3",
+    "share/man/man3/ber_scanf.3",
+    "share/man/man3/ber_skip_tag.3",
+    "share/man/man3/ber_start_set.3",
+    "share/man/man3/ber_str2bv.3",
+    "share/man/man3/lber-decode.3",
+    "share/man/man3/lber-encode.3",
+    "share/man/man3/lber-memory.3",
+    "share/man/man3/lber-sockbuf.3",
+    "share/man/man3/lber-types.3",
+    "share/man/man3/ld_errno.3",
+    "share/man/man3/ldap.3",
+    "share/man/man3/ldap_abandon.3",
+    "share/man/man3/ldap_abandon_ext.3",
+    "share/man/man3/ldap_add.3",
+    "share/man/man3/ldap_add_ext.3",
+    "share/man/man3/ldap_add_ext_s.3",
+    "share/man/man3/ldap_add_s.3",
+    "share/man/man3/ldap_attributetype2name.3",
+    "share/man/man3/ldap_attributetype2str.3",
+    "share/man/man3/ldap_attributetype_free.3",
+    "share/man/man3/ldap_bind.3",
+    "share/man/man3/ldap_bind_s.3",
+    "share/man/man3/ldap_compare.3",
+    "share/man/man3/ldap_compare_ext.3",
+    "share/man/man3/ldap_compare_ext_s.3",
+    "share/man/man3/ldap_compare_s.3",
+    "share/man/man3/ldap_control_create.3",
+    "share/man/man3/ldap_control_dup.3",
+    "share/man/man3/ldap_control_find.3",
+    "share/man/man3/ldap_control_free.3",
+    "share/man/man3/ldap_controls.3",
+    "share/man/man3/ldap_controls_dup.3",
+    "share/man/man3/ldap_controls_free.3",
+    "share/man/man3/ldap_count_entries.3",
+    "share/man/man3/ldap_count_messages.3",
+    "share/man/man3/ldap_count_references.3",
+    "share/man/man3/ldap_count_values.3",
+    "share/man/man3/ldap_count_values_len.3",
+    "share/man/man3/ldap_dcedn2dn.3",
+    "share/man/man3/ldap_delete.3",
+    "share/man/man3/ldap_delete_ext.3",
+    "share/man/man3/ldap_delete_ext_s.3",
+    "share/man/man3/ldap_delete_s.3",
+    "share/man/man3/ldap_destroy.3",
+    "share/man/man3/ldap_dn2ad_canonical.3",
+    "share/man/man3/ldap_dn2dcedn.3",
+    "share/man/man3/ldap_dn2str.3",
+    "share/man/man3/ldap_dn2ufn.3",
+    "share/man/man3/ldap_dnfree.3",
+    "share/man/man3/ldap_dup.3",
+    "share/man/man3/ldap_err2string.3",
+    "share/man/man3/ldap_errlist.3",
+    "share/man/man3/ldap_error.3",
+    "share/man/man3/ldap_explode_dn.3",
+    "share/man/man3/ldap_explode_rdn.3",
+    "share/man/man3/ldap_extended_operation.3",
+    "share/man/man3/ldap_extended_operation_s.3",
+    "share/man/man3/ldap_first_attribute.3",
+    "share/man/man3/ldap_first_entry.3",
+    "share/man/man3/ldap_first_message.3",
+    "share/man/man3/ldap_first_reference.3",
+    "share/man/man3/ldap_free_urldesc.3",
+    "share/man/man3/ldap_get_attribute_ber.3",
+    "share/man/man3/ldap_get_dn.3",
+    "share/man/man3/ldap_get_option.3",
+    "share/man/man3/ldap_get_values.3",
+    "share/man/man3/ldap_get_values_len.3",
+    "share/man/man3/ldap_init.3",
+    "share/man/man3/ldap_init_fd.3",
+    "share/man/man3/ldap_initialize.3",
+    "share/man/man3/ldap_install_tls.3",
+    "share/man/man3/ldap_is_ldap_url.3",
+    "share/man/man3/ldap_matchingrule2name.3",
+    "share/man/man3/ldap_matchingrule2str.3",
+    "share/man/man3/ldap_matchingrule_free.3",
+    "share/man/man3/ldap_memalloc.3",
+    "share/man/man3/ldap_memcalloc.3",
+    "share/man/man3/ldap_memfree.3",
+    "share/man/man3/ldap_memory.3",
+    "share/man/man3/ldap_memrealloc.3",
+    "share/man/man3/ldap_memvfree.3",
+    "share/man/man3/ldap_modify.3",
+    "share/man/man3/ldap_modify_ext.3",
+    "share/man/man3/ldap_modify_ext_s.3",
+    "share/man/man3/ldap_modify_s.3",
+    "share/man/man3/ldap_modrdn.3",
+    "share/man/man3/ldap_modrdn2.3",
+    "share/man/man3/ldap_modrdn2_s.3",
+    "share/man/man3/ldap_modrdn_s.3",
+    "share/man/man3/ldap_mods_free.3",
+    "share/man/man3/ldap_msgfree.3",
+    "share/man/man3/ldap_msgid.3",
+    "share/man/man3/ldap_msgtype.3",
+    "share/man/man3/ldap_next_attribute.3",
+    "share/man/man3/ldap_next_entry.3",
+    "share/man/man3/ldap_next_message.3",
+    "share/man/man3/ldap_next_reference.3",
+    "share/man/man3/ldap_objectclass2name.3",
+    "share/man/man3/ldap_objectclass2str.3",
+    "share/man/man3/ldap_objectclass_free.3",
+    "share/man/man3/ldap_open.3",
+    "share/man/man3/ldap_parse_extended_result.3",
+    "share/man/man3/ldap_parse_intermediate.3",
+    "share/man/man3/ldap_parse_reference.3",
+    "share/man/man3/ldap_parse_result.3",
+    "share/man/man3/ldap_parse_sasl_bind_result.3",
+    "share/man/man3/ldap_parse_sort_control.3",
+    "share/man/man3/ldap_parse_vlv_control.3",
+    "share/man/man3/ldap_perror.3",
+    "share/man/man3/ldap_rename.3",
+    "share/man/man3/ldap_rename_s.3",
+    "share/man/man3/ldap_result.3",
+    "share/man/man3/ldap_result2error.3",
+    "share/man/man3/ldap_sasl_bind.3",
+    "share/man/man3/ldap_sasl_bind_s.3",
+    "share/man/man3/ldap_schema.3",
+    "share/man/man3/ldap_scherr2str.3",
+    "share/man/man3/ldap_search.3",
+    "share/man/man3/ldap_search_ext.3",
+    "share/man/man3/ldap_search_ext_s.3",
+    "share/man/man3/ldap_search_s.3",
+    "share/man/man3/ldap_search_st.3",
+    "share/man/man3/ldap_set_option.3",
+    "share/man/man3/ldap_set_rebind_proc.3",
+    "share/man/man3/ldap_set_urllist_proc.3",
+    "share/man/man3/ldap_simple_bind.3",
+    "share/man/man3/ldap_simple_bind_s.3",
+    "share/man/man3/ldap_sort.3",
+    "share/man/man3/ldap_sort_entries.3",
+    "share/man/man3/ldap_sort_strcasecmp.3",
+    "share/man/man3/ldap_sort_values.3",
+    "share/man/man3/ldap_start_tls.3",
+    "share/man/man3/ldap_start_tls_s.3",
+    "share/man/man3/ldap_str2attributetype.3",
+    "share/man/man3/ldap_str2dn.3",
+    "share/man/man3/ldap_str2matchingrule.3",
+    "share/man/man3/ldap_str2objectclass.3",
+    "share/man/man3/ldap_str2syntax.3",
+    "share/man/man3/ldap_strdup.3",
+    "share/man/man3/ldap_sync.3",
+    "share/man/man3/ldap_syntax2name.3",
+    "share/man/man3/ldap_syntax2str.3",
+    "share/man/man3/ldap_syntax_free.3",
+    "share/man/man3/ldap_tls.3",
+    "share/man/man3/ldap_tls_inplace.3",
+    "share/man/man3/ldap_unbind.3",
+    "share/man/man3/ldap_unbind_ext.3",
+    "share/man/man3/ldap_unbind_ext_s.3",
+    "share/man/man3/ldap_unbind_s.3",
+    "share/man/man3/ldap_url.3",
+    "share/man/man3/ldap_url_parse.3",
+    "share/man/man3/ldap_value_free.3",
+    "share/man/man3/ldap_value_free_len.3",
+    "share/man/man5/ldap.conf.5",
+    "share/man/man5/ldif.5",
+    "share/man/man5/lloadd.conf.5",
+    "share/man/man5/slapd-asyncmeta.5",
+    "share/man/man5/slapd-config.5",
+    "share/man/man5/slapd-dnssrv.5",
+    "share/man/man5/slapd-ldap.5",
+    "share/man/man5/slapd-ldif.5",
+    "share/man/man5/slapd-mdb.5",
+    "share/man/man5/slapd-meta.5",
+    "share/man/man5/slapd-monitor.5",
+    "share/man/man5/slapd-null.5",
+    "share/man/man5/slapd-passwd.5",
+    "share/man/man5/slapd-perl.5",
+    "share/man/man5/slapd-relay.5",
+    "share/man/man5/slapd-sock.5",
+    "share/man/man5/slapd-sql.5",
+    "share/man/man5/slapd-wt.5",
+    "share/man/man5/slapd.access.5",
+    "share/man/man5/slapd.backends.5",
+    "share/man/man5/slapd.conf.5",
+    "share/man/man5/slapd.overlays.5",
+    "share/man/man5/slapd.plugin.5",
+    "share/man/man5/slapo-accesslog.5",
+    "share/man/man5/slapo-auditlog.5",
+    "share/man/man5/slapo-autoca.5",
+    "share/man/man5/slapo-chain.5",
+    "share/man/man5/slapo-collect.5",
+    "share/man/man5/slapo-constraint.5",
+    "share/man/man5/slapo-dds.5",
+    "share/man/man5/slapo-deref.5",
+    "share/man/man5/slapo-dyngroup.5",
+    "share/man/man5/slapo-dynlist.5",
+    "share/man/man5/slapo-homedir.5",
+    "share/man/man5/slapo-memberof.5",
+    "share/man/man5/slapo-nestgroup.5",
+    "share/man/man5/slapo-otp.5",
+    "share/man/man5/slapo-pbind.5",
+    "share/man/man5/slapo-pcache.5",
+    "share/man/man5/slapo-ppolicy.5",
+    "share/man/man5/slapo-refint.5",
+    "share/man/man5/slapo-remoteauth.5",
+    "share/man/man5/slapo-retcode.5",
+    "share/man/man5/slapo-rwm.5",
+    "share/man/man5/slapo-sock.5",
+    "share/man/man5/slapo-sssvlv.5",
+    "share/man/man5/slapo-syncprov.5",
+    "share/man/man5/slapo-translucent.5",
+    "share/man/man5/slapo-unique.5",
+    "share/man/man5/slapo-valsort.5",
+    "share/man/man5/slappw-argon2.5",
+    "share/man/man8/lloadd.8",
+    "share/man/man8/slapacl.8",
+    "share/man/man8/slapadd.8",
+    "share/man/man8/slapauth.8",
+    "share/man/man8/slapcat.8",
+    "share/man/man8/slapd.8",
+    "share/man/man8/slapdn.8",
+    "share/man/man8/slapindex.8",
+    "share/man/man8/slapmodify.8",
+    "share/man/man8/slappasswd.8",
+    "share/man/man8/slapschema.8",
+    "share/man/man8/slaptest.8"
+  ],
+  "fn": "openldap-2.6.10-hebfcc80_0.conda",
+  "legacy_bz2_md5": "2557b9c7ae119859d3dcfd9d52d25eb4",
+  "license": "OLDAP-2.8",
+  "license_family": "BSD",
+  "link": {
+    "source": "/opt/miniconda3/pkgs/openldap-2.6.10-hebfcc80_0",
+    "type": 1
+  },
+  "md5": "42e5ef47a433f13f2cbd5667d1c2298f",
+  "name": "openldap",
+  "package_tarball_full_path": "/opt/miniconda3/pkgs/openldap-2.6.10-hebfcc80_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "bin/ldapadd",
+        "path_type": "softlink",
+        "sha256": "b550687150820b18da98ce384678abec80eada21349b716630397cd50154b74d",
+        "size_in_bytes": 399024
+      },
+      {
+        "_path": "bin/ldapcompare",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "6c6fb93e560897ce8b48bf45d62f2492cdcfaecf11b1f97f8ff25b6615889368",
+        "sha256_in_prefix": "7cef5eedeecdaa10f66a5e9c7fa233a8d65ebe8ac23be1309ac0b97e4b0860fc",
+        "size_in_bytes": 381968
+      },
+      {
+        "_path": "bin/ldapdelete",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "198217a2f5c83849f187559c161f1bfbde6cc7c8b15d448953b2797b0f33be10",
+        "sha256_in_prefix": "fd840d4ef5cc746e4533558ee37509b94b2a6d9074f31ad38104cbf8fc5788f8",
+        "size_in_bytes": 381904
+      },
+      {
+        "_path": "bin/ldapexop",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "5e2b7f3fb56bd2bba8badaf0d449c531442884eb6f88981588aa2549f263fa72",
+        "sha256_in_prefix": "c6422d3b4630612000ff7c169f2e1e38b04434a1ac17a8b782139e7ac4efdabc",
+        "size_in_bytes": 381904
+      },
+      {
+        "_path": "bin/ldapmodify",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "b550687150820b18da98ce384678abec80eada21349b716630397cd50154b74d",
+        "sha256_in_prefix": "0cc5cc517c77bc54b437113a08a83eb3c1294f2ec659e39e16070b608fd2ac34",
+        "size_in_bytes": 399024
+      },
+      {
+        "_path": "bin/ldapmodrdn",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "a2e97897bdd157622f912e5719cbe7a055ae370c5be9f46e4cfd2a9ffe4bfadf",
+        "sha256_in_prefix": "af12cf66fa68101d1a4908b0a60d03e0726f0056d8143eaf7ea0b91160069c55",
+        "size_in_bytes": 382000
+      },
+      {
+        "_path": "bin/ldappasswd",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "aa86f31e54218dc4320476e6e0aa860dd200c25f958fbab65dd2c75b219ed6d8",
+        "sha256_in_prefix": "d71c3db104dc3015b30432120dffde79edf8b7260441fc8fdbca83fb7155e2e2",
+        "size_in_bytes": 381856
+      },
+      {
+        "_path": "bin/ldapsearch",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "7f89b622dd97b545a8b73f3c1288d54811060a1569115702291e18715be9e264",
+        "sha256_in_prefix": "d80b3e762ed561a1657401d0d8b888e67f714a270f8317551a05054bfd8fca5c",
+        "size_in_bytes": 415648
+      },
+      {
+        "_path": "bin/ldapurl",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "0c059cd386200e51c9523ee151c6487255718b92d51a274235e73d2c33c1e568",
+        "sha256_in_prefix": "c9026367d4b941f17f5410094efb06246dda38983a2b420cf6e8df1bfba24829",
+        "size_in_bytes": 327920
+      },
+      {
+        "_path": "bin/ldapvc",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "90a47b31a3dde9633d3908084ed18950da3fb9fe179fca88da2a23806526949a",
+        "sha256_in_prefix": "66cde34942cf510d8508975f5ab85878be8faeddc6f659b44d0183cabdfb7270",
+        "size_in_bytes": 381920
+      },
+      {
+        "_path": "bin/ldapwhoami",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "17d339e34ac07b911000406375806f5970ad08cdc3a8c31935f89cc438ec0f8d",
+        "sha256_in_prefix": "04036a0a7ff489795ebf7b1dd19a55e1db56464c217e95786c7276ac4314c109",
+        "size_in_bytes": 381856
+      },
+      {
+        "_path": "etc/openldap/ldap.conf",
+        "path_type": "hardlink",
+        "sha256": "ab6e6cc0dad4427497b607e42c7815e35691a5a42afa312ddb49996601a6ab80",
+        "sha256_in_prefix": "ab6e6cc0dad4427497b607e42c7815e35691a5a42afa312ddb49996601a6ab80",
+        "size_in_bytes": 247
+      },
+      {
+        "_path": "etc/openldap/ldap.conf.default",
+        "path_type": "hardlink",
+        "sha256": "ab6e6cc0dad4427497b607e42c7815e35691a5a42afa312ddb49996601a6ab80",
+        "sha256_in_prefix": "ab6e6cc0dad4427497b607e42c7815e35691a5a42afa312ddb49996601a6ab80",
+        "size_in_bytes": 247
+      },
+      {
+        "_path": "include/lber.h",
+        "path_type": "hardlink",
+        "sha256": "73153a41a41f2a04dbacdd73df3362601d80c962cbc94b29665d24e28284f8f4",
+        "sha256_in_prefix": "73153a41a41f2a04dbacdd73df3362601d80c962cbc94b29665d24e28284f8f4",
+        "size_in_bytes": 15480
+      },
+      {
+        "_path": "include/lber_types.h",
+        "path_type": "hardlink",
+        "sha256": "c16478229cbc0c3305210f084189284e8e349f3eb3b44f6b8c3ff76cf1c736a2",
+        "sha256_in_prefix": "c16478229cbc0c3305210f084189284e8e349f3eb3b44f6b8c3ff76cf1c736a2",
+        "size_in_bytes": 1468
+      },
+      {
+        "_path": "include/ldap.h",
+        "path_type": "hardlink",
+        "sha256": "3e653aaa7b89e2295a9ff0066758893a717b6a8605d960e199ceaa9be32a0f5f",
+        "sha256_in_prefix": "3e653aaa7b89e2295a9ff0066758893a717b6a8605d960e199ceaa9be32a0f5f",
+        "size_in_bytes": 74100
+      },
+      {
+        "_path": "include/ldap_cdefs.h",
+        "path_type": "hardlink",
+        "sha256": "fe3965e0aee7d022f7fb7201cd1474ac5bf7ed7d17d451e0188c3ab377b3da6c",
+        "sha256_in_prefix": "fe3965e0aee7d022f7fb7201cd1474ac5bf7ed7d17d451e0188c3ab377b3da6c",
+        "size_in_bytes": 9466
+      },
+      {
+        "_path": "include/ldap_features.h",
+        "path_type": "hardlink",
+        "sha256": "bbece6d9b4fa69ef3a84e4f03f0f1396b0d59d2dc11d363cfc141b0d71825e98",
+        "sha256_in_prefix": "bbece6d9b4fa69ef3a84e4f03f0f1396b0d59d2dc11d363cfc141b0d71825e98",
+        "size_in_bytes": 1586
+      },
+      {
+        "_path": "include/ldap_schema.h",
+        "path_type": "hardlink",
+        "sha256": "ac8a339fa98820e5730cffa3ffa4a775b825bf26d6021d52901c6edeb6c68cf8",
+        "sha256_in_prefix": "ac8a339fa98820e5730cffa3ffa4a775b825bf26d6021d52901c6edeb6c68cf8",
+        "size_in_bytes": 9450
+      },
+      {
+        "_path": "include/ldap_utf8.h",
+        "path_type": "hardlink",
+        "sha256": "a445cd22f2e0f939b2b96a3a4e5761c36ed50245ecaaddb1275ff5ed0d00bf45",
+        "sha256_in_prefix": "a445cd22f2e0f939b2b96a3a4e5761c36ed50245ecaaddb1275ff5ed0d00bf45",
+        "size_in_bytes": 3468
+      },
+      {
+        "_path": "include/ldif.h",
+        "path_type": "hardlink",
+        "sha256": "1d98d501925fc02fe28ebbd6785585b3bed8d1f7bd4bff038eb3996a097b284b",
+        "sha256_in_prefix": "1d98d501925fc02fe28ebbd6785585b3bed8d1f7bd4bff038eb3996a097b284b",
+        "size_in_bytes": 4793
+      },
+      {
+        "_path": "include/openldap.h",
+        "path_type": "hardlink",
+        "sha256": "2d775e74ec9ca4d7280e3fa99f3588c3e694317aef746a392c8d6fe0e754300f",
+        "sha256_in_prefix": "2d775e74ec9ca4d7280e3fa99f3588c3e694317aef746a392c8d6fe0e754300f",
+        "size_in_bytes": 964
+      },
+      {
+        "_path": "include/slapi-plugin.h",
+        "path_type": "hardlink",
+        "sha256": "9cab1ae01b1da9163fe423c2d2fae23e3488ab67d62efa866d34c92cb3a33a85",
+        "sha256_in_prefix": "9cab1ae01b1da9163fe423c2d2fae23e3488ab67d62efa866d34c92cb3a33a85",
+        "size_in_bytes": 38352
+      },
+      {
+        "_path": "lib/liblber.2.dylib",
+        "path_type": "hardlink",
+        "sha256": "fccf18ed10d7ac0f9193a8b45b7121377598995c244389587de8fdebc36e39a9",
+        "sha256_in_prefix": "fccf18ed10d7ac0f9193a8b45b7121377598995c244389587de8fdebc36e39a9",
+        "size_in_bytes": 109504
+      },
+      {
+        "_path": "lib/liblber.a",
+        "path_type": "hardlink",
+        "sha256": "69b73092e06d80238d5ad462f5ba84070b62b9543b4390e9a386c946cd3dad7d",
+        "sha256_in_prefix": "69b73092e06d80238d5ad462f5ba84070b62b9543b4390e9a386c946cd3dad7d",
+        "size_in_bytes": 83760
+      },
+      {
+        "_path": "lib/liblber.dylib",
+        "path_type": "softlink",
+        "sha256": "fccf18ed10d7ac0f9193a8b45b7121377598995c244389587de8fdebc36e39a9",
+        "size_in_bytes": 109504
+      },
+      {
+        "_path": "lib/libldap.2.dylib",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "51df4537fee8b21a99a17e6acca713097e763cbc71de0a54558054428473a587",
+        "sha256_in_prefix": "b9e81a9575e2f008be1834f5b827030a9c5f7fadffbc2ab9c09b3fa42ee6a0dc",
+        "size_in_bytes": 376224
+      },
+      {
+        "_path": "lib/libldap.a",
+        "file_mode": "binary",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "a1f3cb1e06e93974628b578255088b936201532944b476d9605e11593dab7560",
+        "sha256_in_prefix": "120f8d32ba625a78964c676a5f7167b06ad22da8db3bc7141439df04ed360f9d",
+        "size_in_bytes": 579032
+      },
+      {
+        "_path": "lib/libldap.dylib",
+        "path_type": "softlink",
+        "sha256": "51df4537fee8b21a99a17e6acca713097e763cbc71de0a54558054428473a587",
+        "size_in_bytes": 376224
+      },
+      {
+        "_path": "lib/pkgconfig/lber.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "50ebbf52619234335fcd21fa7f26987f6917ef263a50a9325ecab30151b87270",
+        "sha256_in_prefix": "87206945fd5aeb4ef273c694c4ea7a6a33aaddacce1bec163b439ce51b49f4f1",
+        "size_in_bytes": 551
+      },
+      {
+        "_path": "lib/pkgconfig/ldap.pc",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "75f630fde2d10e2cb61950026932885a00d3a7bfd2af6b6b18204f161fe871ca",
+        "sha256_in_prefix": "68421afd1f8e7b32af6ddace32e447ec3ced21cafd83df2fedd3b53f544b7cb4",
+        "size_in_bytes": 589
+      },
+      {
+        "_path": "share/man/man1/ldapadd.1",
+        "path_type": "softlink",
+        "sha256": "c49345c239e11569ae72084c9a976783ae6c37e038be214b79d6b644106db9cc",
+        "size_in_bytes": 8814
+      },
+      {
+        "_path": "share/man/man1/ldapcompare.1",
+        "path_type": "hardlink",
+        "sha256": "bb72bd048bc2fbcba9d4d31b03ee5d18a6850a61859771a89c29bd080abc407c",
+        "sha256_in_prefix": "bb72bd048bc2fbcba9d4d31b03ee5d18a6850a61859771a89c29bd080abc407c",
+        "size_in_bytes": 6472
+      },
+      {
+        "_path": "share/man/man1/ldapdelete.1",
+        "path_type": "hardlink",
+        "sha256": "126f1500ddcb8eb7e75f9955eee407ce7ce40b62fcb177b0ec6843afc2908fa2",
+        "sha256_in_prefix": "126f1500ddcb8eb7e75f9955eee407ce7ce40b62fcb177b0ec6843afc2908fa2",
+        "size_in_bytes": 6509
+      },
+      {
+        "_path": "share/man/man1/ldapexop.1",
+        "path_type": "hardlink",
+        "sha256": "c2371b1822337ce09be2feba9d51e0f14a23a89c54a0a49f051df386b0bc5e19",
+        "sha256_in_prefix": "c2371b1822337ce09be2feba9d51e0f14a23a89c54a0a49f051df386b0bc5e19",
+        "size_in_bytes": 5955
+      },
+      {
+        "_path": "share/man/man1/ldapmodify.1",
+        "path_type": "hardlink",
+        "sha256": "c49345c239e11569ae72084c9a976783ae6c37e038be214b79d6b644106db9cc",
+        "sha256_in_prefix": "c49345c239e11569ae72084c9a976783ae6c37e038be214b79d6b644106db9cc",
+        "size_in_bytes": 8814
+      },
+      {
+        "_path": "share/man/man1/ldapmodrdn.1",
+        "path_type": "hardlink",
+        "sha256": "e4d32a0039e7418daf4f04554d25a8e7f1654f2d7a791242aabf13ae806a9ec7",
+        "sha256_in_prefix": "e4d32a0039e7418daf4f04554d25a8e7f1654f2d7a791242aabf13ae806a9ec7",
+        "size_in_bytes": 6679
+      },
+      {
+        "_path": "share/man/man1/ldappasswd.1",
+        "path_type": "hardlink",
+        "sha256": "c8974366637639ce3e2d81a36a5a8cbbbd802537f024a20685a820bc188daf50",
+        "sha256_in_prefix": "c8974366637639ce3e2d81a36a5a8cbbbd802537f024a20685a820bc188daf50",
+        "size_in_bytes": 5723
+      },
+      {
+        "_path": "share/man/man1/ldapsearch.1",
+        "path_type": "hardlink",
+        "sha256": "81ab0ef75974844aceb7f3fc58c0c0590d669abaa65220a7b44e9807bec03dff",
+        "sha256_in_prefix": "81ab0ef75974844aceb7f3fc58c0c0590d669abaa65220a7b44e9807bec03dff",
+        "size_in_bytes": 14203
+      },
+      {
+        "_path": "share/man/man1/ldapurl.1",
+        "path_type": "hardlink",
+        "sha256": "bfebc16fb323bb41cafdedc4c50683a55e95406ed4025d055c39b2b11d7ba947",
+        "sha256_in_prefix": "bfebc16fb323bb41cafdedc4c50683a55e95406ed4025d055c39b2b11d7ba947",
+        "size_in_bytes": 4157
+      },
+      {
+        "_path": "share/man/man1/ldapvc.1",
+        "path_type": "hardlink",
+        "sha256": "5ab88c6c2f19aeea0f79224842278cc3c1cec0bdb01f59ce52fa2b06eab6ed3c",
+        "sha256_in_prefix": "5ab88c6c2f19aeea0f79224842278cc3c1cec0bdb01f59ce52fa2b06eab6ed3c",
+        "size_in_bytes": 5577
+      },
+      {
+        "_path": "share/man/man1/ldapwhoami.1",
+        "path_type": "hardlink",
+        "sha256": "185a869440ce7b8325ba8476175284fc28fd5e8e47be55c5f71085a00762ac14",
+        "sha256_in_prefix": "185a869440ce7b8325ba8476175284fc28fd5e8e47be55c5f71085a00762ac14",
+        "size_in_bytes": 4838
+      },
+      {
+        "_path": "share/man/man3/ber_alloc_t.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_bvarray_add.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvarray_free.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvdup.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvecadd.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvecfree.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvfree.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvstr.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_bvstrdup.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_dupbv.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_first_element.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_flush.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_free.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ber_get_bitstring.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_boolean.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_enum.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_int.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_next.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_null.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_stringa.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_get_stringb.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_next_element.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_peek_tag.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_printf.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_enum.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_int.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_null.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_ostring.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_seq.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_set.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_put_string.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_scanf.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_skip_tag.3",
+        "path_type": "softlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/ber_start_set.3",
+        "path_type": "softlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/ber_str2bv.3",
+        "path_type": "softlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/lber-decode.3",
+        "path_type": "hardlink",
+        "sha256": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "sha256_in_prefix": "fc7be8fae1773979986500b511ab17ea63b115008ec4ee72794ab350b18d52d1",
+        "size_in_bytes": 12662
+      },
+      {
+        "_path": "share/man/man3/lber-encode.3",
+        "path_type": "hardlink",
+        "sha256": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "sha256_in_prefix": "eb1dd3b86f319bf84e3d5be542b227e5a9b1749df17a6c7f958969ed2ebd8585",
+        "size_in_bytes": 9291
+      },
+      {
+        "_path": "share/man/man3/lber-memory.3",
+        "path_type": "hardlink",
+        "sha256": "f08116f903976959eea53c128d4a72ba46f3bd5dd945c5250078b7a344043db3",
+        "sha256_in_prefix": "f08116f903976959eea53c128d4a72ba46f3bd5dd945c5250078b7a344043db3",
+        "size_in_bytes": 1564
+      },
+      {
+        "_path": "share/man/man3/lber-sockbuf.3",
+        "path_type": "hardlink",
+        "sha256": "39be8ee5348675c41fba5cfe82a5ac665b4e2b68d295c8e1660de016b07968f6",
+        "sha256_in_prefix": "39be8ee5348675c41fba5cfe82a5ac665b4e2b68d295c8e1660de016b07968f6",
+        "size_in_bytes": 5854
+      },
+      {
+        "_path": "share/man/man3/lber-types.3",
+        "path_type": "hardlink",
+        "sha256": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "sha256_in_prefix": "3979dd2a65c85d99298fd5d23ec79b1131d7ebd7d4b575490528b93e827eea97",
+        "size_in_bytes": 6534
+      },
+      {
+        "_path": "share/man/man3/ld_errno.3",
+        "path_type": "softlink",
+        "sha256": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "size_in_bytes": 6692
+      },
+      {
+        "_path": "share/man/man3/ldap.3",
+        "path_type": "hardlink",
+        "sha256": "1d3575340b6793e822a7d0f28c2f98d0e9aefbd30e9ec8ea9f43f6bc3caf40e4",
+        "sha256_in_prefix": "1d3575340b6793e822a7d0f28c2f98d0e9aefbd30e9ec8ea9f43f6bc3caf40e4",
+        "size_in_bytes": 9042
+      },
+      {
+        "_path": "share/man/man3/ldap_abandon.3",
+        "path_type": "hardlink",
+        "sha256": "81897b576f8453b5375598d0228eb509f2ddc07d4219c46e723ad88a644ac1ce",
+        "sha256_in_prefix": "81897b576f8453b5375598d0228eb509f2ddc07d4219c46e723ad88a644ac1ce",
+        "size_in_bytes": 2349
+      },
+      {
+        "_path": "share/man/man3/ldap_abandon_ext.3",
+        "path_type": "softlink",
+        "sha256": "81897b576f8453b5375598d0228eb509f2ddc07d4219c46e723ad88a644ac1ce",
+        "size_in_bytes": 2349
+      },
+      {
+        "_path": "share/man/man3/ldap_add.3",
+        "path_type": "hardlink",
+        "sha256": "cb44de6240d571c3ad9b51ec1d226f41ea235a954ed0f1559a8c594bbc16985d",
+        "sha256_in_prefix": "cb44de6240d571c3ad9b51ec1d226f41ea235a954ed0f1559a8c594bbc16985d",
+        "size_in_bytes": 2714
+      },
+      {
+        "_path": "share/man/man3/ldap_add_ext.3",
+        "path_type": "softlink",
+        "sha256": "cb44de6240d571c3ad9b51ec1d226f41ea235a954ed0f1559a8c594bbc16985d",
+        "size_in_bytes": 2714
+      },
+      {
+        "_path": "share/man/man3/ldap_add_ext_s.3",
+        "path_type": "softlink",
+        "sha256": "cb44de6240d571c3ad9b51ec1d226f41ea235a954ed0f1559a8c594bbc16985d",
+        "size_in_bytes": 2714
+      },
+      {
+        "_path": "share/man/man3/ldap_add_s.3",
+        "path_type": "softlink",
+        "sha256": "cb44de6240d571c3ad9b51ec1d226f41ea235a954ed0f1559a8c594bbc16985d",
+        "size_in_bytes": 2714
+      },
+      {
+        "_path": "share/man/man3/ldap_attributetype2name.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_attributetype2str.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_attributetype_free.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_bind.3",
+        "path_type": "hardlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "sha256_in_prefix": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_bind_s.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_compare.3",
+        "path_type": "hardlink",
+        "sha256": "f82dfbaaea1864403da86aeded17c8bf988fa5c0a0cbecea79629c4617168b63",
+        "sha256_in_prefix": "f82dfbaaea1864403da86aeded17c8bf988fa5c0a0cbecea79629c4617168b63",
+        "size_in_bytes": 2787
+      },
+      {
+        "_path": "share/man/man3/ldap_compare_ext.3",
+        "path_type": "softlink",
+        "sha256": "f82dfbaaea1864403da86aeded17c8bf988fa5c0a0cbecea79629c4617168b63",
+        "size_in_bytes": 2787
+      },
+      {
+        "_path": "share/man/man3/ldap_compare_ext_s.3",
+        "path_type": "softlink",
+        "sha256": "f82dfbaaea1864403da86aeded17c8bf988fa5c0a0cbecea79629c4617168b63",
+        "size_in_bytes": 2787
+      },
+      {
+        "_path": "share/man/man3/ldap_compare_s.3",
+        "path_type": "softlink",
+        "sha256": "f82dfbaaea1864403da86aeded17c8bf988fa5c0a0cbecea79629c4617168b63",
+        "size_in_bytes": 2787
+      },
+      {
+        "_path": "share/man/man3/ldap_control_create.3",
+        "path_type": "softlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_control_dup.3",
+        "path_type": "softlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_control_find.3",
+        "path_type": "softlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_control_free.3",
+        "path_type": "softlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_controls.3",
+        "path_type": "hardlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "sha256_in_prefix": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_controls_dup.3",
+        "path_type": "softlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_controls_free.3",
+        "path_type": "softlink",
+        "sha256": "58f8c4440a179a4c1c2e08212ed6fd7461f7d564743e062ec255acbcca6a5446",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "share/man/man3/ldap_count_entries.3",
+        "path_type": "softlink",
+        "sha256": "ef9dc9c762ee28aa5ebdea0c29d19e544b9c6f178f7bb48ea21b4558ef155721",
+        "size_in_bytes": 2410
+      },
+      {
+        "_path": "share/man/man3/ldap_count_messages.3",
+        "path_type": "softlink",
+        "sha256": "b5d0be01730f91ca74e3a96d5c4ecf4a6377f4c9baf671866bb6d69fe4e7e151",
+        "size_in_bytes": 2639
+      },
+      {
+        "_path": "share/man/man3/ldap_count_references.3",
+        "path_type": "softlink",
+        "sha256": "76c2db00f93ad36b02049af80a0df3c73579219943c8c97093fe94aa9a10a9bb",
+        "size_in_bytes": 2349
+      },
+      {
+        "_path": "share/man/man3/ldap_count_values.3",
+        "path_type": "softlink",
+        "sha256": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "size_in_bytes": 2792
+      },
+      {
+        "_path": "share/man/man3/ldap_count_values_len.3",
+        "path_type": "softlink",
+        "sha256": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "size_in_bytes": 2792
+      },
+      {
+        "_path": "share/man/man3/ldap_dcedn2dn.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_delete.3",
+        "path_type": "hardlink",
+        "sha256": "105ac4f126eeabfe3e731514aeb30f8bab35e6c9948d536257aa54a1f87aa439",
+        "sha256_in_prefix": "105ac4f126eeabfe3e731514aeb30f8bab35e6c9948d536257aa54a1f87aa439",
+        "size_in_bytes": 2551
+      },
+      {
+        "_path": "share/man/man3/ldap_delete_ext.3",
+        "path_type": "softlink",
+        "sha256": "105ac4f126eeabfe3e731514aeb30f8bab35e6c9948d536257aa54a1f87aa439",
+        "size_in_bytes": 2551
+      },
+      {
+        "_path": "share/man/man3/ldap_delete_ext_s.3",
+        "path_type": "softlink",
+        "sha256": "105ac4f126eeabfe3e731514aeb30f8bab35e6c9948d536257aa54a1f87aa439",
+        "size_in_bytes": 2551
+      },
+      {
+        "_path": "share/man/man3/ldap_delete_s.3",
+        "path_type": "softlink",
+        "sha256": "105ac4f126eeabfe3e731514aeb30f8bab35e6c9948d536257aa54a1f87aa439",
+        "size_in_bytes": 2551
+      },
+      {
+        "_path": "share/man/man3/ldap_destroy.3",
+        "path_type": "softlink",
+        "sha256": "735507ee299b3dd392ae04cd13a9ae65ad33ef0b690c6aa65e96f311fe98fcf7",
+        "size_in_bytes": 3612
+      },
+      {
+        "_path": "share/man/man3/ldap_dn2ad_canonical.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_dn2dcedn.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_dn2str.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_dn2ufn.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_dnfree.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_dup.3",
+        "path_type": "hardlink",
+        "sha256": "735507ee299b3dd392ae04cd13a9ae65ad33ef0b690c6aa65e96f311fe98fcf7",
+        "sha256_in_prefix": "735507ee299b3dd392ae04cd13a9ae65ad33ef0b690c6aa65e96f311fe98fcf7",
+        "size_in_bytes": 3612
+      },
+      {
+        "_path": "share/man/man3/ldap_err2string.3",
+        "path_type": "softlink",
+        "sha256": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "size_in_bytes": 6692
+      },
+      {
+        "_path": "share/man/man3/ldap_errlist.3",
+        "path_type": "softlink",
+        "sha256": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "size_in_bytes": 6692
+      },
+      {
+        "_path": "share/man/man3/ldap_error.3",
+        "path_type": "hardlink",
+        "sha256": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "sha256_in_prefix": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "size_in_bytes": 6692
+      },
+      {
+        "_path": "share/man/man3/ldap_explode_dn.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_explode_rdn.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_extended_operation.3",
+        "path_type": "hardlink",
+        "sha256": "508c0e7ad20f9934b4e77bdd9466bc7a9214aa3f9f73046543570b5240350238",
+        "sha256_in_prefix": "508c0e7ad20f9934b4e77bdd9466bc7a9214aa3f9f73046543570b5240350238",
+        "size_in_bytes": 2534
+      },
+      {
+        "_path": "share/man/man3/ldap_extended_operation_s.3",
+        "path_type": "softlink",
+        "sha256": "508c0e7ad20f9934b4e77bdd9466bc7a9214aa3f9f73046543570b5240350238",
+        "size_in_bytes": 2534
+      },
+      {
+        "_path": "share/man/man3/ldap_first_attribute.3",
+        "path_type": "hardlink",
+        "sha256": "b5a351f3dc0240e50d80389ded4ffb554e0069c645935fdba48422d98aa365b8",
+        "sha256_in_prefix": "b5a351f3dc0240e50d80389ded4ffb554e0069c645935fdba48422d98aa365b8",
+        "size_in_bytes": 3210
+      },
+      {
+        "_path": "share/man/man3/ldap_first_entry.3",
+        "path_type": "hardlink",
+        "sha256": "ef9dc9c762ee28aa5ebdea0c29d19e544b9c6f178f7bb48ea21b4558ef155721",
+        "sha256_in_prefix": "ef9dc9c762ee28aa5ebdea0c29d19e544b9c6f178f7bb48ea21b4558ef155721",
+        "size_in_bytes": 2410
+      },
+      {
+        "_path": "share/man/man3/ldap_first_message.3",
+        "path_type": "hardlink",
+        "sha256": "b5d0be01730f91ca74e3a96d5c4ecf4a6377f4c9baf671866bb6d69fe4e7e151",
+        "sha256_in_prefix": "b5d0be01730f91ca74e3a96d5c4ecf4a6377f4c9baf671866bb6d69fe4e7e151",
+        "size_in_bytes": 2639
+      },
+      {
+        "_path": "share/man/man3/ldap_first_reference.3",
+        "path_type": "hardlink",
+        "sha256": "76c2db00f93ad36b02049af80a0df3c73579219943c8c97093fe94aa9a10a9bb",
+        "sha256_in_prefix": "76c2db00f93ad36b02049af80a0df3c73579219943c8c97093fe94aa9a10a9bb",
+        "size_in_bytes": 2349
+      },
+      {
+        "_path": "share/man/man3/ldap_free_urldesc.3",
+        "path_type": "softlink",
+        "sha256": "741dbcbb6dc38acf89d3c6059dbeddf685828446c15e8c7fd4762b8f81f8b094",
+        "size_in_bytes": 3097
+      },
+      {
+        "_path": "share/man/man3/ldap_get_attribute_ber.3",
+        "path_type": "softlink",
+        "sha256": "b5a351f3dc0240e50d80389ded4ffb554e0069c645935fdba48422d98aa365b8",
+        "size_in_bytes": 3210
+      },
+      {
+        "_path": "share/man/man3/ldap_get_dn.3",
+        "path_type": "hardlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "sha256_in_prefix": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_get_option.3",
+        "path_type": "hardlink",
+        "sha256": "0b359a802dd22e7ab946a5d40d30eec755cc7a53659638574736e48ef8144b4b",
+        "sha256_in_prefix": "0b359a802dd22e7ab946a5d40d30eec755cc7a53659638574736e48ef8144b4b",
+        "size_in_bytes": 23139
+      },
+      {
+        "_path": "share/man/man3/ldap_get_values.3",
+        "path_type": "hardlink",
+        "sha256": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "sha256_in_prefix": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "size_in_bytes": 2792
+      },
+      {
+        "_path": "share/man/man3/ldap_get_values_len.3",
+        "path_type": "softlink",
+        "sha256": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "size_in_bytes": 2792
+      },
+      {
+        "_path": "share/man/man3/ldap_init.3",
+        "path_type": "softlink",
+        "sha256": "3572732dbd4ffaeef4a6268d12b316ca4dad177b59a3d316ef93a5783cd852b3",
+        "size_in_bytes": 6342
+      },
+      {
+        "_path": "share/man/man3/ldap_init_fd.3",
+        "path_type": "softlink",
+        "sha256": "3572732dbd4ffaeef4a6268d12b316ca4dad177b59a3d316ef93a5783cd852b3",
+        "size_in_bytes": 6342
+      },
+      {
+        "_path": "share/man/man3/ldap_initialize.3",
+        "path_type": "softlink",
+        "sha256": "3572732dbd4ffaeef4a6268d12b316ca4dad177b59a3d316ef93a5783cd852b3",
+        "size_in_bytes": 6342
+      },
+      {
+        "_path": "share/man/man3/ldap_install_tls.3",
+        "path_type": "softlink",
+        "sha256": "1216b39767cf13589d3ba093ca3b2b39c8d60aa7d52cee4fdd31caef5c430be9",
+        "size_in_bytes": 1695
+      },
+      {
+        "_path": "share/man/man3/ldap_is_ldap_url.3",
+        "path_type": "softlink",
+        "sha256": "741dbcbb6dc38acf89d3c6059dbeddf685828446c15e8c7fd4762b8f81f8b094",
+        "size_in_bytes": 3097
+      },
+      {
+        "_path": "share/man/man3/ldap_matchingrule2name.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_matchingrule2str.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_matchingrule_free.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_memalloc.3",
+        "path_type": "softlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_memcalloc.3",
+        "path_type": "softlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_memfree.3",
+        "path_type": "softlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_memory.3",
+        "path_type": "hardlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "sha256_in_prefix": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_memrealloc.3",
+        "path_type": "softlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_memvfree.3",
+        "path_type": "softlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_modify.3",
+        "path_type": "hardlink",
+        "sha256": "d1ca19c06ccaa9aed9a7046942d6a706a08ded394f8187fb6fce6fa40a37c07a",
+        "sha256_in_prefix": "d1ca19c06ccaa9aed9a7046942d6a706a08ded394f8187fb6fce6fa40a37c07a",
+        "size_in_bytes": 4430
+      },
+      {
+        "_path": "share/man/man3/ldap_modify_ext.3",
+        "path_type": "softlink",
+        "sha256": "d1ca19c06ccaa9aed9a7046942d6a706a08ded394f8187fb6fce6fa40a37c07a",
+        "size_in_bytes": 4430
+      },
+      {
+        "_path": "share/man/man3/ldap_modify_ext_s.3",
+        "path_type": "softlink",
+        "sha256": "d1ca19c06ccaa9aed9a7046942d6a706a08ded394f8187fb6fce6fa40a37c07a",
+        "size_in_bytes": 4430
+      },
+      {
+        "_path": "share/man/man3/ldap_modify_s.3",
+        "path_type": "softlink",
+        "sha256": "d1ca19c06ccaa9aed9a7046942d6a706a08ded394f8187fb6fce6fa40a37c07a",
+        "size_in_bytes": 4430
+      },
+      {
+        "_path": "share/man/man3/ldap_modrdn.3",
+        "path_type": "hardlink",
+        "sha256": "1f11bd960c95e5612fa2fe3b2a5957d1e26e35ca70327d50a13f94cef73b84ae",
+        "sha256_in_prefix": "1f11bd960c95e5612fa2fe3b2a5957d1e26e35ca70327d50a13f94cef73b84ae",
+        "size_in_bytes": 2320
+      },
+      {
+        "_path": "share/man/man3/ldap_modrdn2.3",
+        "path_type": "softlink",
+        "sha256": "1f11bd960c95e5612fa2fe3b2a5957d1e26e35ca70327d50a13f94cef73b84ae",
+        "size_in_bytes": 2320
+      },
+      {
+        "_path": "share/man/man3/ldap_modrdn2_s.3",
+        "path_type": "softlink",
+        "sha256": "1f11bd960c95e5612fa2fe3b2a5957d1e26e35ca70327d50a13f94cef73b84ae",
+        "size_in_bytes": 2320
+      },
+      {
+        "_path": "share/man/man3/ldap_modrdn_s.3",
+        "path_type": "softlink",
+        "sha256": "1f11bd960c95e5612fa2fe3b2a5957d1e26e35ca70327d50a13f94cef73b84ae",
+        "size_in_bytes": 2320
+      },
+      {
+        "_path": "share/man/man3/ldap_mods_free.3",
+        "path_type": "softlink",
+        "sha256": "d1ca19c06ccaa9aed9a7046942d6a706a08ded394f8187fb6fce6fa40a37c07a",
+        "size_in_bytes": 4430
+      },
+      {
+        "_path": "share/man/man3/ldap_msgfree.3",
+        "path_type": "softlink",
+        "sha256": "e2db8948d61be70f1eb07cc96160ebaed398ac2c991f590c8d5bfd3dfac596b1",
+        "size_in_bytes": 4513
+      },
+      {
+        "_path": "share/man/man3/ldap_msgid.3",
+        "path_type": "softlink",
+        "sha256": "e2db8948d61be70f1eb07cc96160ebaed398ac2c991f590c8d5bfd3dfac596b1",
+        "size_in_bytes": 4513
+      },
+      {
+        "_path": "share/man/man3/ldap_msgtype.3",
+        "path_type": "softlink",
+        "sha256": "e2db8948d61be70f1eb07cc96160ebaed398ac2c991f590c8d5bfd3dfac596b1",
+        "size_in_bytes": 4513
+      },
+      {
+        "_path": "share/man/man3/ldap_next_attribute.3",
+        "path_type": "softlink",
+        "sha256": "b5a351f3dc0240e50d80389ded4ffb554e0069c645935fdba48422d98aa365b8",
+        "size_in_bytes": 3210
+      },
+      {
+        "_path": "share/man/man3/ldap_next_entry.3",
+        "path_type": "softlink",
+        "sha256": "ef9dc9c762ee28aa5ebdea0c29d19e544b9c6f178f7bb48ea21b4558ef155721",
+        "size_in_bytes": 2410
+      },
+      {
+        "_path": "share/man/man3/ldap_next_message.3",
+        "path_type": "softlink",
+        "sha256": "b5d0be01730f91ca74e3a96d5c4ecf4a6377f4c9baf671866bb6d69fe4e7e151",
+        "size_in_bytes": 2639
+      },
+      {
+        "_path": "share/man/man3/ldap_next_reference.3",
+        "path_type": "softlink",
+        "sha256": "76c2db00f93ad36b02049af80a0df3c73579219943c8c97093fe94aa9a10a9bb",
+        "size_in_bytes": 2349
+      },
+      {
+        "_path": "share/man/man3/ldap_objectclass2name.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_objectclass2str.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_objectclass_free.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_open.3",
+        "path_type": "hardlink",
+        "sha256": "3572732dbd4ffaeef4a6268d12b316ca4dad177b59a3d316ef93a5783cd852b3",
+        "sha256_in_prefix": "3572732dbd4ffaeef4a6268d12b316ca4dad177b59a3d316ef93a5783cd852b3",
+        "size_in_bytes": 6342
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_extended_result.3",
+        "path_type": "softlink",
+        "sha256": "ff39fc40035e20795e8baab89aa4c6657b84f82e6dee941795663d84f84df770",
+        "size_in_bytes": 4340
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_intermediate.3",
+        "path_type": "softlink",
+        "sha256": "ff39fc40035e20795e8baab89aa4c6657b84f82e6dee941795663d84f84df770",
+        "size_in_bytes": 4340
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_reference.3",
+        "path_type": "hardlink",
+        "sha256": "cc0cee8c52b6fea6d2167fa840f51cf688f152914d747a3f0db43d69127c9f91",
+        "sha256_in_prefix": "cc0cee8c52b6fea6d2167fa840f51cf688f152914d747a3f0db43d69127c9f91",
+        "size_in_bytes": 2351
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_result.3",
+        "path_type": "hardlink",
+        "sha256": "ff39fc40035e20795e8baab89aa4c6657b84f82e6dee941795663d84f84df770",
+        "sha256_in_prefix": "ff39fc40035e20795e8baab89aa4c6657b84f82e6dee941795663d84f84df770",
+        "size_in_bytes": 4340
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_sasl_bind_result.3",
+        "path_type": "softlink",
+        "sha256": "ff39fc40035e20795e8baab89aa4c6657b84f82e6dee941795663d84f84df770",
+        "size_in_bytes": 4340
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_sort_control.3",
+        "path_type": "hardlink",
+        "sha256": "59f7e2a04413b1c0622657e74f3867a8240f05256b0631f9f7e1f84b4bf30840",
+        "sha256_in_prefix": "59f7e2a04413b1c0622657e74f3867a8240f05256b0631f9f7e1f84b4bf30840",
+        "size_in_bytes": 1683
+      },
+      {
+        "_path": "share/man/man3/ldap_parse_vlv_control.3",
+        "path_type": "hardlink",
+        "sha256": "0297dfb9f4739f9565d546bce2acaf944ed4a3a0523b90788cd8b3cf560dd693",
+        "sha256_in_prefix": "0297dfb9f4739f9565d546bce2acaf944ed4a3a0523b90788cd8b3cf560dd693",
+        "size_in_bytes": 2346
+      },
+      {
+        "_path": "share/man/man3/ldap_perror.3",
+        "path_type": "softlink",
+        "sha256": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "size_in_bytes": 6692
+      },
+      {
+        "_path": "share/man/man3/ldap_rename.3",
+        "path_type": "hardlink",
+        "sha256": "ce7cba146588eb10e90deb530048151623a365a926dc7148f77725fc40daf42d",
+        "sha256_in_prefix": "ce7cba146588eb10e90deb530048151623a365a926dc7148f77725fc40daf42d",
+        "size_in_bytes": 2697
+      },
+      {
+        "_path": "share/man/man3/ldap_rename_s.3",
+        "path_type": "softlink",
+        "sha256": "ce7cba146588eb10e90deb530048151623a365a926dc7148f77725fc40daf42d",
+        "size_in_bytes": 2697
+      },
+      {
+        "_path": "share/man/man3/ldap_result.3",
+        "path_type": "hardlink",
+        "sha256": "e2db8948d61be70f1eb07cc96160ebaed398ac2c991f590c8d5bfd3dfac596b1",
+        "sha256_in_prefix": "e2db8948d61be70f1eb07cc96160ebaed398ac2c991f590c8d5bfd3dfac596b1",
+        "size_in_bytes": 4513
+      },
+      {
+        "_path": "share/man/man3/ldap_result2error.3",
+        "path_type": "softlink",
+        "sha256": "e056cf406daa137e8481c0fd890329b5793fdc59f84a2a01899289c184e12da6",
+        "size_in_bytes": 6692
+      },
+      {
+        "_path": "share/man/man3/ldap_sasl_bind.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_sasl_bind_s.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_schema.3",
+        "path_type": "hardlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "sha256_in_prefix": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_scherr2str.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_search.3",
+        "path_type": "hardlink",
+        "sha256": "11d6e01f1f6176cdb98f6d075f00da90d8bb21c5d268495dae92a0e4ed6a61f8",
+        "sha256_in_prefix": "11d6e01f1f6176cdb98f6d075f00da90d8bb21c5d268495dae92a0e4ed6a61f8",
+        "size_in_bytes": 5237
+      },
+      {
+        "_path": "share/man/man3/ldap_search_ext.3",
+        "path_type": "softlink",
+        "sha256": "11d6e01f1f6176cdb98f6d075f00da90d8bb21c5d268495dae92a0e4ed6a61f8",
+        "size_in_bytes": 5237
+      },
+      {
+        "_path": "share/man/man3/ldap_search_ext_s.3",
+        "path_type": "softlink",
+        "sha256": "11d6e01f1f6176cdb98f6d075f00da90d8bb21c5d268495dae92a0e4ed6a61f8",
+        "size_in_bytes": 5237
+      },
+      {
+        "_path": "share/man/man3/ldap_search_s.3",
+        "path_type": "softlink",
+        "sha256": "11d6e01f1f6176cdb98f6d075f00da90d8bb21c5d268495dae92a0e4ed6a61f8",
+        "size_in_bytes": 5237
+      },
+      {
+        "_path": "share/man/man3/ldap_search_st.3",
+        "path_type": "softlink",
+        "sha256": "11d6e01f1f6176cdb98f6d075f00da90d8bb21c5d268495dae92a0e4ed6a61f8",
+        "size_in_bytes": 5237
+      },
+      {
+        "_path": "share/man/man3/ldap_set_option.3",
+        "path_type": "softlink",
+        "sha256": "0b359a802dd22e7ab946a5d40d30eec755cc7a53659638574736e48ef8144b4b",
+        "size_in_bytes": 23139
+      },
+      {
+        "_path": "share/man/man3/ldap_set_rebind_proc.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_set_urllist_proc.3",
+        "path_type": "softlink",
+        "sha256": "3572732dbd4ffaeef4a6268d12b316ca4dad177b59a3d316ef93a5783cd852b3",
+        "size_in_bytes": 6342
+      },
+      {
+        "_path": "share/man/man3/ldap_simple_bind.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_simple_bind_s.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_sort.3",
+        "path_type": "hardlink",
+        "sha256": "e181a8e3cd12d9d2e5cb56cd677e82e5ba1085030f93d032e70425a6ea7bb712",
+        "sha256_in_prefix": "e181a8e3cd12d9d2e5cb56cd677e82e5ba1085030f93d032e70425a6ea7bb712",
+        "size_in_bytes": 1256
+      },
+      {
+        "_path": "share/man/man3/ldap_sort_entries.3",
+        "path_type": "softlink",
+        "sha256": "e181a8e3cd12d9d2e5cb56cd677e82e5ba1085030f93d032e70425a6ea7bb712",
+        "size_in_bytes": 1256
+      },
+      {
+        "_path": "share/man/man3/ldap_sort_strcasecmp.3",
+        "path_type": "softlink",
+        "sha256": "e181a8e3cd12d9d2e5cb56cd677e82e5ba1085030f93d032e70425a6ea7bb712",
+        "size_in_bytes": 1256
+      },
+      {
+        "_path": "share/man/man3/ldap_sort_values.3",
+        "path_type": "softlink",
+        "sha256": "e181a8e3cd12d9d2e5cb56cd677e82e5ba1085030f93d032e70425a6ea7bb712",
+        "size_in_bytes": 1256
+      },
+      {
+        "_path": "share/man/man3/ldap_start_tls.3",
+        "path_type": "softlink",
+        "sha256": "1216b39767cf13589d3ba093ca3b2b39c8d60aa7d52cee4fdd31caef5c430be9",
+        "size_in_bytes": 1695
+      },
+      {
+        "_path": "share/man/man3/ldap_start_tls_s.3",
+        "path_type": "softlink",
+        "sha256": "1216b39767cf13589d3ba093ca3b2b39c8d60aa7d52cee4fdd31caef5c430be9",
+        "size_in_bytes": 1695
+      },
+      {
+        "_path": "share/man/man3/ldap_str2attributetype.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_str2dn.3",
+        "path_type": "softlink",
+        "sha256": "7a3bddb869cd48b1b3a1760e253a8e678560608f91d3122866f9459051931bbd",
+        "size_in_bytes": 6769
+      },
+      {
+        "_path": "share/man/man3/ldap_str2matchingrule.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_str2objectclass.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_str2syntax.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_strdup.3",
+        "path_type": "softlink",
+        "sha256": "f939fff6c74c9ee82d37afe651eb1259b3379be864c525ada00ae6d10e903228",
+        "size_in_bytes": 1584
+      },
+      {
+        "_path": "share/man/man3/ldap_sync.3",
+        "path_type": "hardlink",
+        "sha256": "e63547cd39c11e05976c02820dbc09ba89e4d892755212373e0959fb9b6d699f",
+        "sha256_in_prefix": "e63547cd39c11e05976c02820dbc09ba89e4d892755212373e0959fb9b6d699f",
+        "size_in_bytes": 9738
+      },
+      {
+        "_path": "share/man/man3/ldap_syntax2name.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_syntax2str.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_syntax_free.3",
+        "path_type": "softlink",
+        "sha256": "ae56d5dd1152becde7a0af4da65425c43730e1045d7519ab5a3ad5c1c59989d7",
+        "size_in_bytes": 8996
+      },
+      {
+        "_path": "share/man/man3/ldap_tls.3",
+        "path_type": "hardlink",
+        "sha256": "1216b39767cf13589d3ba093ca3b2b39c8d60aa7d52cee4fdd31caef5c430be9",
+        "sha256_in_prefix": "1216b39767cf13589d3ba093ca3b2b39c8d60aa7d52cee4fdd31caef5c430be9",
+        "size_in_bytes": 1695
+      },
+      {
+        "_path": "share/man/man3/ldap_tls_inplace.3",
+        "path_type": "softlink",
+        "sha256": "1216b39767cf13589d3ba093ca3b2b39c8d60aa7d52cee4fdd31caef5c430be9",
+        "size_in_bytes": 1695
+      },
+      {
+        "_path": "share/man/man3/ldap_unbind.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_unbind_ext.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_unbind_ext_s.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_unbind_s.3",
+        "path_type": "softlink",
+        "sha256": "2598f2a12f582e6d65e1abcf96fcc750a4a66430c5c470ae694a2196747041b9",
+        "size_in_bytes": 12104
+      },
+      {
+        "_path": "share/man/man3/ldap_url.3",
+        "path_type": "hardlink",
+        "sha256": "741dbcbb6dc38acf89d3c6059dbeddf685828446c15e8c7fd4762b8f81f8b094",
+        "sha256_in_prefix": "741dbcbb6dc38acf89d3c6059dbeddf685828446c15e8c7fd4762b8f81f8b094",
+        "size_in_bytes": 3097
+      },
+      {
+        "_path": "share/man/man3/ldap_url_parse.3",
+        "path_type": "softlink",
+        "sha256": "741dbcbb6dc38acf89d3c6059dbeddf685828446c15e8c7fd4762b8f81f8b094",
+        "size_in_bytes": 3097
+      },
+      {
+        "_path": "share/man/man3/ldap_value_free.3",
+        "path_type": "softlink",
+        "sha256": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "size_in_bytes": 2792
+      },
+      {
+        "_path": "share/man/man3/ldap_value_free_len.3",
+        "path_type": "softlink",
+        "sha256": "eac1d26cc4604d27e02c171e9fb71ec5162352d4f60e5706f4f8014984496b2f",
+        "size_in_bytes": 2792
+      },
+      {
+        "_path": "share/man/man5/ldap.conf.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "5f8ebf9d9f9a6ed746c8f4d5c47d42593985dbd7c024b48cc07495392ffdfa94",
+        "sha256_in_prefix": "99d22e5604078cd694fd448308c8a3464887477a6caff76f6e94f643c19f83ad",
+        "size_in_bytes": 17880
+      },
+      {
+        "_path": "share/man/man5/ldif.5",
+        "path_type": "hardlink",
+        "sha256": "2248e1a9903bdfe95ea4f3c5dcafbaf9250e7b9fc15372c16069cafe317fb293",
+        "sha256_in_prefix": "2248e1a9903bdfe95ea4f3c5dcafbaf9250e7b9fc15372c16069cafe317fb293",
+        "size_in_bytes": 6734
+      },
+      {
+        "_path": "share/man/man5/lloadd.conf.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8d2ebd69ddc8c9b589d2e4ba84fad5362f190036f2995a51d54b19a5eb3b4242",
+        "sha256_in_prefix": "c8f2a80debf645d3b1efadaecaa7a04ab28eb0d596c5a477c7f92217afb92861",
+        "size_in_bytes": 32388
+      },
+      {
+        "_path": "share/man/man5/slapd-asyncmeta.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "3254686f056ba3305fe16a2a88a678651b8fceda57d94139e66df567cb2b92b0",
+        "sha256_in_prefix": "6abc7e9c784c3f4771ca3ff478338f30bda2b2e0ef9d2f772d6fcd54ef32478c",
+        "size_in_bytes": 17134
+      },
+      {
+        "_path": "share/man/man5/slapd-config.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8856cd6fbf4fd865ec25126bf04379170a9ecadc360cbe2992874fbc2163a475",
+        "sha256_in_prefix": "d1eb99b34f676a25b860800b0914fc62da7683943b18bdada28da2cbe511057f",
+        "size_in_bytes": 78182
+      },
+      {
+        "_path": "share/man/man5/slapd-dnssrv.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "c2a3facea52e2b314c2d987d980a5326e448f601daba8021c548593b36f0b1ba",
+        "sha256_in_prefix": "77bbf1ec34a2c973ec836a4ed1c419d8a872cdb4ff4dd8276605997674350a89",
+        "size_in_bytes": 2105
+      },
+      {
+        "_path": "share/man/man5/slapd-ldap.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "a767098771f044267d36034c102f3693399f0d29696c1b907d9e87998757caa1",
+        "sha256_in_prefix": "ceef4c704c7f00495dc8a139cc4a2b0505e5ad5d5909d4ded94aa6ccce07b937",
+        "size_in_bytes": 22495
+      },
+      {
+        "_path": "share/man/man5/slapd-ldif.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "c7d9ea52a24ae51c40e6732e10978db5c396f989513a51d7c136e9122767709c",
+        "sha256_in_prefix": "a566cc4bb1310d42eaae679dbf56534be71fa62e78328093987018976fc0e88f",
+        "size_in_bytes": 2094
+      },
+      {
+        "_path": "share/man/man5/slapd-mdb.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "0c5ec8af1f6a97fee53b0f38b549719842958a2baf73e393233c6f02bf41d759",
+        "sha256_in_prefix": "f68a670f1cdd8de99945101e2e76c55182a29bad129b7d39e679959e746dafc8",
+        "size_in_bytes": 9919
+      },
+      {
+        "_path": "share/man/man5/slapd-meta.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "a1c02a6e79266bef59f207968c738d039d5ec6b098973e6ae0f83ccc5da65389",
+        "sha256_in_prefix": "bda921a97b8f90499a92c879400ce9233e25af75c2fd8168863dfa5026702ada",
+        "size_in_bytes": 46864
+      },
+      {
+        "_path": "share/man/man5/slapd-monitor.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "1efc4be7ea011e91603fe8ca1cdefb8bcb9278d7b62788ab6d88fd770585b504",
+        "sha256_in_prefix": "625535fcff530d723ba7b22ca767217fed3e87f8181e39c0b56de7c8de461f60",
+        "size_in_bytes": 3811
+      },
+      {
+        "_path": "share/man/man5/slapd-null.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "26ca7e496766fc05b76df4051ba754f4ab9a0243142eb06ed9ec62b2513d8438",
+        "sha256_in_prefix": "4d7afc38f32a4920420d164a7c0b9213283b87a460fa05209f2659236a8c5e68",
+        "size_in_bytes": 2200
+      },
+      {
+        "_path": "share/man/man5/slapd-passwd.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "77c2b9c1da99f75f234f307a78344adefa14f5ebcc9d932d5f7a1c196910a535",
+        "sha256_in_prefix": "65080f8097ce864a4ab16c790be87cd70283d1294ca088683b7358a16cfd6889",
+        "size_in_bytes": 2026
+      },
+      {
+        "_path": "share/man/man5/slapd-perl.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "09a9b17d5d2e32fea49cca60096308b38e49aafa6bb6b0e85abaa90b588d0b56",
+        "sha256_in_prefix": "fcfa20eb0daea935aac8ad12cc26701670ab28b4188dac68e138c8a5c152750a",
+        "size_in_bytes": 5614
+      },
+      {
+        "_path": "share/man/man5/slapd-relay.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "dcca93912243dd8c65c38022ef930fb9d84c0f8048190f34ed68b3b9b6e2657b",
+        "sha256_in_prefix": "18b1a3840624bd1b5c42bb09dbd0fe0954476573101cc39c0721a44e803ad15f",
+        "size_in_bytes": 6947
+      },
+      {
+        "_path": "share/man/man5/slapd-sock.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8489fa7597f8951b4f46a9f17de7af7e45639e7f78c51eb4a8c9dcb76345ba5a",
+        "sha256_in_prefix": "7dadb52467260b3e2717513852a34427116c515cb88931be570fbc3320ed6878",
+        "size_in_bytes": 8269
+      },
+      {
+        "_path": "share/man/man5/slapd-sql.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "0c18b9a201f9ed9785ddcc37bcbbdf18fed1d0464a5f4a5c974c1eab189988c6",
+        "sha256_in_prefix": "9d63c04d018923923f046e998da3cf45a2a3f7d5f9fc23e14cdd6252c675bc96",
+        "size_in_bytes": 26629
+      },
+      {
+        "_path": "share/man/man5/slapd-wt.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "7f751dae6ea32f6b197a2f9c6fdc00d2e479c0fa37d09c6573fb379ffb2c8ece",
+        "sha256_in_prefix": "22a7c87ad590bf0c4c0dbe728290b1e59f475f0bf55a618340aa913d09889006",
+        "size_in_bytes": 3643
+      },
+      {
+        "_path": "share/man/man5/slapd.access.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "cae4f5fea804abc62e35f0c4127a9efde85a2aea4645afdd611115101eba0649",
+        "sha256_in_prefix": "8ffc7a7162159122f67e95975da0532eb6d0d548925b21798d7de6b57ea125a7",
+        "size_in_bytes": 30203
+      },
+      {
+        "_path": "share/man/man5/slapd.backends.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "ecd60bd247de82295ac8115af88b5089290d61d27c630211fd9c5ae8ccb9ac99",
+        "sha256_in_prefix": "95ab068b5085ddcef30cd7c39d1a38493fad51585436ec0cd45b53547e187c31",
+        "size_in_bytes": 4584
+      },
+      {
+        "_path": "share/man/man5/slapd.conf.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "82b807b469c959343b4e1adb74f3cba15499f80a881c14d5954987203d54b98f",
+        "sha256_in_prefix": "11610cc526208c55ff1ade99dc8c9b9d3b0436259c1c7318cf7c2f16549f2f57",
+        "size_in_bytes": 71579
+      },
+      {
+        "_path": "share/man/man5/slapd.overlays.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "5b994bae03dd8bd3ea8455f886b5b58a0b4ae06de0a6ea4e8e3ed3cc87c1c9ce",
+        "sha256_in_prefix": "29213a52daa64707636eb280899e1e1f96e21c1e9486709552be6c33683fc308",
+        "size_in_bytes": 6720
+      },
+      {
+        "_path": "share/man/man5/slapd.plugin.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "c70881741995b7eed43df3ea92be27cebb210255e1d7280d4d8f99a4119b6e5e",
+        "sha256_in_prefix": "7e5651b705b5da68b7b3cce79839abc927b77744eb86f35e02daaea555bfcc3b",
+        "size_in_bytes": 5359
+      },
+      {
+        "_path": "share/man/man5/slapo-accesslog.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "a37b456a222526dd1ff8e0cf1355105d39fdd0e66f97b378c97907a3178cd415",
+        "sha256_in_prefix": "728dcfc1ae775badab9013c7bc13219785157ef6c53634eb285b77b4e422cd66",
+        "size_in_bytes": 14096
+      },
+      {
+        "_path": "share/man/man5/slapo-auditlog.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "e044aa25e1ba83eacb96f6c2d5d4d4a721bdf0949489db666897275b092f29c5",
+        "sha256_in_prefix": "3f6276eb47d9cc6e70c485246c7fb93b56cca082480d8b1abd395cfc25e79cfa",
+        "size_in_bytes": 3588
+      },
+      {
+        "_path": "share/man/man5/slapo-autoca.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "208ddbaf593b7ce84b2fa328eff9cb9f8f2b9c1557e32c939e2738990efb5431",
+        "sha256_in_prefix": "3a9bf60c4e1bfe1afc207bfdef698f2f1968f0251e956b93223ee275997d01ba",
+        "size_in_bytes": 4553
+      },
+      {
+        "_path": "share/man/man5/slapo-chain.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "ac417a2c7d41b4e32ec4cc8bbf1a622294f6f82223cef3b059b5b7e590c57a1c",
+        "sha256_in_prefix": "324732b805e0c62757b72148b82b75ec3e9596cd0764eb218a91560f803440d1",
+        "size_in_bytes": 6349
+      },
+      {
+        "_path": "share/man/man5/slapo-collect.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "1bb36b9a2d6a0a7dbb48ecf33000c536cee7ef2686f18ed9886856af37928ad7",
+        "sha256_in_prefix": "99eb5137508c23057eab06a2d13a8e1b70561142822efe53a8dbcd43d14267b3",
+        "size_in_bytes": 2267
+      },
+      {
+        "_path": "share/man/man5/slapo-constraint.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "e9c15d83e48cc0074fd18b2bda62bddd8de4cb9533217a51153b22e9b561169d",
+        "sha256_in_prefix": "31dc54add0bfd8db3f22e9fafcaa269b47eada4b3b9cd9efc8dc1ae0e00acd3a",
+        "size_in_bytes": 5257
+      },
+      {
+        "_path": "share/man/man5/slapo-dds.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "10206039c70bde9380d0fc363c10bec88ff91e0f85bcebb299738bcd59f6b2a3",
+        "sha256_in_prefix": "c08a7ec80be41f5604b041befffe4f1165f0dd70189ec794a80c2913d57842fd",
+        "size_in_bytes": 7893
+      },
+      {
+        "_path": "share/man/man5/slapo-deref.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "9fa5090bac26887f745b7edfe8c7dd25538ffb3e5384e73ed9f89ce95ea9dcfa",
+        "sha256_in_prefix": "18f004bfec8ec13f0b77652f348f6239d0ebd364c58530f8acd6b8f6303f4975",
+        "size_in_bytes": 2912
+      },
+      {
+        "_path": "share/man/man5/slapo-dyngroup.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "90a187a7c90ef2d1d8d3dbd9577480a58153451a85d2ddf995f34aef765e90d4",
+        "sha256_in_prefix": "3a7783365dbc450394893d55ad605e4332b7b323f89304c8acf435f9853c5bc2",
+        "size_in_bytes": 2258
+      },
+      {
+        "_path": "share/man/man5/slapo-dynlist.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "e5df64a8154bc9fabeb79368d27379e72dbb28335604947b1aa258a050864ddf",
+        "sha256_in_prefix": "c19f5c156f0e76edb0bdbbf3e08926c6388ddaadee49189ab576fc9362b5045e",
+        "size_in_bytes": 10036
+      },
+      {
+        "_path": "share/man/man5/slapo-homedir.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "5a384a6cd33e52d82ae9fda143587c0b0d96bba53f83fae7bf46f007cceb06ed",
+        "sha256_in_prefix": "b87c6cd77cb852bb53e3c3910a6c633aa946cd5430b90f26beca7c3b56e50022",
+        "size_in_bytes": 5598
+      },
+      {
+        "_path": "share/man/man5/slapo-memberof.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "52f68ffa61fea33d0d0abe7f0271810739e7c98bd4b6f45dd35e7f1f06df2839",
+        "sha256_in_prefix": "9f9524b90b7008d26f76280e094a4ca27cd8663c7ac6abcd4d110f050b475a3e",
+        "size_in_bytes": 5514
+      },
+      {
+        "_path": "share/man/man5/slapo-nestgroup.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "a62751735afdf8ada9cbd381de49bb40533a15b55a8ffb173afaa428d2f6ce7d",
+        "sha256_in_prefix": "ac6d713390116395e14ce6b027bef620dd78f2243f320bcb5f54d2d439319765",
+        "size_in_bytes": 3233
+      },
+      {
+        "_path": "share/man/man5/slapo-otp.5",
+        "path_type": "hardlink",
+        "sha256": "3d4ae81eb71f2205875a9016a78d6f41e342872cb92700d5f911499a2c956637",
+        "sha256_in_prefix": "3d4ae81eb71f2205875a9016a78d6f41e342872cb92700d5f911499a2c956637",
+        "size_in_bytes": 4655
+      },
+      {
+        "_path": "share/man/man5/slapo-pbind.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "6f39a63f7cc20bcb47c9d1a817bf5dd81de8e4695cb7bdda322391fd2770e388",
+        "sha256_in_prefix": "4bcab63352b379015e30ac4bd9f2cd77e0479a6c94bb59e0b97572d34fdfb6fe",
+        "size_in_bytes": 1918
+      },
+      {
+        "_path": "share/man/man5/slapo-pcache.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "3e0aeb11c4990a87bf36c557ab5f2ea8c75df3839a3c842c45d99d76606238be",
+        "sha256_in_prefix": "100dc1d3dd5f3806a23adc75980504234ac14e71b839a60df6f35f25392f798f",
+        "size_in_bytes": 13568
+      },
+      {
+        "_path": "share/man/man5/slapo-ppolicy.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8cb2f887542e7b8db6e8f5087679abff27ead204a03a4e3c56acbf0d1358f704",
+        "sha256_in_prefix": "73a969f9ddd89d0e4d2a1e8fd3df7d39c6b73c92870bcda72c54ad3614fc32eb",
+        "size_in_bytes": 32020
+      },
+      {
+        "_path": "share/man/man5/slapo-refint.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "d1f117261804b4bae907ccb12475a74b1a1370827763e84fcd4fa1a420a162c6",
+        "sha256_in_prefix": "af042187748d51c1edf7966a315603e28ecc923d5ff7daf5f458095b4d03e8a0",
+        "size_in_bytes": 3411
+      },
+      {
+        "_path": "share/man/man5/slapo-remoteauth.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "79df40ff9c4dcaa2930fdcfa0c2c54b6cda158cddc33bd9eb19e3b6c841006b1",
+        "sha256_in_prefix": "1015c085c338ad347c993211e405c97a4f3705493cb672badd440000aa713890",
+        "size_in_bytes": 5218
+      },
+      {
+        "_path": "share/man/man5/slapo-retcode.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8289bc0baaf2c427c7c629f2ce9e99d2bc2eb7e31b843349ee85ba48d8092cff",
+        "sha256_in_prefix": "ad750c69708bb109588c3f9bde09e48120fa1d81f57a22f90120b135238eccf0",
+        "size_in_bytes": 8532
+      },
+      {
+        "_path": "share/man/man5/slapo-rwm.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8c1a92d66fc5e2e95f0fdfed771a929ff3512386bdd19fbeedca2da97776b66b",
+        "sha256_in_prefix": "7218ce03433d1f46e2dfec166f68de3012e65c24ffad4a219ab9f08bc61cd3a4",
+        "size_in_bytes": 25064
+      },
+      {
+        "_path": "share/man/man5/slapo-sock.5",
+        "path_type": "softlink",
+        "sha256": "8489fa7597f8951b4f46a9f17de7af7e45639e7f78c51eb4a8c9dcb76345ba5a",
+        "size_in_bytes": 8269
+      },
+      {
+        "_path": "share/man/man5/slapo-sssvlv.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "2ef2cc2c829f3cdf395d1f3a9d3a91187cde02120e2e9b8b39d6ab4e7cf86a18",
+        "sha256_in_prefix": "ff8de6e28de06ac508c5c0c1add0435b80143b23ab740d05cb123bc0d8389912",
+        "size_in_bytes": 2819
+      },
+      {
+        "_path": "share/man/man5/slapo-syncprov.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "9431ab1fd3b1fea28c8cd86989f1619280f380330da01fc753cf3c957b14b63c",
+        "sha256_in_prefix": "5201ac1e8ac0690224fdab3b8b5c6b7fe2f5ecd43630c87521322b12a9e8881e",
+        "size_in_bytes": 3854
+      },
+      {
+        "_path": "share/man/man5/slapo-translucent.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "3530c6ef600bfba4643c8858ea7fe86eff7660338c9ae2583c22e8f059d08ef5",
+        "sha256_in_prefix": "6db42b94eb4345fd295ba9d6fbad825911d7e26514f472fa6afcb7558be7e604",
+        "size_in_bytes": 5171
+      },
+      {
+        "_path": "share/man/man5/slapo-unique.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "94edf9154b8abc336e9ee9e1f4795da7f7db6b8ba0e4d8903781ce62a4c3be27",
+        "sha256_in_prefix": "f97f756a82a7f8a35746d2805573ccc28a9a9b2a509e8c14deaa10e5160ada05",
+        "size_in_bytes": 6125
+      },
+      {
+        "_path": "share/man/man5/slapo-valsort.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8349090cbaca0c6b82077ca7fd8a5b805e7ba3079be65360fb2e9122edc78cc3",
+        "sha256_in_prefix": "8958874b606051dcc41b65c7115871432e33ffb357985ccf964a5ab4282886e2",
+        "size_in_bytes": 3514
+      },
+      {
+        "_path": "share/man/man5/slappw-argon2.5",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "113ac70510fddded0c636e84138c223f0cdb6bae0c770454b7e579d7071fde6b",
+        "sha256_in_prefix": "e15e2d46cb0936054ce2b1d7937d532003b82b2128c14a60c67e36d0522c6530",
+        "size_in_bytes": 3065
+      },
+      {
+        "_path": "share/man/man8/lloadd.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "84b19e458376147f7eda82a20de5cb2baab4a13fc14017e65ffa7d29afad5b25",
+        "sha256_in_prefix": "99822ee09a5498c71bf23e03a7f11eada9d956cd046b82f1066cf39fb17cae89",
+        "size_in_bytes": 11308
+      },
+      {
+        "_path": "share/man/man8/slapacl.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "5b03449d7b8b7c402e5826f6b283f8bf3ef44144ad9045cb4cce05f6893a390e",
+        "sha256_in_prefix": "b391c169863adc1d518db5a344b67f43a8c4b20e670b5c74a646c88d4b915be6",
+        "size_in_bytes": 5358
+      },
+      {
+        "_path": "share/man/man8/slapadd.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "328d4f7905eba97a5e258acab29779a2ef081ff1f162a7f3cd1fba39cbd3344c",
+        "sha256_in_prefix": "cb6c496fe2527927763432ec736ebe71b331f1526061e22b7142a798fb77ec82",
+        "size_in_bytes": 6151
+      },
+      {
+        "_path": "share/man/man8/slapauth.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "8bdcdf5a5c8684953234846c1737508782adef25974a702f212e565e5a244e1c",
+        "sha256_in_prefix": "63d033b16819d3789fac5fdb8ea2a68f8ae1ea7bfd71adf50188e66b93b40d8b",
+        "size_in_bytes": 4123
+      },
+      {
+        "_path": "share/man/man8/slapcat.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "e73fb0b66136f6bd90a39c3d4ba4ca017b756c4e51dc9993883e1d889cc66868",
+        "sha256_in_prefix": "771d3d613b5d4c31662dd6eac8ad71be79865e4a3f2482ae7b7646d8bcbd1880",
+        "size_in_bytes": 5709
+      },
+      {
+        "_path": "share/man/man8/slapd.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "9176513e84f1172899aaf76a57824d9d304b079e42a5cb437845d84769fe8bf0",
+        "sha256_in_prefix": "4b40392f6e046424f4f1f8e895042f52ad1a3b64af46ce1d24949570d9863bce",
+        "size_in_bytes": 14002
+      },
+      {
+        "_path": "share/man/man8/slapdn.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "bd2c46a8da5f052b7e8b8659584d03870c0de8707d47625a60f4e060ad6f903c",
+        "sha256_in_prefix": "377c4cc8991e36bc44ca36cee0359f848bc34f53b6862f60e952a717aa3be911",
+        "size_in_bytes": 3386
+      },
+      {
+        "_path": "share/man/man8/slapindex.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "ece79361010721535894f5939b197cd0a6498fcfeff10cbba6a1351962b7db26",
+        "sha256_in_prefix": "058ec62d59c185f468f78bb4a708cfc7e0cc189369544255358073fc464893a2",
+        "size_in_bytes": 5065
+      },
+      {
+        "_path": "share/man/man8/slapmodify.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "00480da59c35f4e074d611ab17428a8f846daebb8f2af5e5cf5e709f4219eaf0",
+        "sha256_in_prefix": "5f9b00c33421a2910f097cea5108d3e11bb76e6f05e36fe0e3089e0383e219a2",
+        "size_in_bytes": 6254
+      },
+      {
+        "_path": "share/man/man8/slappasswd.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "f0922a6492d6b45b443ee777873c60f32307e859303aa580c206de2d372986ba",
+        "sha256_in_prefix": "92b0145ed3ab6e488cfe92c32cff4311ab33a371a006b677b20f644ca6547e97",
+        "size_in_bytes": 4830
+      },
+      {
+        "_path": "share/man/man8/slapschema.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "9c1d6aa6892329f0db22574bbca86803a2160335330276a295521d9619c332df",
+        "sha256_in_prefix": "4e8fa4d9f67f1f4a645e12af38d5970ba61b46f3536c9adcf7a23484ab3851f4",
+        "size_in_bytes": 5585
+      },
+      {
+        "_path": "share/man/man8/slaptest.8",
+        "file_mode": "text",
+        "path_type": "hardlink",
+        "prefix_placeholder": "/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3dpl5jb9pc/croot/openldap_1754998267877/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_place",
+        "sha256": "ac3c62bf2344b53574ded4e14558204ee448e7c0d531838127441423885c4a72",
+        "sha256_in_prefix": "9e6d5d428fc032a18e6cd603a4a13470a4e5713be2536fc17885a5caf984a131",
+        "size_in_bytes": 3552
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "9da4dfc63f2538212533cd8828d929e929ca90f593d5c1a1febdcfca5d520400",
+  "size": 937744,
+  "subdir": "osx-arm64",
+  "timestamp": 1754998577839,
+  "url": "https://repo.anaconda.com/pkgs/main/osx-arm64/openldap-2.6.10-hebfcc80_0.conda",
+  "version": "2.6.10"
+}

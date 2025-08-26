@@ -1,0 +1,12 @@
+prefix=/Users/preethiseshadri/Documents/tau-bench/env
+exec_prefix=${prefix}
+libdir=/Users/preethiseshadri/Documents/tau-bench/env/lib
+includedir=/Users/preethiseshadri/Documents/tau-bench/env/include
+
+Name: absl_pretty_function
+Description: Abseil pretty_function library
+URL: https://abseil.io/
+Version: 20250127
+Requires:
+Libs: -L${libdir}  
+Cflags: -I${includedir} -Wno-float-conversion -Wno-implicit-float-conversion -Wno-implicit-int-float-conversion -Wno-unknown-warning-option -DNOMINMAX

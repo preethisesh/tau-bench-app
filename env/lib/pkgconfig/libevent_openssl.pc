@@ -1,0 +1,16 @@
+#libevent pkg-config source file
+
+prefix=/Users/preethiseshadri/Documents/tau-bench/env
+exec_prefix=/Users/preethiseshadri/Documents/tau-bench/env
+libdir=/Users/preethiseshadri/Documents/tau-bench/env/lib
+includedir=/Users/preethiseshadri/Documents/tau-bench/env/include
+
+Name: libevent_openssl
+Description: libevent_openssl adds openssl-based TLS support to libevent
+Version: 2.1.12
+Requires: libevent
+Conflicts:
+Libs: -L${libdir} -levent_openssl
+Libs.private:   -L/Users/preethiseshadri/Documents/tau-bench/env/lib/libssl.dylib -L/Users/preethiseshadri/Documents/tau-bench/env/lib/libcrypto.dylib
+Cflags: -I${includedir} 
+

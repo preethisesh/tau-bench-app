@@ -5,3 +5,7 @@ results/**
 __pycache__/
 *.py[cod]
 *.egg-info/
+
+# Streamlit secrets - ADD THESE LINES
+.streamlit/secrets.toml
+.streamlit/

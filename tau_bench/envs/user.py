@@ -25,10 +25,25 @@ class BaseUserSimulationEnv(abc.ABC):
 
 class HumanUserSimulationEnv(BaseUserSimulationEnv):
     def reset(self, instruction: str) -> str:
-        return input(f"{instruction}\n")
+        # print("=== HUMAN USER SIMULATION ===")
+        # print("DEBUG: reset() called with instruction:")
+        print(instruction)
+        # print("=== WAITING FOR YOUR INPUT ===")
+        # import sys
+        # sys.stdout.flush()
+        response = input("###Your response###\n")
+        # print(f"DEBUG: You entered: {response}")
+        return response
 
     def step(self, content: str) -> str:
-        return input(f"{content}\n")
+        # print("=== AGENT SAYS ===")
+        print(content)
+        # print("=== YOUR TURN ===")
+        # import sys
+        # sys.stdout.flush()
+        response = input("Your response: ")
+        # print(f"DEBUG: You entered: {response}")
+        return response
 
     def get_total_cost(self) -> float:
         return 0
