@@ -66,8 +66,11 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
     """Save conversation log and offer download for Streamlit Cloud"""
     
     # Calculate proper reward using environment
-    env.actions = agent_actions
+    env.actions = agent_actions  # Set the actions that were taken
     reward_result = env.calculate_reward()
+    
+    # Override the actions in reward_result to show what actually happened
+    reward_result.actions = agent_actions
     
     # Build info structure matching command-line version
     info = {
@@ -106,17 +109,14 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
     
     # Always offer download button
     st.download_button(
-        label="💾 Download Conversation Log",
+        label="Download Conversation Log",
         data=json_data,
         file_name=filename,
         mime="application/json",
         help="Click to download the conversation log as JSON"
     )
     
-    if local_saved:
-        return f"Saved locally to: results/{filename} (also available for download)"
-    else:
-        return f"File ready for download: {filename}"
+    return f"File ready for download: {filename}"
 
 
 class StreamlitHumanUser:
