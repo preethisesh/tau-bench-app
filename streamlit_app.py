@@ -299,6 +299,10 @@ def main():
                     {"role": "system", "content": st.session_state.env.wiki}
                 ]
                 
+                # Add initial greeting message from agent
+                greeting_message = "Hello! I am an AI Agent and I am here to assist you. What can I do for you?"
+                st.session_state.messages.append({"role": "assistant", "content": greeting_message})
+                
                 st.rerun()
                 
             except Exception as e:
