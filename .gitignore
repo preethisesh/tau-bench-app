@@ -9,3 +9,13 @@ __pycache__/
 # Streamlit secrets - ADD THESE LINES
 .streamlit/secrets.toml
 .streamlit/
+
+# macOS system files - YOU HAVE THIS ONE
+.DS_Store
+
+# Other common ignores
+.vscode/
+.idea/
+.env
+.venv/
+venv/
