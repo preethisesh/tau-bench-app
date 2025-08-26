@@ -66,8 +66,15 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
     """Save conversation log and offer download for Streamlit Cloud"""
     
     # The environment already tracks actions through env.step() calls
-    # Just calculate reward using existing environment logic
+    # Calculate reward using existing environment logic
     reward_result = env.calculate_reward()
+    
+    # Fix: Replace expected actions with actual actions taken
+    # Filter out RESPOND actions from actual actions for consistency
+    actual_non_respond_actions = [
+        action for action in env.actions if action.name != RESPOND_ACTION_NAME
+    ]
+    reward_result.actions = actual_non_respond_actions
     
     # Build info structure matching command-line version
     info = {
