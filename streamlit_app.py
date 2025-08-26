@@ -63,12 +63,10 @@ def get_task_options(env_name: str, task_split: str) -> List[Dict[str, Any]]:
 
 def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]], 
                          agent_actions: List[Action], trial: int = 0) -> str:
-    """Save conversation log to results directory with proper reward calculation"""
-    if not os.path.exists("results"):
-        os.makedirs("results")
+    """Save conversation log and offer download for Streamlit Cloud"""
     
     # Calculate proper reward using environment
-    env.actions = agent_actions  # Set the actions that were taken
+    env.actions = agent_actions
     reward_result = env.calculate_reward()
     
     # Build info structure matching command-line version
@@ -80,7 +78,7 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
     }
     
     time_str = datetime.now().strftime("%m%d%H%M%S")
-    filename = f"results/streamlit-claude-3-5-sonnet-20241022-0.0_range_{task_id}-{task_id+1}_user-human-human_{time_str}.json"
+    filename = f"streamlit-claude-3-5-sonnet-20241022-0.0_range_{task_id}-{task_id+1}_user-human-human_{time_str}.json"
     
     result = EnvRunResult(
         task_id=task_id,
@@ -90,10 +88,35 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
         trial=trial
     )
     
-    with open(filename, 'w') as f:
-        json.dump([result.model_dump()], f, indent=2)
+    # Convert to JSON string for download
+    json_data = json.dumps([result.model_dump()], indent=2)
     
-    return filename
+    # Try to save locally (works locally, might not work on cloud)
+    local_saved = False
+    try:
+        if not os.path.exists("results"):
+            os.makedirs("results")
+        local_path = f"results/{filename}"
+        with open(local_path, 'w') as f:
+            f.write(json_data)
+        local_saved = True
+    except (PermissionError, OSError):
+        # Cloud environment - can't write to disk
+        local_saved = False
+    
+    # Always offer download button
+    st.download_button(
+        label="💾 Download Conversation Log",
+        data=json_data,
+        file_name=filename,
+        mime="application/json",
+        help="Click to download the conversation log as JSON"
+    )
+    
+    if local_saved:
+        return f"Saved locally to: results/{filename} (also available for download)"
+    else:
+        return f"File ready for download: {filename}"
 
 
 class StreamlitHumanUser:
