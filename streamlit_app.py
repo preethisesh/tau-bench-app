@@ -233,7 +233,7 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title("🤖 AI Agent Customer Assistance")
-    st.markdown("Chat with an AI agent to assist with retail and airline domain tasks.")
+    st.markdown("Chat with an AI agent to assist with retail or airline domain tasks. Please follow the task instructions carefully and type `###STOP###` to end the conversation at any time.")
     
     # Sidebar configuration
     with st.sidebar:
