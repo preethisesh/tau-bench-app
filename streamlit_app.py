@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import os
+import re
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 
@@ -61,6 +62,18 @@ def get_task_options(env_name: str, task_split: str) -> List[Dict[str, Any]]:
     
     return options
 
+def clean_agent_response(text):
+    """Clean problematic markdown formatting from agent responses"""
+    if text is None:
+        return ""
+    
+    # Replace *word* with just word (removes italic formatting)
+    text = re.sub(r'\*([^*\s]+)\*', r'\1', text)
+    
+    # Alternatively, you could be more specific and just fix the "to" case:
+    # text = text.replace('*to*', 'to')
+    
+    return text
 
 def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]], 
                          agent_actions: List[Action], trial: int = 0) -> str:
@@ -463,7 +476,9 @@ def main():
                             
                             with st.chat_message("assistant"):
                                 # Use markdown to ensure consistent formatting
-                                st.markdown(agent_content)
+                                # st.markdown(agent_content)
+                                cleaned_content = clean_agent_response(agent_content)
+                                st.markdown(cleaned_content)
                             st.session_state.messages.append({"role": "assistant", "content": agent_content})
                             st.session_state.agent_messages.append(agent_message)
                             
