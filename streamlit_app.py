@@ -65,12 +65,9 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
                          agent_actions: List[Action], trial: int = 0) -> str:
     """Save conversation log and offer download for Streamlit Cloud"""
     
-    # Calculate proper reward using environment
-    env.actions = agent_actions  # Set the actions that were taken
+    # The environment already tracks actions through env.step() calls
+    # Just calculate reward using existing environment logic
     reward_result = env.calculate_reward()
-    
-    # Override the actions in reward_result to show what actually happened
-    reward_result.actions = agent_actions
     
     # Build info structure matching command-line version
     info = {
