@@ -28,6 +28,44 @@ def get_api_key():
         return api_key
 
 
+def format_agent_response(content: str) -> str:
+    """Format agent response content for consistent display"""
+    if not content:
+        return content
+    
+    import re
+    
+    # Convert content to string if it's not already
+    content = str(content)
+    
+    # Replace problematic markdown characters that might cause formatting issues
+    # Escape backticks that could create code blocks
+    content = re.sub(r'`([^`\n]*)`', r'"\1"', content)
+    
+    # Replace multiple spaces with single spaces for consistency
+    content = re.sub(r'\s+', ' ', content)
+    
+    # Ensure consistent formatting for common patterns
+    # Fix currency formatting (e.g., $123.45)
+    content = re.sub(r'\$(\d+\.?\d*)', r'$\1', content)
+    
+    # Fix order ID formatting (e.g., #W123456)
+    content = re.sub(r'#([A-Z]\d+)', r'#\1', content)
+    
+    # Fix percentage formatting
+    content = re.sub(r'(\d+)%', r'\1%', content)
+    
+    # Remove any remaining markdown formatting that could cause issues
+    # Remove bold/italic markers if they're causing problems
+    content = re.sub(r'\*\*([^*]+)\*\*', r'\1', content)  # Remove bold
+    content = re.sub(r'\*([^*]+)\*', r'\1', content)      # Remove italic
+    
+    # Clean up any extra whitespace
+    content = content.strip()
+    
+    return content
+
+
 def get_task_options(env_name: str, task_split: str) -> List[Dict[str, Any]]:
     """Get list of available tasks with descriptions"""
     if env_name == "retail":
@@ -319,7 +357,13 @@ def main():
         # Display conversation history
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
-                st.write(message["content"])
+                if message["role"] == "assistant":
+                    # Format agent responses consistently
+                    formatted_content = format_agent_response(message["content"])
+                    st.write(formatted_content)
+                else:
+                    # User messages don't need special formatting
+                    st.write(message["content"])
         
         # Chat input
         if st.session_state.conversation_active:
@@ -440,8 +484,11 @@ def main():
                             if agent_content is None or agent_content.strip() == "":
                                 agent_content = "I apologize, but I didn't understand your request. Could you please rephrase or provide more specific details about what you'd like me to help you with?"
                             
+                            # Process agent content to ensure consistent formatting
+                            formatted_content = format_agent_response(agent_content)
+                            
                             with st.chat_message("assistant"):
-                                st.write(agent_content)
+                                st.write(formatted_content)
                             st.session_state.messages.append({"role": "assistant", "content": agent_content})
                             st.session_state.agent_messages.append(agent_message)
                             
