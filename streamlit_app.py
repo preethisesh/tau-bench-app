@@ -103,6 +103,11 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
                          agent_actions: List[Action], trial: int = 0) -> str:
     """Save conversation log and offer download for Streamlit Cloud"""
     
+    # Calculate conversation duration
+    conversation_end_time = datetime.now()
+    start_time = st.session_state.get('conversation_start_time', conversation_end_time)
+    duration_seconds = (conversation_end_time - start_time).total_seconds()
+    
     # Save the actual actions taken before calculate_reward() pollutes them
     actual_actions_taken = [
         action for action in env.actions if action.name != RESPOND_ACTION_NAME
@@ -115,12 +120,17 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
     # Fix: Replace the polluted actions with actual actions taken
     reward_result.actions = actual_actions_taken
     
-    # Build info structure matching command-line version
+    # Build info structure matching command-line version with timing info
     info = {
         "task": env.task.model_dump(),
         "source": "user",
         "user_cost": env.user.get_total_cost(),
-        "reward_info": reward_result.model_dump()
+        "reward_info": reward_result.model_dump(),
+        # Add timing information
+        "conversation_start_time": start_time.isoformat(),
+        "conversation_end_time": conversation_end_time.isoformat(),
+        "conversation_duration_seconds": round(duration_seconds, 2),
+        "conversation_duration_minutes": round(duration_seconds / 60, 2)
     }
     
     time_str = datetime.now().strftime("%m%d%H%M%S")
@@ -296,6 +306,8 @@ def main():
         st.session_state.agent = None
     if 'agent_actions' not in st.session_state:
         st.session_state.agent_actions = []  # Track all agent actions for logging
+    if 'conversation_start_time' not in st.session_state:
+        st.session_state.conversation_start_time = None
     
     # Main chat interface
     if not st.session_state.conversation_started:
@@ -336,6 +348,9 @@ def main():
                 st.session_state.agent_messages = [
                     {"role": "system", "content": st.session_state.env.wiki}
                 ]
+                
+                # Track conversation start time
+                st.session_state.conversation_start_time = datetime.now()
                 
                 # Add initial greeting message from agent
                 greeting_message = "Hello! I am an AI Agent and I am here to assist you. What can I do for you?"
