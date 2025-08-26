@@ -232,8 +232,8 @@ def main():
     </style>
     """, unsafe_allow_html=True)
     
-    st.title("🤖 Tau-Bench Human-Agent Conversation")
-    st.markdown("Chat with an AI agent to complete various tasks in retail and airline domains.")
+    st.title("🤖 AI Agent Customer Assistance")
+    st.markdown("Chat with an AI agent to assist with retail and airline domain tasks.")
     
     # Sidebar configuration
     with st.sidebar:
