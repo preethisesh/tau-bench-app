@@ -352,11 +352,10 @@ def main():
             st.write(st.session_state.task_instruction)
             st.write("---")
             st.write("**Instructions:** Please respond as the user described in the task. Please behave like yourself and converse naturally. Type `###STOP###` to end the conversation at any point.")
-            st.write("---")
+            # st.write("---")
             st.write("**To begin the conversation, authenticate yourself by providing either:**")
-            st.write("1) Your email: *\"My email is EMAIL\"*")
-            st.write("2) Your full name and zip code: *\"My full name is User [a-z][0-9][0-9] and zip code is ZIP_CODE\"*")
-            st.write("*(Note: Full names follow the format User + letter + two digits, e.g., User b63, User m30)*")
+            st.write("1) Your email: *\"My email is EMAIL.\"*")
+            st.write("2) Your full name and zip code: *\"My full name is User [a-z][0-9][0-9] and zip code is ZIP_CODE.\" Note: Full names follow the format User + letter + two digits, e.g., User b63, User m30)*")
         
         # Display conversation history
         for message in st.session_state.messages:
