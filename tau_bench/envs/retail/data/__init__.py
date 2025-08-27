@@ -8,7 +8,8 @@ FOLDER_PATH = os.path.dirname(__file__)
 
 
 def load_data() -> dict[str, Any]:
-    with open(os.path.join(FOLDER_PATH, "orders.json")) as f:
+    # with open(os.path.join(FOLDER_PATH, "orders.json")) as f:
+    with open(os.path.join(FOLDER_PATH, "orders_modified.json")) as f:
         order_data = json.load(f)
     with open(os.path.join(FOLDER_PATH, "products.json")) as f:
         product_data = json.load(f)
