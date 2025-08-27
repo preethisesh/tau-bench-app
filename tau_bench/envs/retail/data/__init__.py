@@ -12,7 +12,8 @@ def load_data() -> dict[str, Any]:
         order_data = json.load(f)
     with open(os.path.join(FOLDER_PATH, "products.json")) as f:
         product_data = json.load(f)
-    with open(os.path.join(FOLDER_PATH, "users.json")) as f:
+    # with open(os.path.join(FOLDER_PATH, "users.json")) as f:
+    with open(os.path.join(FOLDER_PATH, "users_modified.json")) as f:
         user_data = json.load(f)
     return {
         "orders": order_data,

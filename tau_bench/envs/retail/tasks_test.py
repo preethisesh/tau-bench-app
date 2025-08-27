@@ -1144,7 +1144,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="aarav_santos_2259",
-        instruction="You are aarav_santos_2259 and aarav.santos8321@example.com and aarav.santos8320@example.com. You want to return the speaker that is more expensive yet not resistent to water. Also, You want to modify the 17-inch laptop to the 13-inch version in another order. If no exact item is available, you want to know all available 13-inch options, and you prefer i5 over i7, and prefer silver and black than other colors. You are a rude person.",
+        instruction="You are aarav_santos_2259 with the email address aarav.santos8321@example.com. You want to return the speaker that is more expensive yet not resistent to water. Also, You want to modify the 17-inch laptop to the 13-inch version in another order. If no exact item is available, you want to know all available 13-inch options, and you prefer i5 over i7, and prefer silver and black than other colors. You are a rude person.",
         actions=[
             Action(
                 name="find_user_id_by_email",

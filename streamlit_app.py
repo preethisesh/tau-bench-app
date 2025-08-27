@@ -246,12 +246,9 @@ def main():
             index=0
         )
         
-        # Task split selection
-        task_split = st.selectbox(
-            "Task Split",
-            options=["test", "dev", "train"] if env_name == "retail" else ["test"],
-            index=0
-        )
+        # Task split selection - only allow test subset
+        task_split = "test"
+        st.write("**Task Split:** test (only test subset available)")
         
         # Get available tasks
         task_options = get_task_options(env_name, task_split)
