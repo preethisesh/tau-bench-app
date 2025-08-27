@@ -350,7 +350,7 @@ def main():
         # Display task instruction
         with st.expander("📋 Task Instructions", expanded=False):
             st.write(st.session_state.task_instruction)
-            st.write("**Instructions:** Please respond as the user described in the task. Please behave like yourself and converse naturally. Type `###STOP###` to end the conversation at any point.")
+            st.write("**Instructions:** Please respond as the user described in the task. Beyond this, please behave like yourself and converse naturally. Type `###STOP###` to end the conversation at any point.")
             st.write("**To begin the conversation, authenticate yourself by providing either:**")
             st.write("1) Your email: *\"My email is EMAIL.\"*")
             st.write("2) Your full name and zip code: *\"My full name is User [a-z][0-9][0-9] and zip code is ZIP_CODE.\"* Note: Full names follow the format User + letter + two digits, e.g., User b63, User m30).")
