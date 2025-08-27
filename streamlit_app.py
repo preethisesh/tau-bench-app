@@ -8,9 +8,9 @@ from typing import Dict, Any, List, Optional
 from tau_bench.envs import get_env
 from tau_bench.agents.tool_calling_agent import ToolCallingAgent
 from tau_bench.types import Action, RESPOND_ACTION_NAME, EnvRunResult, SolveResult
-from tau_bench.envs.retail.tasks_test import TASKS_TEST as RETAIL_TASKS_TEST
-from tau_bench.envs.retail.tasks_dev import TASKS_DEV as RETAIL_TASKS_DEV
-from tau_bench.envs.retail.tasks_train import TASKS_TRAIN as RETAIL_TASKS_TRAIN
+from tau_bench.envs.retail.tasks_test_modified import TASKS_TEST as RETAIL_TASKS_TEST
+# from tau_bench.envs.retail.tasks_dev import TASKS_DEV as RETAIL_TASKS_DEV
+# from tau_bench.envs.retail.tasks_train import TASKS_TRAIN as RETAIL_TASKS_TRAIN
 from tau_bench.envs.airline.tasks_test import TASKS as AIRLINE_TASKS_TEST
 
 
