@@ -242,7 +242,7 @@ def main():
         # Environment selection
         env_name = st.selectbox(
             "Environment",
-            options=["retail", "airline"],
+            options=["retail"], # , "airline"
             index=0
         )
         
@@ -386,7 +386,7 @@ def main():
                             trial=0
                         )
                         
-                        st.success(f"✅ Conversation ended. ")
+                        st.success(f"✅ Conversation ended.")
                         
                     except Exception as e:
                         st.error(f"Error saving conversation: {str(e)}")
@@ -465,7 +465,8 @@ def main():
                                         trial=0
                                     )
                                     
-                                    st.success(f"✅ Task completed! Conversation saved to: {filename}")
+                                    # st.success(f"✅ Task completed! Conversation saved to: {filename}")
+                                    st.success(f"✅ Task completed!")
                                     st.balloons()
                                     
                                 except Exception as e:
@@ -503,7 +504,8 @@ def main():
                                         trial=0
                                     )
                                     
-                                    st.success(f"✅ Task completed! Conversation saved to: {filename}")
+                                    # st.success(f"✅ Task completed! Conversation saved to: {filename}")
+                                    st.success(f"✅ Task completed!")
                                     st.balloons()
                                     
                                 except Exception as e:
