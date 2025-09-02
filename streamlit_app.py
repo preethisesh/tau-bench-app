@@ -444,18 +444,7 @@ def main():
                         has_content = agent_content is not None and agent_content.strip() != ""
                         has_tool_calls = agent_action.name != RESPOND_ACTION_NAME
                         
-                        # Always display content if it exists
-                        if has_content:
-                            # Handle case where agent content needs cleaning
-                            if agent_content.strip() == "":
-                                agent_content = "I apologize, but I didn't understand your request. Could you please rephrase or provide more specific details about what you'd like me to help you with?"
-                            
-                            with st.chat_message("assistant"):
-                                cleaned_content = clean_agent_response(agent_content)
-                                st.markdown(cleaned_content)
-                            st.session_state.messages.append({"role": "assistant", "content": agent_content})
-                        
-                        # Handle tool calls
+                        # Handle tool calls first (always complete the tool call sequence)
                         if has_tool_calls:
                             # Update agent messages with tool call and response
                             agent_message["tool_calls"] = agent_message["tool_calls"][:1]
@@ -469,9 +458,37 @@ def main():
                                 }
                             ])
                             
-                            # If this was just a pure tool call (no content), continue the loop
-                            if not has_content:
-                                # For pure tool calls, show a brief processing indicator if not think tool
+                            # Display content if it exists (even with tool calls)
+                            if has_content:
+                                with st.chat_message("assistant"):
+                                    cleaned_content = clean_agent_response(agent_content)
+                                    st.markdown(cleaned_content)
+                                st.session_state.messages.append({"role": "assistant", "content": agent_content})
+                                
+                                # Check if conversation is done
+                                if env_response.done:
+                                    st.session_state.conversation_active = False
+                                    
+                                    # Save conversation log
+                                    try:
+                                        filename = save_conversation_log(
+                                            env=st.session_state.env,
+                                            task_id=st.session_state.task_id,
+                                            messages=st.session_state.agent_messages,
+                                            agent_actions=st.session_state.agent_actions,
+                                            trial=0
+                                        )
+                                        
+                                        st.success(f"✅ Task completed!")
+                                        st.balloons()
+                                        
+                                    except Exception as e:
+                                        st.error(f"Error saving conversation: {str(e)}")
+                                
+                                # Break the loop - we displayed content, now wait for user response
+                                break
+                            else:
+                                # Pure tool call (no content) - show processing indicator and continue
                                 tool_name = agent_message["tool_calls"][0]["function"]["name"]
                                 if tool_name != "think":  # Don't show anything for think tool
                                     with st.chat_message("assistant"):
@@ -503,42 +520,45 @@ def main():
                                 current_step += 1
                                 continue
                         
-                        # If we get here, either:
-                        # 1. Agent provided content (with or without tool calls) - display and break
-                        # 2. Agent provided no content and no tool calls - handle as error
+                        # No tool calls - handle pure content or empty response
+                        elif has_content:
+                            # Pure content response - display and break
+                            with st.chat_message("assistant"):
+                                cleaned_content = clean_agent_response(agent_content)
+                                st.markdown(cleaned_content)
+                            st.session_state.messages.append({"role": "assistant", "content": agent_content})
+                            st.session_state.agent_messages.append(agent_message)
+                            
+                            # Check if conversation is done
+                            if env_response.done:
+                                st.session_state.conversation_active = False
+                                
+                                # Save conversation log
+                                try:
+                                    filename = save_conversation_log(
+                                        env=st.session_state.env,
+                                        task_id=st.session_state.task_id,
+                                        messages=st.session_state.agent_messages,
+                                        agent_actions=st.session_state.agent_actions,
+                                        trial=0
+                                    )
+                                    
+                                    st.success(f"✅ Task completed!")
+                                    st.balloons()
+                                    
+                                except Exception as e:
+                                    st.error(f"Error saving conversation: {str(e)}")
+                            
+                            break
                         
-                        if not has_content and not has_tool_calls:
+                        else:
                             # Agent provided nothing - show error message
                             error_content = "I apologize, but I didn't understand your request. Could you please rephrase or provide more specific details about what you'd like me to help you with?"
                             with st.chat_message("assistant"):
                                 st.markdown(error_content)
                             st.session_state.messages.append({"role": "assistant", "content": error_content})
-                        
-                        # Add agent message to conversation log
-                        st.session_state.agent_messages.append(agent_message)
-                        
-                        # Check if conversation is done
-                        if env_response.done:
-                            st.session_state.conversation_active = False
-                            
-                            # Save conversation log
-                            try:
-                                filename = save_conversation_log(
-                                    env=st.session_state.env,
-                                    task_id=st.session_state.task_id,
-                                    messages=st.session_state.agent_messages,
-                                    agent_actions=st.session_state.agent_actions,
-                                    trial=0
-                                )
-                                
-                                st.success(f"✅ Task completed!")
-                                st.balloons()
-                                
-                            except Exception as e:
-                                st.error(f"Error saving conversation: {str(e)}")
-                        
-                        # Break the loop - we've handled the agent response
-                        break
+                            st.session_state.agent_messages.append(agent_message)
+                            break
                     
                     if current_step >= max_steps:
                         st.error("⚠️ Agent took too many steps without responding. Please try again.")
