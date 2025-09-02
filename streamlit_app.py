@@ -484,9 +484,12 @@ def main():
                                         
                                     except Exception as e:
                                         st.error(f"Error saving conversation: {str(e)}")
+                                    
+                                    break
                                 
-                                # Break the loop - we displayed content, now wait for user response
-                                break
+                                # Continue the loop - let agent process tool results and respond further
+                                current_step += 1
+                                continue
                             else:
                                 # Pure tool call (no content) - show processing indicator and continue
                                 tool_name = agent_message["tool_calls"][0]["function"]["name"]
