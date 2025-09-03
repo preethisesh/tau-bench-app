@@ -226,11 +226,46 @@ def main():
     /* Consistent text styling */
     .stChatMessage .stMarkdown,
     .stChatMessage p,
-    .stChatMessage div {
+    .stChatMessage div,
+    .stChatMessage li,
+    .stChatMessage ol,
+    .stChatMessage ul {
         color: #000000 !important;
         font-family: "Source Sans Pro", sans-serif !important;
         font-size: 14px !important;
         line-height: 1.4 !important;
+    }
+    
+    /* Dark mode chat message text color fixes */
+    [data-theme="dark"] .stChatMessage .stMarkdown,
+    [data-theme="dark"] .stChatMessage p,
+    [data-theme="dark"] .stChatMessage div,
+    [data-theme="dark"] .stChatMessage li,
+    [data-theme="dark"] .stChatMessage ol,
+    [data-theme="dark"] .stChatMessage ul {
+        color: white !important;
+    }
+    
+    /* Light mode chat message text color */
+    [data-theme="light"] .stChatMessage .stMarkdown,
+    [data-theme="light"] .stChatMessage p,
+    [data-theme="light"] .stChatMessage div,
+    [data-theme="light"] .stChatMessage li,
+    [data-theme="light"] .stChatMessage ol,
+    [data-theme="light"] .stChatMessage ul {
+        color: black !important;
+    }
+    
+    /* Fallback for chat messages in dark mode */
+    @media (prefers-color-scheme: dark) {
+        .stChatMessage .stMarkdown,
+        .stChatMessage p,
+        .stChatMessage div,
+        .stChatMessage li,
+        .stChatMessage ol,
+        .stChatMessage ul {
+            color: white !important;
+        }
     }
     
     /* Task instructions styling */
@@ -307,17 +342,29 @@ def main():
         
         /* Dark mode text color fixes - more specific targeting */
         [data-theme="dark"] .stMarkdown p,
+        [data-theme="dark"] .stMarkdown li,
+        [data-theme="dark"] .stMarkdown ol,
+        [data-theme="dark"] .stMarkdown ul,
         [data-theme="dark"] .stText,
         [data-theme="dark"] div[data-testid="stExpander"] p,
-        [data-theme="dark"] div[data-testid="stExpander"] div {
+        [data-theme="dark"] div[data-testid="stExpander"] div,
+        [data-theme="dark"] div[data-testid="stExpander"] li,
+        [data-theme="dark"] div[data-testid="stExpander"] ol,
+        [data-theme="dark"] div[data-testid="stExpander"] ul {
             color: white !important;
         }
         
         /* Light mode text color */
         [data-theme="light"] .stMarkdown p,
+        [data-theme="light"] .stMarkdown li,
+        [data-theme="light"] .stMarkdown ol,
+        [data-theme="light"] .stMarkdown ul,
         [data-theme="light"] .stText,
         [data-theme="light"] div[data-testid="stExpander"] p,
-        [data-theme="light"] div[data-testid="stExpander"] div {
+        [data-theme="light"] div[data-testid="stExpander"] div,
+        [data-theme="light"] div[data-testid="stExpander"] li,
+        [data-theme="light"] div[data-testid="stExpander"] ol,
+        [data-theme="light"] div[data-testid="stExpander"] ul {
             color: black !important;
         }
         
@@ -325,7 +372,13 @@ def main():
         @media (prefers-color-scheme: dark) {
             div[data-testid="stExpander"] p,
             div[data-testid="stExpander"] div,
-            .element-container .stMarkdown p {
+            div[data-testid="stExpander"] li,
+            div[data-testid="stExpander"] ol,
+            div[data-testid="stExpander"] ul,
+            .element-container .stMarkdown p,
+            .element-container .stMarkdown li,
+            .element-container .stMarkdown ol,
+            .element-container .stMarkdown ul {
                 color: white !important;
             }
         }
