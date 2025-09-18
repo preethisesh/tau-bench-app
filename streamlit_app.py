@@ -2,16 +2,32 @@ import streamlit as st
 import json
 import os
 import re
+import random
 from datetime import datetime
-from typing import Dict, Any, List, Optional
+from typing import List, Optional
 
 from tau_bench.envs import get_env
 from tau_bench.agents.tool_calling_agent import ToolCallingAgent
 from tau_bench.types import Action, RESPOND_ACTION_NAME, EnvRunResult, SolveResult
-from tau_bench.envs.retail.tasks_test_modified import TASKS_TEST as RETAIL_TASKS_TEST
+from tau_bench.envs.retail.tasks_test_modified2 import TASKS_TEST as RETAIL_TASKS_TEST
 # from tau_bench.envs.retail.tasks_dev import TASKS_DEV as RETAIL_TASKS_DEV
 # from tau_bench.envs.retail.tasks_train import TASKS_TRAIN as RETAIL_TASKS_TRAIN
 from tau_bench.envs.airline.tasks_test import TASKS as AIRLINE_TASKS_TEST
+from task_questions import TASK_QUESTIONS
+
+# Task difficulty configuration
+EASY_TASK_INDICES = [53, 80, 15, 3, 65, 8, 44, 60, 95, 70]
+HARD_TASK_INDICES = [72, 20, 74, 29, 99, 79, 82, 27, 59, 101]
+
+
+def assign_random_tasks() -> List[int]:
+    """Assign 2 random easy tasks and 2 random hard tasks"""
+    easy_tasks = random.sample(EASY_TASK_INDICES, 2)
+    hard_tasks = random.sample(HARD_TASK_INDICES, 2)
+    # Combine and shuffle the order
+    all_tasks = easy_tasks + hard_tasks
+    random.shuffle(all_tasks)
+    return all_tasks
 
 
 def get_api_key():
@@ -30,7 +46,7 @@ def get_api_key():
 
 
 
-def get_task_options(env_name: str, task_split: str) -> List[Dict[str, Any]]:
+def get_task_options(env_name: str, task_split: str):
     """Get list of available tasks with descriptions"""
     if env_name == "retail":
         if task_split == "test":
@@ -107,8 +123,8 @@ def clean_agent_response(text):
     
     return text
 
-def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]], 
-                         agent_actions: List[Action], trial: int = 0) -> str:
+def save_conversation_log(env, task_id: int, messages, 
+                         agent_actions: List[Action], trial: int = 0):
     """Save conversation log and offer download for Streamlit Cloud"""
     
     # Calculate conversation duration
@@ -142,7 +158,9 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
     }
     
     time_str = datetime.now().strftime("%m%d%H%M%S")
-    filename = f"streamlit-claude-3-5-sonnet-20241022-0.0_range_{task_id}-{task_id+1}_user-human-human_{time_str}.json"
+    # Get the current task sequence number (1-4)
+    task_sequence = st.session_state.get('current_task_index', 0) + 1
+    filename = f"streamlit-claude-3-5-sonnet-20241022-0.0_range_{task_id}-{task_id+1}_user-human-human_{time_str}_task{task_sequence}.json"
     
     result = EnvRunResult(
         task_id=task_id,
@@ -174,6 +192,36 @@ def save_conversation_log(env, task_id: int, messages: List[Dict[str, Any]],
         "filename": filename,
         "local_saved": local_saved
     }
+
+
+def handle_task_completion():
+    """Handle task completion and progression to next task"""
+    # Mark current task as completed
+    current_task_id = st.session_state.task_id
+    st.session_state.completed_tasks.append(current_task_id)
+    
+    # Store which task was just completed (before incrementing)
+    st.session_state.just_completed_task = st.session_state.current_task_index + 1  # Convert to 1-based for display
+    
+    # Check if all tasks are completed
+    if st.session_state.current_task_index >= 3:  # 0-based index, so 3 means 4th task
+        st.session_state.all_tasks_completed = True
+        st.session_state.conversation_active = False
+        return True
+    else:
+        # Move to next task
+        st.session_state.current_task_index += 1
+        st.session_state.conversation_active = False
+        st.session_state.conversation_started = False  # Reset to start next conversation
+        
+        # Don't clear conversation history yet - wait until next task starts
+        # Keep conversation visible while user answers question and downloads log
+        # st.session_state.messages = []  # Clear this when Begin is clicked instead
+        # st.session_state.agent_messages = []  # Clear this when Begin is clicked instead
+        # st.session_state.agent_actions = []  # Clear this when Begin is clicked instead
+        # Keep conversation_ended = True and log_data for download button
+        
+        return False
 
 
 class StreamlitHumanUser:
@@ -286,32 +334,18 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title("🤖 AI Agent Customer Assistance")
-    st.markdown("Chat with an AI agent to assist with retail or airline domain tasks. Please follow the task instructions carefully. Use the 'End Conversation' button in the left sidebar to finish at any time and make sure to download your conversation log (for each task).")
+    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). Make sure to download your conversation logs for each task and upload them in the form. You will also answer a question about each task in the form (the question will be shown here after task completion, and you will answer in the form).")
     
     # Sidebar configuration
     with st.sidebar:
         st.header("Configuration")
         
-        # Environment selection
+        # Environment selection (fixed)
         env_name = st.selectbox(
             "Environment",
-            options=["retail"], # , "airline"
-            index=0
-        )
-        
-        # Task split selection - only allow test subset
-        task_split = "test"
-        st.write("**Task Split:** test (only test subset available)")
-        
-        # Get available tasks
-        task_options = get_task_options(env_name, task_split)
-        
-        # Task selection
-        selected_task = st.selectbox(
-            "Select Task",
-            options=task_options,
-            format_func=lambda x: x['description'],
-            index=0
+            options=["retail"],
+            index=0,
+            disabled=True
         )
         
         # Model selection (fixed for now)
@@ -321,6 +355,20 @@ def main():
             index=0,
             disabled=True
         )
+        
+        # Task split (fixed to test)
+        task_split = "test"
+        
+        # Task progress tracking (no task selection needed)
+        if 'assigned_tasks' not in st.session_state:
+            st.session_state.assigned_tasks = []
+        if 'current_task_index' not in st.session_state:
+            st.session_state.current_task_index = 0
+            
+        if st.session_state.assigned_tasks:
+            st.write(f"**Task {st.session_state.current_task_index + 1} of 4**")
+        else:
+            st.write("**Ready to begin your tasks**")
         
         # Add custom CSS for button colors and dark mode text
         st.markdown("""
@@ -385,8 +433,8 @@ def main():
         </style>
         """, unsafe_allow_html=True)
         
-        # Start new conversation button
-        if st.button("Start New Conversation", type="primary", use_container_width=True):
+        # Restart button
+        if st.button("Restart from scratch", type="primary", use_container_width=True):
             # Reset session state
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
@@ -396,9 +444,6 @@ def main():
         if st.session_state.get('conversation_active', False):
             end_conversation_pressed = st.button("End Conversation", type="secondary", key="sidebar_end_conv", use_container_width=True)
             if end_conversation_pressed:
-                # Simply end the conversation without processing agent response
-                st.session_state.conversation_active = False
-                
                 # Store conversation log data for download
                 if st.session_state.env:
                     try:
@@ -409,12 +454,56 @@ def main():
                             st.session_state.messages, 
                             st.session_state.agent_actions
                         )
+                        
+                        # Handle task completion and progression
+                        all_completed = handle_task_completion()
+                        
+                        if all_completed:
+                            st.success(f"🎉 Task {st.session_state.current_task_index + 1} completed! You have finished all 4 tasks!")
+                            st.balloons()
+                        else:
+                            completed_task_num = st.session_state.current_task_index  # This is the task we just completed
+                            next_task_num = st.session_state.current_task_index + 1  # This is the next task
+                            # Don't show messages here - they'll be shown in main area
+                        
                     except Exception as e:
                         st.error(f"Error saving conversation log: {str(e)}")
                         st.session_state.conversation_ended = True  # Still mark as ended
                         st.session_state.log_data = None
                 
                 st.rerun()
+        
+        # Show task completion and download section
+        if st.session_state.get('conversation_ended', False) and st.session_state.get('log_data'):
+            completed_task_num = st.session_state.get('just_completed_task', st.session_state.current_task_index)
+            next_task_num = st.session_state.current_task_index + 1
+            
+            st.success(f"✅ Task {completed_task_num} Complete!")
+            st.write("**Please download your log, and upload it and answer the following question in the form:**")
+            
+            log_data = st.session_state.log_data
+            download_clicked = st.download_button(
+                label="📄 Download Log",
+                data=log_data["json_data"],
+                file_name=log_data["filename"],
+                mime="application/json",
+                help="Click to download the conversation log as JSON",
+                key="sidebar_download",
+                use_container_width=True
+            )
+            
+            # Track that download was clicked for this task
+            if download_clicked:
+                st.session_state.current_log_downloaded = True
+            
+            # Show task-specific question in sidebar
+            completed_task_id = st.session_state.task_id  # The actual task ID that was just completed
+            if completed_task_id in TASK_QUESTIONS:
+                st.write("**Question for the form:**")
+                st.write(f"*{TASK_QUESTIONS[completed_task_id]}*")
+            
+            st.write(f"**Scroll down and proceed with Task {next_task_num} by clicking \"Begin Next Task\"**.")
+        
     
     # Initialize session state
     if 'conversation_started' not in st.session_state:
@@ -436,12 +525,40 @@ def main():
     if 'log_data' not in st.session_state:
         st.session_state.log_data = None
     
+    # Task sequence tracking
+    if 'assigned_tasks' not in st.session_state:
+        st.session_state.assigned_tasks = []
+    if 'current_task_index' not in st.session_state:
+        st.session_state.current_task_index = 0
+    if 'completed_tasks' not in st.session_state:
+        st.session_state.completed_tasks = []
+    if 'all_tasks_completed' not in st.session_state:
+        st.session_state.all_tasks_completed = False
+    
     # Main chat interface
-    if not st.session_state.conversation_started:
-        st.info("👈 Configure your settings in the sidebar and click 'Start New Conversation' to begin!")
-        
-        if st.button("Start Conversation with Selected Task"):
+    if st.session_state.all_tasks_completed:
+        st.success("🎉 Congratulations! You have completed all 4 tasks!")
+        st.info("Thank you for participating. You can now close this session.")
+        # Optionally show download links for all completed tasks
+        return
+    
+    if not st.session_state.conversation_started and not st.session_state.get('conversation_ended', False):        
+        if st.button("Begin"):
+            # Check if user needs to download current log first
+            if (st.session_state.get('conversation_ended', False) and 
+                st.session_state.get('log_data') and 
+                not st.session_state.get('current_log_downloaded', False)):
+                st.error("⚠️ Please download your conversation log and answer the question before proceeding to the next task!")
+                st.stop()
+            
             try:
+                # Assign tasks if not already assigned
+                if not st.session_state.assigned_tasks:
+                    st.session_state.assigned_tasks = assign_random_tasks()
+                    st.session_state.current_task_index = 0
+                
+                current_task_id = st.session_state.assigned_tasks[st.session_state.current_task_index]
+                
                 # Initialize environment with human user strategy
                 st.session_state.env = get_env(
                     env_name=env_name,
@@ -449,7 +566,7 @@ def main():
                     user_model="gpt-4o",  # Not used for human strategy
                     user_provider="openai",  # Not used for human strategy
                     task_split=task_split,
-                    task_index=selected_task['index']
+                    task_index=current_task_id
                 )
                 
                 # Replace the human user with our Streamlit version
@@ -465,14 +582,21 @@ def main():
                 )
                 
                 # Start conversation
-                env_reset_res = st.session_state.env.reset(task_index=selected_task['index'])
+                env_reset_res = st.session_state.env.reset(task_index=current_task_id)
                 st.session_state.task_instruction = env_reset_res.info.task.instruction
                 st.session_state.conversation_started = True
                 st.session_state.conversation_active = True
-                st.session_state.task_id = selected_task['index']
+                st.session_state.task_id = current_task_id
                 st.session_state.agent_actions = []  # Reset actions for new conversation
-                st.session_state.conversation_ended = False  # Reset conversation ended flag
-                st.session_state.log_data = None  # Clear previous log data
+                # Clear previous log data and conversation when starting new conversation
+                st.session_state.conversation_ended = False
+                st.session_state.log_data = None
+                st.session_state.just_completed_task = None
+                st.session_state.current_log_downloaded = False
+                
+                # Clear conversation history from previous task
+                st.session_state.messages = []
+                st.session_state.agent_actions = []
                 # Agent starts with just the system message (wiki)
                 st.session_state.agent_messages = [
                     {"role": "system", "content": st.session_state.env.wiki}
@@ -492,13 +616,47 @@ def main():
                 if "api" in str(e).lower() or "key" in str(e).lower():
                     st.error("Make sure your ANTHROPIC_API_KEY is properly configured in Streamlit secrets.")
     
+    elif st.session_state.get('conversation_ended', False) and not st.session_state.conversation_started:
+        # Show conversation history even after ending (before moving to next task)
+        # Display task instruction
+        with st.expander("📋 Task Instructions", expanded=True):
+            st.write(st.session_state.task_instruction)
+            st.write("**Instructions:** Please respond as the user described in the task. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation.")
+            st.write("**To begin the conversation, authenticate yourself by providing your user email. For example, you can start by saying, \"Hello, my email is user.[a-z][0-9][0-9]@example.com.\" (e.g., Hello, my email is user.p79@example.com.)**")
+        
+        # Display conversation history (read-only)
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                if message["role"] == "assistant":
+                    # Use markdown for consistent agent response formatting
+                    st.markdown(message["content"])
+                else:
+                    st.write(message["content"])
+        
+        # Show "Begin Next Task" button
+        if st.button("Begin Next Task"):
+            # Check if user needs to download current log first
+            if (st.session_state.get('conversation_ended', False) and 
+                st.session_state.get('log_data') and 
+                not st.session_state.get('current_log_downloaded', False)):
+                st.error("⚠️ Please download your conversation log and upload it to the form, and answer the question in the form before proceeding to the next task!")
+                st.stop()
+            
+            # Clear the ended conversation state and start fresh
+            st.session_state.conversation_ended = False
+            st.session_state.log_data = None
+            st.session_state.just_completed_task = None
+            st.session_state.current_log_downloaded = False
+            st.session_state.messages = []
+            st.session_state.agent_actions = []
+            st.rerun()
+    
     else:
         # Display task instruction
-        with st.expander("📋 Task Instructions", expanded=False):
+        with st.expander("📋 Task Instructions", expanded=True):
             st.write(st.session_state.task_instruction)
-            st.write("**Instructions:** Please respond as the user described in the task. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish at any point.")
-            st.write("**To begin the conversation, authenticate yourself by providing your email (which follows the format user.[user_id]@example.com):**")
-            st.write("For example, you can start by saying, *\"Hello, my email is user.[a-z][0-9][0-9]@example.com.\"* (e.g., Hello, my email is user.p79@example.com.)")
+            st.write("**Instructions:** Please respond as the user described in the task. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation.")
+            st.write("**To begin the conversation, authenticate yourself by providing your user email. For example, you can start by saying, \"Hello, my email is user.[a-z][0-9][0-9]@example.com.\" (e.g., Hello, my email is user.p79@example.com.)**")
         
         # Display conversation history
         for message in st.session_state.messages:
@@ -555,7 +713,7 @@ def main():
                     st.session_state.agent_messages.append({"role": "user", "content": user_input})
                     
                     # Helper function to convert message to action
-                    def message_to_action(message: Dict[str, Any]) -> Action:
+                    def message_to_action(message) -> Action:
                         if ("tool_calls" in message and message["tool_calls"] is not None and 
                             len(message["tool_calls"]) > 0 and message["tool_calls"][0]["function"] is not None):
                             tool_call = message["tool_calls"][0]
@@ -616,13 +774,25 @@ def main():
                                     st.markdown(cleaned_content)
                                 st.session_state.messages.append({"role": "assistant", "content": agent_content})
                                 
-                                # Check if conversation is done
-                                if env_response.done:
-                                    st.session_state.conversation_active = False
-                                    
+                                # Check if agent used transfer tool
+                                if (agent_message.get("tool_calls") and 
+                                    any(tool_call["function"]["name"] == "transfer_to_human_agents" 
+                                        for tool_call in agent_message["tool_calls"])):
+                                    # Show transfer message instead of the tool result
+                                    transfer_message = "I'm transferring you to a human agent. Your conversation has ended. Please click 'End Conversation' in the sidebar to complete this task."
+                                    with st.chat_message("assistant"):
+                                        st.markdown(transfer_message)
+                                    st.session_state.messages.append({"role": "assistant", "content": transfer_message})
+                                    break
+                                
+                                # Check if conversation is done (but don't auto-complete for transfer)
+                                if env_response.done and not any(
+                                    action.name == "transfer_to_human_agents" 
+                                    for action in st.session_state.agent_actions[-5:] if hasattr(action, 'name')
+                                ):
                                     # Save conversation log
                                     try:
-                                        filename = save_conversation_log(
+                                        save_conversation_log(
                                             env=st.session_state.env,
                                             task_id=st.session_state.task_id,
                                             messages=st.session_state.agent_messages,
@@ -630,8 +800,8 @@ def main():
                                             trial=0
                                         )
                                         
-                                        st.success(f"✅ Task completed!")
-                                        st.balloons()
+                                        # Handle task completion and progression
+                                        handle_task_completion()
                                         
                                     except Exception as e:
                                         st.error(f"Error saving conversation: {str(e)}")
@@ -647,11 +817,9 @@ def main():
                                 
                                 # Check if conversation is done after pure tool call
                                 if env_response.done:
-                                    st.session_state.conversation_active = False
-                                    
                                     # Save conversation log
                                     try:
-                                        filename = save_conversation_log(
+                                        save_conversation_log(
                                             env=st.session_state.env,
                                             task_id=st.session_state.task_id,
                                             messages=st.session_state.agent_messages,
@@ -659,8 +827,8 @@ def main():
                                             trial=0
                                         )
                                         
-                                        st.success(f"✅ Task completed!")
-                                        st.balloons()
+                                        # Handle task completion and progression
+                                        handle_task_completion()
                                         
                                     except Exception as e:
                                         st.error(f"Error saving conversation: {str(e)}")
@@ -682,11 +850,9 @@ def main():
                             
                             # Check if conversation is done
                             if env_response.done:
-                                st.session_state.conversation_active = False
-                                
                                 # Save conversation log
                                 try:
-                                    filename = save_conversation_log(
+                                    save_conversation_log(
                                         env=st.session_state.env,
                                         task_id=st.session_state.task_id,
                                         messages=st.session_state.agent_messages,
@@ -694,8 +860,8 @@ def main():
                                         trial=0
                                     )
                                     
-                                    st.success(f"✅ Task completed!")
-                                    st.balloons()
+                                    # Handle task completion and progression
+                                    handle_task_completion()
                                     
                                 except Exception as e:
                                     st.error(f"Error saving conversation: {str(e)}")
@@ -720,10 +886,46 @@ def main():
                         st.error("Make sure your ANTHROPIC_API_KEY is properly configured in Streamlit secrets.")
         
         else:
-            st.info("Conversation ended. Click 'Start New Conversation' in the sidebar to begin again.")
+            if st.session_state.all_tasks_completed:
+                st.success("🎉 All tasks completed! Thank you for participating.")
+            elif st.session_state.assigned_tasks and st.session_state.current_task_index < len(st.session_state.assigned_tasks):
+                # Check if we just completed a task and need to show question + download
+                if st.session_state.get('conversation_ended', False) and st.session_state.get('log_data'):
+                    completed_task_num = st.session_state.get('just_completed_task', st.session_state.current_task_index)
+                    completed_task_id = st.session_state.task_id  # The actual task ID that was just completed
+                    next_task_num = st.session_state.current_task_index + 1
+                    
+                    st.success(f"✅ Task {completed_task_num} completed!")
+                    
+                    # Show task-specific question
+                    if completed_task_id in TASK_QUESTIONS:
+                        st.info("📝 Please note this question for the user study form:")
+                        st.write(f"**{TASK_QUESTIONS[completed_task_id]}**")
+                        st.write("*Please answer this question in the user study form.*")
+                    
+                    st.warning("📥 Please download your conversation log:")
+                    
+                    # Show download button in main area
+                    log_data = st.session_state.log_data
+                    st.download_button(
+                        label=f"📄 Download Task {completed_task_num} Conversation Log",
+                        data=log_data["json_data"],
+                        file_name=log_data["filename"],
+                        mime="application/json",
+                        help="Click to download the conversation log as JSON",
+                        key=f"download_task_{completed_task_num}_main",
+                        use_container_width=True
+                    )
+                    
+                    st.info(f"After answering the question and downloading the log, click 'Begin' in the sidebar to start Task {next_task_num}.")
+                else:
+                    next_task_num = st.session_state.current_task_index + 1
+                    st.info(f"Ready for Task {next_task_num}. Click 'Begin' to continue.")
+            else:
+                st.info("Click 'Begin' to start your 4-task sequence.")
             
-            # Show download button if conversation has ended and log data is available
-            if st.session_state.get('conversation_ended', False) and st.session_state.get('log_data'):
+            # Legacy download button (fallback)
+            if st.session_state.get('conversation_ended', False) and st.session_state.get('log_data') and not st.session_state.assigned_tasks:
                 log_data = st.session_state.log_data
                 st.download_button(
                     label="Download Conversation Log",
