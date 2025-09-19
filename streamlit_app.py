@@ -621,8 +621,8 @@ def main():
         # Display task instruction
         with st.expander("📋 Task Instructions", expanded=True):
             st.write(st.session_state.task_instruction)
-            st.write("**Instructions:** Please respond as the user described in the task. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation.")
-            st.write("**To begin the conversation, authenticate yourself by providing your user email. For example, you can start by saying, \"Hello, my email is user.[a-z][0-9][0-9]@example.com.\" (e.g., Hello, my email is user.p79@example.com.)**")
+            st.write("**Instructions:** Please respond as the user described in the task instructions. You want to complete all the requests mentioned in the instructions. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have given a genuine effort to complete the task and the agent is not cooperating, you can move on to the next task by clicking 'End Conversation'.")
+            st.write("**To begin the conversation, authenticate yourself by providing you user email provided in the instructions.**")
         
         # Display conversation history (read-only)
         for message in st.session_state.messages:
