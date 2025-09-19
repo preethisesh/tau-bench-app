@@ -334,7 +334,7 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title("🤖 AI Agent Customer Assistance")
-    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). Make sure to download your conversation logs for each task and upload them in the form. You will also answer a question about each task in the form (the question will be shown here after task completion, and you will answer in the form).")
+    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). Make sure to download your conversation logs for each task and upload them in the form. You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
     
     # Sidebar configuration
     with st.sidebar:
