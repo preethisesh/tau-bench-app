@@ -493,7 +493,7 @@ def main():
             # Show task-specific question in sidebar
             completed_task_id = st.session_state.task_id  # The actual task ID that was just completed
             if completed_task_id in TASK_QUESTIONS:
-                st.write("**Question for the form:**")
+                st.write("**Question to answer in the form (answer this question, do not simply copy and paste it):**")
                 st.write(f"*{TASK_QUESTIONS[completed_task_id]}*")
             
             st.write(f"**Scroll down and proceed with Task {next_task_num} by clicking \"Begin Next Task\"**.")
