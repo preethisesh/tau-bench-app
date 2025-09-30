@@ -142,7 +142,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="b63",
-        instruction="You are User b63 in 19122. You want to know how many tshirt options are available in the online store right now. You want to modify all your pending small tshirts to purple, same size, same v-neck, and prefer polyester. To start the conversation, say 'Hello, my email is user.b63@example.com.'",
+        instruction="You are User b63 in 19122. You want to know how many tshirt options are available in the online store right now. Please ask this first. You also want to modify all your pending small tshirts to purple, same size, same v-neck, and prefer polyester. To start the conversation, say 'Hello, my email is user.b63@example.com.'",
         actions=[
             Action(
                 name="find_user_id_by_name_zip",
@@ -407,7 +407,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="m30",
-        instruction="You are User m30 (zip code 28236) and you want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one (prefer battery > USB > AC). If the agent asks for confirmation, only exchange the desk lamp. To start the conversation, say 'Hello, my email is user.m30@example.com.'",
+        instruction="You are User m30 (zip code 28236) and you want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one. If there are equally bright options, you prefer battery > USB > AC. If the agent asks for confirmation, only exchange the desk lamp. To start the conversation, say 'Hello, my email is user.m30@example.com.'",
         actions=[
             Action(
                 name="find_user_id_by_name_zip",
@@ -448,7 +448,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="m30",
-        instruction="You are User m30 (zip code 28236) and you want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one (prefer AC adapter > battery > USB). If the agent asks for confirmation, only exchange the desk lamp. To start the conversation, say 'Hello, my email is user.m30@example.com.'",
+        instruction="You are User m30 (zip code 28236) and you want to exchange the water bottle and the desk lamp. You want to exchange the water bottle to a bigger one, and the desk lamp to a brighter one. If there are equally bright options, you prefer battery > USB > AC. If the agent asks for confirmation, only exchange the desk lamp. To start the conversation, say 'Hello, my email is user.m30@example.com.'",
         actions=[
             Action(
                 name="find_user_id_by_name_zip",
@@ -1271,7 +1271,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="i49",
-        instruction="You are User i49, and you live in 32286. You want to return the hose, backpack, and exchange the hiking boots to the same item, but with waterproofing. Make sure you mention the two requests at the same time, and if the agent can only do one, you prefer the exchange. To start the conversation, say 'Hello, my email is user.i49@example.com.'",
+        instruction="You are User i49, and you live in 32286. You want to return the hose, backpack, and exchange the hiking boots to the same item, but with waterproofing. Make sure you mention the two requests at the same time, and confirm that the agent can do both the exchange and return. If the agent can only do one, you prefer the exchange over the return. To start the conversation, say 'Hello, my email is user.i49@example.com.'",
         actions=[
             Action(
                 name="find_user_id_by_name_zip",
@@ -2837,8 +2837,8 @@ TASKS_TEST = [
             "You are User w43 from San Jose, CA, 95154. You recently placed two orders, "
             "and now you would like to make several changes and checks. You'll first inquire "
             "about the status difference between your two orders, #W2702727 and #W8268610, "
-            "since both are \"pending,\" but one was placed much earlier in the year. You are "
-            "considering cancelling the older order as you find the wait time unreasonable. "
+            "since both are \"pending,\" but #W8268610 was placed much earlier in the year. You are "
+            "considering cancelling this order as you find the wait time unreasonable. "
             "If the agent cannot guarantee the older order will be processed within 5 days, "
             "you want to cancel it. You also want to confirm the total price of the refund.\n\n"
             "For order #W2702727, you intend to switch the shipping address to your new home "
@@ -2904,7 +2904,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="h49",
-        instruction="You are User h49 from Houston TX, 77004. You want to change your wireless earbuds in order W5061109 to blue colored ones. Provide all details upfront in your very first message and ask the agent to resolve as soon as possible. You want the price to be the same or lower, which you want the agent to verify explicitly. If and only if the agent provides several options, you want the option without water resistance. To start the conversation, say 'Hello, my email is user.h49@example.com.'",
+        instruction="You are User h49 from Houston TX, 77004. You want to change your wireless earbuds in order W5061109 to blue colored ones. Provide all details upfront in your very first message and ask the agent to resolve as soon as possible. You want the price to be the same or lower, which you want the agent to verify explicitly. If the agent provides several options, you want the cheapest option without water resistance. If none of the provided options are without water resistance, ask the agent to find options without water resistance. Use the original payment method. To start the conversation, say 'Hello, my email is user.h49@example.com.'",
         actions=[
             Action(
                 name="find_user_id_by_name_zip",
@@ -3361,7 +3361,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="n20",
-        instruction="Your name is User n20 and your zip code is 85033. You recently bought a laptop, but you want to exchange it to i9 CPU. If multiple storage options are available, you prefer 256GB SSD. If multiple colors are available, you prefer silver. You also have a pending order with five items (you don't remember the order ID), and you want to cancel it because you no longer need these items. Use credit for the exchange, and the original payment method for the cancellation. To start the conversation, say 'Hello, my email is user.n20@example.com.'",
+        instruction="Your name is User n20 and your zip code is 85033. You recently bought a laptop, but you want to exchange it to i9 CPU. If multiple storage options are available, you prefer 256GB SSD. If multiple colors are available, you prefer silver. You also have a pending order with five items (you don't remember the order ID), and you want to cancel it because you no longer need these items. Use credit card for the exchange, and the original payment method for the cancellation. To start the conversation, say 'Hello, my email is user.n20@example.com.'",
         actions=[
             Action(
                 name="cancel_pending_order",
@@ -3465,7 +3465,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="e70",
-        instruction="Your name is User e70 and your zip code is 32190. You just bought a water bottle with 500ml but you regret it, and you want to change it to the other bottle you just ordered with 1000ml capacity. If the exact item is not available any more, you can allow the material to be different. To start the conversation, say 'Hello, my email is user.e70@example.com.'",
+        instruction="Your name is User e70 and your zip code is 32190. You just bought a water bottle with 500ml but you regret it, and you instead want to change it to the other bottle you recently ordered with 1000ml capacity. If the exact 1000ml bottle is not available any more, you can allow the material to be different. To start the conversation, say 'Hello, my email is user.e70@example.com.'",
         actions=[
             Action(
                 name="modify_pending_order_items",
@@ -3894,7 +3894,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="b38",
-        instruction="Your name is User b38 and your zip code is 78260. You want to exchange your bicycle to a larger frame size for your kid. The jigsaw puzzle in the same order also needs to be exchanged. You want the same difficulty, but a 1000 more pieces, and you prefer the animal theme more than the art theme if both are available. Make sure you mention these at the same time. You also want to exchange your camera to slightly lower resolution, without changing the other options. If the agent asks for confirmation, mention that you would prefer the other card as payment or refund method. Lastly, you want to cancel the skateboard order. If you cannot cancel one single item, you are okay with cancelling the whole order, with the reason of no longer needed. To start the conversation, say 'Hello, my email is user.b38@example.com.'",
+        instruction="Your name is User b38 and your zip code is 78260. You want to exchange your bicycle to a larger frame size for your kid. The jigsaw puzzle in the same order also needs to be exchanged. You want the same difficulty, but a 1000 more pieces, and you prefer the animal theme more than the art theme if both are available. Make sure you exchange these at the same time, not separately, and use the original payment method. You also want to exchange your camera to slightly lower resolution, without changing the other options. Mention that you would like to use the Visa card ending in 6791 as the payment or refund method. Lastly, you want to cancel the skateboard order. If you cannot cancel one single item, you are okay with cancelling the whole order, with the reason of no longer needed. To start the conversation, say 'Hello, my email is user.b38@example.com.'",
         actions=[
             Action(
                 name="exchange_delivered_order_items",
@@ -3950,7 +3950,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="s72",
-        instruction="Your name is User s72 and your zip code is 85049. You want to return your luggage set and get the exact same item in red, and exchange your skateboard in the same order for one with {'length': '34 inch', 'design': 'custom'}. You should request both of these together. You also want to return the hiking boots. You should use credit card for the luggage and skateboard, and the original payment method for the boots. To start the conversation, say 'Hello, my email is user.s72@example.com.'",
+        instruction="Your name is User s72 and your zip code is 85049. You want to exchange your luggage set for the exact same item in red, and exchange your skateboard in the same order for one with {'length': '34 inch', 'design': 'custom'}. You should request both of these together. You also want to return the hiking boots. You should use credit card for the luggage and skateboard, and the original payment method for the boots. To start the conversation, say 'Hello, my email is user.s72@example.com.'",
         actions=[
             Action(
                 name="modify_pending_order_items",

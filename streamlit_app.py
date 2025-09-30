@@ -132,17 +132,11 @@ def save_conversation_log(env, task_id: int, messages,
     start_time = st.session_state.get('conversation_start_time', conversation_end_time)
     duration_seconds = (conversation_end_time - start_time).total_seconds()
     
-    # Save the actual actions taken before calculate_reward() pollutes them
-    actual_actions_taken = [
-        action for action in env.actions if action.name != RESPOND_ACTION_NAME
-    ]
-    
     # Calculate reward using existing environment logic
-    # NOTE: This will add expected task actions to env.actions, polluting it
     reward_result = env.calculate_reward()
-    
-    # Fix: Replace the polluted actions with actual actions taken
-    reward_result.actions = actual_actions_taken
+
+    # Replace with only successful actions (not attempted actions)
+    reward_result.actions = st.session_state.successful_actions
     
     # Build info structure matching command-line version with timing info
     info = {
@@ -518,6 +512,8 @@ def main():
         st.session_state.agent = None
     if 'agent_actions' not in st.session_state:
         st.session_state.agent_actions = []  # Track all agent actions for logging
+    if 'successful_actions' not in st.session_state:
+        st.session_state.successful_actions = []  # Track only successful tool calls
     if 'conversation_start_time' not in st.session_state:
         st.session_state.conversation_start_time = None
     if 'conversation_ended' not in st.session_state:
@@ -588,6 +584,7 @@ def main():
                 st.session_state.conversation_active = True
                 st.session_state.task_id = current_task_id
                 st.session_state.agent_actions = []  # Reset actions for new conversation
+                st.session_state.successful_actions = []  # Reset successful actions for new conversation
                 # Clear previous log data and conversation when starting new conversation
                 st.session_state.conversation_ended = False
                 st.session_state.log_data = None
@@ -597,6 +594,7 @@ def main():
                 # Clear conversation history from previous task
                 st.session_state.messages = []
                 st.session_state.agent_actions = []
+                st.session_state.successful_actions = []
                 # Agent starts with just the system message (wiki)
                 st.session_state.agent_messages = [
                     {"role": "system", "content": st.session_state.env.wiki}
@@ -649,6 +647,7 @@ def main():
             st.session_state.current_log_downloaded = False
             st.session_state.messages = []
             st.session_state.agent_actions = []
+            st.session_state.successful_actions = []
             st.rerun()
     
     else:
@@ -741,12 +740,18 @@ def main():
                         agent_message = res.choices[0].message.model_dump()
                         agent_action = message_to_action(agent_message)
                         
-                        # Track the agent action for logging (exclude respond and think actions)
+                        # Execute action in environment first
+                        env_response = st.session_state.env.step(agent_action)
+
+                        # Track all attempted actions for backwards compatibility
                         if agent_action.name != RESPOND_ACTION_NAME and agent_action.name != "think":
                             st.session_state.agent_actions.append(agent_action)
-                        
-                        # Execute action in environment
-                        env_response = st.session_state.env.step(agent_action)
+
+                        # Track only successful tool calls (check if response contains error)
+                        if (agent_action.name != RESPOND_ACTION_NAME and
+                            agent_action.name != "think" and
+                            not env_response.observation.startswith("Error:")):
+                            st.session_state.successful_actions.append(agent_action)
                         
                         # Check if agent provided content (regardless of tool calls)
                         agent_content = agent_message.get("content")
