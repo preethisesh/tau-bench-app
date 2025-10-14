@@ -45,6 +45,34 @@ def get_api_key():
         return api_key
 
 
+def save_task_state_to_url(assigned_tasks, current_task_index, completed_tasks):
+    """Save task progress to URL parameters for persistence"""
+    try:
+        # Update URL parameters to preserve state across refreshes
+        st.query_params.tasks = ','.join(map(str, assigned_tasks))
+        st.query_params.current = str(current_task_index)
+        st.query_params.completed = ','.join(map(str, completed_tasks)) if completed_tasks else ''
+    except Exception:
+        pass  # Silently fail if URL update isn't available
+
+
+def load_task_state_from_url():
+    """Load task progress from URL parameters"""
+    try:
+        query_params = st.query_params
+        if 'tasks' in query_params and 'current' in query_params:
+            assigned_tasks = [int(x) for x in query_params['tasks'].split(',') if x]
+            current_task_index = int(query_params['current'])
+            completed_tasks = [int(x) for x in query_params.get('completed', '').split(',') if x] if query_params.get('completed') else []
+            return {
+                'assigned_tasks': assigned_tasks,
+                'current_task_index': current_task_index,
+                'completed_tasks': completed_tasks
+            }
+    except (ValueError, IndexError, AttributeError):
+        pass
+    return None
+
 
 def get_task_options(env_name: str, task_split: str):
     """Get list of available tasks with descriptions"""
@@ -193,7 +221,7 @@ def handle_task_completion():
     # Mark current task as completed
     current_task_id = st.session_state.task_id
     st.session_state.completed_tasks.append(current_task_id)
-    
+
     # Store which task was just completed (before incrementing)
     st.session_state.just_completed_task = st.session_state.current_task_index + 1  # Convert to 1-based for display
     
@@ -201,20 +229,33 @@ def handle_task_completion():
     if st.session_state.current_task_index >= 3:  # 0-based index, so 3 means 4th task
         st.session_state.all_tasks_completed = True
         st.session_state.conversation_active = False
+        # Save final completion state
+        save_task_state_to_url(
+            st.session_state.assigned_tasks,
+            st.session_state.current_task_index,
+            st.session_state.completed_tasks
+        )
         return True
     else:
         # Move to next task
         st.session_state.current_task_index += 1
         st.session_state.conversation_active = False
         st.session_state.conversation_started = False  # Reset to start next conversation
-        
+
+        # Save updated task progress
+        save_task_state_to_url(
+            st.session_state.assigned_tasks,
+            st.session_state.current_task_index,
+            st.session_state.completed_tasks
+        )
+
         # Don't clear conversation history yet - wait until next task starts
         # Keep conversation visible while user answers question and downloads log
         # st.session_state.messages = []  # Clear this when Begin is clicked instead
         # st.session_state.agent_messages = []  # Clear this when Begin is clicked instead
         # st.session_state.agent_actions = []  # Clear this when Begin is clicked instead
         # Keep conversation_ended = True and log_data for download button
-        
+
         return False
 
 
@@ -325,10 +366,61 @@ def main():
         font-family: "Source Code Pro", monospace !important;
     }
     </style>
+
+    <script>
+    // localStorage functions for persistence across refreshes
+    function saveAppState(key, data) {
+        try {
+            localStorage.setItem('tau_bench_' + key, JSON.stringify(data));
+        } catch(e) {
+            console.warn('Failed to save to localStorage:', e);
+        }
+    }
+
+    function loadAppState(key) {
+        try {
+            const data = localStorage.getItem('tau_bench_' + key);
+            return data ? JSON.parse(data) : null;
+        } catch(e) {
+            console.warn('Failed to load from localStorage:', e);
+            return null;
+        }
+    }
+
+    function clearAppState() {
+        try {
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('tau_bench_')) {
+                    localStorage.removeItem(key);
+                }
+            });
+        } catch(e) {
+            console.warn('Failed to clear localStorage:', e);
+        }
+    }
+
+    // Auto-save critical state when it changes
+    window.saveTaskState = function(assigned_tasks, current_task_index, completed_tasks) {
+        saveAppState('task_progress', {
+            assigned_tasks: assigned_tasks,
+            current_task_index: current_task_index,
+            completed_tasks: completed_tasks,
+            timestamp: Date.now()
+        });
+    }
+
+    window.loadTaskState = function() {
+        return loadAppState('task_progress');
+    }
+
+    window.clearAllAppState = function() {
+        clearAppState();
+    }
+    </script>
     """, unsafe_allow_html=True)
     
     st.title("🤖 AI Agent Customer Assistance")
-    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). Make sure to download your conversation logs for each task and upload them in the form. You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
+    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully and converse with the agent to complete the task. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). Make sure to download your conversation logs for each task and upload them in the form. You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
     
     # Sidebar configuration
     with st.sidebar:
@@ -429,6 +521,11 @@ def main():
         
         # Restart button
         if st.button("Restart from scratch", type="primary", use_container_width=True):
+            # Clear URL parameters (persistence state)
+            try:
+                st.query_params.clear()
+            except Exception:
+                pass
             # Reset session state
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
@@ -530,6 +627,16 @@ def main():
         st.session_state.completed_tasks = []
     if 'all_tasks_completed' not in st.session_state:
         st.session_state.all_tasks_completed = False
+
+    # Restore task state from URL parameters (for refresh persistence)
+    if not st.session_state.assigned_tasks:  # Only restore if no tasks are assigned
+        saved_state = load_task_state_from_url()
+        if saved_state:
+            st.session_state.assigned_tasks = saved_state['assigned_tasks']
+            st.session_state.current_task_index = saved_state['current_task_index']
+            st.session_state.completed_tasks = saved_state['completed_tasks']
+            # Show recovery message
+            st.info(f"🔄 Restored your progress: Task {saved_state['current_task_index'] + 1} of 4")
     
     # Main chat interface
     if st.session_state.all_tasks_completed:
@@ -552,6 +659,12 @@ def main():
                 if not st.session_state.assigned_tasks:
                     st.session_state.assigned_tasks = assign_random_tasks()
                     st.session_state.current_task_index = 0
+                    # Save task state to URL for refresh persistence
+                    save_task_state_to_url(
+                        st.session_state.assigned_tasks,
+                        st.session_state.current_task_index,
+                        st.session_state.completed_tasks
+                    )
                 
                 current_task_id = st.session_state.assigned_tasks[st.session_state.current_task_index]
                 
@@ -620,7 +733,7 @@ def main():
         with st.expander("📋 Task Instructions", expanded=True):
             st.write(st.session_state.task_instruction)
             st.write("**Instructions:** Please respond as the user described in the task instructions. You want to complete all the requests mentioned in the instructions. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
-            st.write("**To begin the conversation, authenticate yourself by providing your user email provided in the instructions.**")
+            st.write("**To begin the conversation, authenticate yourself by providing the user email provided in the instructions.**")
         
         # Display conversation history (read-only)
         for message in st.session_state.messages:
@@ -655,7 +768,7 @@ def main():
         with st.expander("📋 Task Instructions", expanded=True):
             st.write(st.session_state.task_instruction)
             st.write("**Instructions:** Please respond as the user described in the task instructions. You want to complete all the requests mentioned in the instructions. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
-            st.write("**To begin the conversation, authenticate yourself by providing your user email provided in the instructions.**")
+            st.write("**To begin the conversation, authenticate yourself by providing the user email provided in the instructions.**")
         
         # Display conversation history
         for message in st.session_state.messages:
