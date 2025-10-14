@@ -45,13 +45,19 @@ def get_api_key():
         return api_key
 
 
-def save_task_state_to_url(assigned_tasks, current_task_index, completed_tasks):
+def save_task_state_to_url(assigned_tasks, current_task_index, completed_tasks, needs_download=False):
     """Save task progress to URL parameters for persistence"""
     try:
         # Update URL parameters to preserve state across refreshes
         st.query_params.tasks = ','.join(map(str, assigned_tasks))
         st.query_params.current = str(current_task_index)
         st.query_params.completed = ','.join(map(str, completed_tasks)) if completed_tasks else ''
+
+        # Track download requirement
+        if needs_download:
+            st.query_params.needs_download = '1'
+        elif 'needs_download' in st.query_params:
+            del st.query_params['needs_download']
     except Exception:
         pass  # Silently fail if URL update isn't available
 
@@ -64,10 +70,12 @@ def load_task_state_from_url():
             assigned_tasks = [int(x) for x in query_params['tasks'].split(',') if x]
             current_task_index = int(query_params['current'])
             completed_tasks = [int(x) for x in query_params.get('completed', '').split(',') if x] if query_params.get('completed') else []
+            needs_download = query_params.get('needs_download') == '1'
             return {
                 'assigned_tasks': assigned_tasks,
                 'current_task_index': current_task_index,
-                'completed_tasks': completed_tasks
+                'completed_tasks': completed_tasks,
+                'needs_download': needs_download
             }
     except (ValueError, IndexError, AttributeError):
         pass
@@ -237,16 +245,16 @@ def handle_task_completion():
         )
         return True
     else:
-        # Move to next task
-        st.session_state.current_task_index += 1
+        # DON'T move to next task yet - wait for download completion
         st.session_state.conversation_active = False
         st.session_state.conversation_started = False  # Reset to start next conversation
 
-        # Save updated task progress
+        # Save task progress with download requirement (stay on current task until download)
         save_task_state_to_url(
             st.session_state.assigned_tasks,
             st.session_state.current_task_index,
-            st.session_state.completed_tasks
+            st.session_state.completed_tasks,
+            needs_download=True
         )
 
         # Don't clear conversation history yet - wait until next task starts
@@ -420,7 +428,7 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title("🤖 AI Agent Customer Assistance")
-    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully and converse with the agent to complete the task. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). Make sure to download your conversation logs for each task and upload them in the form. You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
+    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully and converse with the agent to complete the task. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). **Make sure to download your conversation logs for each task and upload them in the form.** You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
     
     # Sidebar configuration
     with st.sidebar:
@@ -444,7 +452,39 @@ def main():
         
         # Task split (fixed to test)
         task_split = "test"
-        
+
+        # Complete task restoration now that we have env_name and task_split
+        if st.session_state.get('_needs_task_restoration') is not None:
+            needs_download = st.session_state._needs_task_restoration
+            del st.session_state._needs_task_restoration
+
+            # Restore current task details
+            current_task_id = st.session_state.assigned_tasks[st.session_state.current_task_index]
+            st.session_state.task_id = current_task_id
+
+            # Load task instruction from the task data
+            try:
+                temp_env = get_env(env_name=env_name, user_strategy="human", task_split=task_split)
+                env_reset_res = temp_env.reset(task_index=current_task_id)
+                st.session_state.task_instruction = env_reset_res.info.task.instruction
+            except Exception:
+                # Don't store error message, just leave task_instruction as None
+                st.session_state.task_instruction = None
+
+            # Handle download requirement
+            if needs_download:
+                st.session_state.conversation_ended = True
+                st.session_state.log_data = None  # Don't create fake data
+                st.session_state.current_log_downloaded = False
+                # Set just_completed_task correctly for display
+                st.session_state.just_completed_task = st.session_state.current_task_index + 1  # Convert to 1-based
+                st.warning(f"⚠️ Page refresh detected during Task {st.session_state.current_task_index + 1} of 4")
+                st.error("Conversation data was lost due to page refresh. You'll need to restart this task.")
+                st.info(f"Scroll down and click 'Begin Next Task' to restart Task {st.session_state.current_task_index + 1}, or use 'Restart from scratch' to start over completely.")
+            else:
+                # Show recovery message
+                st.info(f"🔄 Restored your progress: Task {st.session_state.current_task_index + 1} of 4")
+
         # Task progress tracking (no task selection needed)
         if 'assigned_tasks' not in st.session_state:
             st.session_state.assigned_tasks = []
@@ -553,8 +593,8 @@ def main():
                             st.success(f"🎉 Task {st.session_state.current_task_index + 1} completed! You have finished all 4 tasks!")
                             st.balloons()
                         else:
-                            completed_task_num = st.session_state.current_task_index  # This is the task we just completed
-                            next_task_num = st.session_state.current_task_index + 1  # This is the next task
+                            completed_task_num = st.session_state.just_completed_task  # This is the task we just completed
+                            next_task_num = st.session_state.just_completed_task + 1  # Next task after the one we just completed
                             # Don't show messages here - they'll be shown in main area
                         
                     except Exception as e:
@@ -566,8 +606,8 @@ def main():
         
         # Show task completion and download section
         if st.session_state.get('conversation_ended', False) and st.session_state.get('log_data'):
-            completed_task_num = st.session_state.get('just_completed_task', st.session_state.current_task_index)
-            next_task_num = st.session_state.current_task_index + 1
+            completed_task_num = st.session_state.get('just_completed_task', st.session_state.current_task_index + 1)
+            next_task_num = completed_task_num + 1
             
             st.success(f"✅ Task {completed_task_num} Complete!")
             st.write("**Please download your log, and upload it and answer the following question in the form:**")
@@ -586,6 +626,14 @@ def main():
             # Track that download was clicked for this task
             if download_clicked:
                 st.session_state.current_log_downloaded = True
+                # DON'T increment task yet - wait for "Begin" button
+                # Clear download requirement but stay on current task
+                save_task_state_to_url(
+                    st.session_state.assigned_tasks,
+                    st.session_state.current_task_index,
+                    st.session_state.completed_tasks,
+                    needs_download=False
+                )
             
             # Show task-specific question in sidebar
             completed_task_id = st.session_state.task_id  # The actual task ID that was just completed
@@ -593,7 +641,10 @@ def main():
                 st.write("**Question to answer in the form (answer this question, do not simply copy and paste it):**")
                 st.write(f"*{TASK_QUESTIONS[completed_task_id]}*")
             
-            st.write(f"**Scroll down and proceed with Task {next_task_num} by clicking \"Begin Next Task\"**.")
+            if st.session_state.get('current_log_downloaded', False):
+                st.write("**✅ Log downloaded! Scroll down and click 'Begin Next Task' to start the next task.**")
+            else:
+                st.write(f"**Scroll down and proceed with Task {next_task_num} by clicking \"Begin Next Task\"**.")
         
     
     # Initialize session state
@@ -617,7 +668,13 @@ def main():
         st.session_state.conversation_ended = False
     if 'log_data' not in st.session_state:
         st.session_state.log_data = None
-    
+    if 'task_instruction' not in st.session_state:
+        st.session_state.task_instruction = None
+    if 'task_id' not in st.session_state:
+        st.session_state.task_id = None
+    if 'current_log_downloaded' not in st.session_state:
+        st.session_state.current_log_downloaded = False
+
     # Task sequence tracking
     if 'assigned_tasks' not in st.session_state:
         st.session_state.assigned_tasks = []
@@ -628,20 +685,20 @@ def main():
     if 'all_tasks_completed' not in st.session_state:
         st.session_state.all_tasks_completed = False
 
-    # Restore task state from URL parameters (for refresh persistence)
-    if not st.session_state.assigned_tasks:  # Only restore if no tasks are assigned
+    # Basic restoration without task details (will be completed later after sidebar config)
+    # Always restore if no tasks are assigned (page rerun clears session state)
+    if not st.session_state.assigned_tasks:
         saved_state = load_task_state_from_url()
         if saved_state:
             st.session_state.assigned_tasks = saved_state['assigned_tasks']
             st.session_state.current_task_index = saved_state['current_task_index']
             st.session_state.completed_tasks = saved_state['completed_tasks']
-            # Show recovery message
-            st.info(f"🔄 Restored your progress: Task {saved_state['current_task_index'] + 1} of 4")
+            st.session_state._needs_task_restoration = saved_state.get('needs_download', False)
     
     # Main chat interface
     if st.session_state.all_tasks_completed:
         st.success("🎉 Congratulations! You have completed all 4 tasks!")
-        st.info("Thank you for participating. You can now close this session.")
+        st.info("Thank you for participating. After downloading the log file and answering the question, you can close this session.")
         # Optionally show download links for all completed tasks
         return
     
@@ -698,6 +755,8 @@ def main():
                 st.session_state.task_id = current_task_id
                 st.session_state.agent_actions = []  # Reset actions for new conversation
                 st.session_state.successful_actions = []  # Reset successful actions for new conversation
+                # Clear download state now that new task has started
+                st.session_state.current_log_downloaded = False
                 # Clear previous log data and conversation when starting new conversation
                 st.session_state.conversation_ended = False
                 st.session_state.log_data = None
@@ -731,7 +790,10 @@ def main():
         # Show conversation history even after ending (before moving to next task)
         # Display task instruction
         with st.expander("📋 Task Instructions", expanded=True):
-            st.write(st.session_state.task_instruction)
+            if st.session_state.task_instruction:
+                st.write(st.session_state.task_instruction)
+            else:
+                st.write("Task instructions will appear here once you begin.")
             st.write("**Instructions:** Please respond as the user described in the task instructions. You want to complete all the requests mentioned in the instructions. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
             st.write("**To begin the conversation, authenticate yourself by providing the user email provided in the instructions.**")
         
@@ -747,13 +809,25 @@ def main():
         # Show "Begin Next Task" button
         if st.button("Begin Next Task"):
             # Check if user needs to download current log first
-            if (st.session_state.get('conversation_ended', False) and 
-                st.session_state.get('log_data') and 
+            if (st.session_state.get('conversation_ended', False) and
+                st.session_state.get('log_data') and
                 not st.session_state.get('current_log_downloaded', False)):
                 st.error("⚠️ Please download your conversation log and upload it to the form, and answer the question in the form before proceeding to the next task!")
                 st.stop()
-            
-            # Clear the ended conversation state and start fresh
+
+            # FIRST: Increment task if conditions are met, BEFORE clearing state
+            if (st.session_state.get('conversation_ended', False) and
+                st.session_state.get('current_log_downloaded', False) and
+                st.session_state.current_task_index < 3):  # Not on last task
+                st.session_state.current_task_index += 1
+                # Update URL state immediately
+                save_task_state_to_url(
+                    st.session_state.assigned_tasks,
+                    st.session_state.current_task_index,
+                    st.session_state.completed_tasks
+                )
+
+            # THEN: Clear the ended conversation state and start fresh
             st.session_state.conversation_ended = False
             st.session_state.log_data = None
             st.session_state.just_completed_task = None
@@ -766,7 +840,10 @@ def main():
     else:
         # Display task instruction
         with st.expander("📋 Task Instructions", expanded=True):
-            st.write(st.session_state.task_instruction)
+            if st.session_state.task_instruction:
+                st.write(st.session_state.task_instruction)
+            else:
+                st.write("No task loaded yet. Scroll down and click 'Begin Next Task' to start your first task.")
             st.write("**Instructions:** Please respond as the user described in the task instructions. You want to complete all the requests mentioned in the instructions. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
             st.write("**To begin the conversation, authenticate yourself by providing the user email provided in the instructions.**")
         
@@ -1009,9 +1086,9 @@ def main():
             elif st.session_state.assigned_tasks and st.session_state.current_task_index < len(st.session_state.assigned_tasks):
                 # Check if we just completed a task and need to show question + download
                 if st.session_state.get('conversation_ended', False) and st.session_state.get('log_data'):
-                    completed_task_num = st.session_state.get('just_completed_task', st.session_state.current_task_index)
+                    completed_task_num = st.session_state.get('just_completed_task', st.session_state.current_task_index + 1)
                     completed_task_id = st.session_state.task_id  # The actual task ID that was just completed
-                    next_task_num = st.session_state.current_task_index + 1
+                    next_task_num = completed_task_num + 1
                     
                     st.success(f"✅ Task {completed_task_num} completed!")
                     
@@ -1025,7 +1102,7 @@ def main():
                     
                     # Show download button in main area
                     log_data = st.session_state.log_data
-                    st.download_button(
+                    main_download_clicked = st.download_button(
                         label=f"📄 Download Task {completed_task_num} Conversation Log",
                         data=log_data["json_data"],
                         file_name=log_data["filename"],
@@ -1034,11 +1111,26 @@ def main():
                         key=f"download_task_{completed_task_num}_main",
                         use_container_width=True
                     )
+
+                    # Track main download button click
+                    if main_download_clicked:
+                        st.session_state.current_log_downloaded = True
+                        # DON'T increment task yet - wait for "Begin" button
+                        # Clear download requirement but stay on current task
+                        save_task_state_to_url(
+                            st.session_state.assigned_tasks,
+                            st.session_state.current_task_index,
+                            st.session_state.completed_tasks,
+                            needs_download=False
+                        )
                     
-                    st.info(f"After answering the question and downloading the log, click 'Begin' in the sidebar to start Task {next_task_num}.")
+                    if st.session_state.get('current_log_downloaded', False):
+                        st.success("✅ Log downloaded! Scroll down and click 'Begin Next Task' to start the next task.")
+                    else:
+                        st.info(f"After answering the question and downloading the log, scroll down and click 'Begin Next Task' to start Task {next_task_num}.")
                 else:
                     next_task_num = st.session_state.current_task_index + 1
-                    st.info(f"Ready for Task {next_task_num}. Click 'Begin' to continue.")
+                    st.info(f"Ready for Task {next_task_num}. Scroll down and click 'Begin Next Task' to continue.")
             else:
                 st.info("Click 'Begin' to start your 4-task sequence.")
             
