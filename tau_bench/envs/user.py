@@ -2,7 +2,9 @@
 
 import abc
 import enum
+import time
 from litellm import completion
+from litellm.exceptions import InternalServerError, RateLimitError, ServiceUnavailableError
 
 from typing import Optional, List, Dict, Any, Union
 
@@ -59,13 +61,40 @@ class LLMUserSimulationEnv(BaseUserSimulationEnv):
         self.reset()
 
     def generate_next_message(self, messages: List[Dict[str, Any]]) -> str:
-        res = completion(
-            model=self.model, custom_llm_provider=self.provider, messages=messages
-        )
-        message = res.choices[0].message
-        self.messages.append(message.model_dump())
-        self.total_cost = res._hidden_params["response_cost"]
-        return message.content
+        max_retries = 5
+        base_delay = 5  # seconds
+
+        for attempt in range(max_retries):
+            try:
+                res = completion(
+                    model=self.model, custom_llm_provider=self.provider, messages=messages
+                )
+                message = res.choices[0].message
+                self.messages.append(message.model_dump())
+                self.total_cost = res._hidden_params["response_cost"]
+                return message.content
+            except (ServiceUnavailableError, InternalServerError) as e:
+                # Both 503 and 500 errors - retry with exponential backoff
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)  # 5s, 10s, 20s, 40s, 80s
+                    error_type = "Service unavailable" if isinstance(e, ServiceUnavailableError) else "API overloaded"
+                    print(f"{error_type}, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                else:
+                    print(f"Service still unavailable after {max_retries} attempts, giving up.")
+                    raise
+            except RateLimitError as e:
+                # Rate limit - needs longer wait
+                if attempt < max_retries - 1:
+                    delay = 60 * (attempt + 1)  # 60s, 120s, 180s, 240s, 300s
+                    print(f"Rate limit hit, waiting {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                else:
+                    print(f"Rate limit still hit after {max_retries} attempts, giving up.")
+                    raise
+            except Exception as e:
+                # Any other error - don't retry
+                raise
 
     def build_system_prompt(self, instruction: Optional[str]) -> str:
         instruction_display = (
@@ -130,13 +159,40 @@ User Response:
 <the user response (this will be parsed and sent to the agent)>"""
 
     def generate_next_message(self, messages: List[Dict[str, Any]]) -> str:
-        res = completion(
-            model=self.model, custom_llm_provider=self.provider, messages=messages
-        )
-        message = res.choices[0].message
-        self.messages.append(message.model_dump())
-        self.total_cost = res._hidden_params["response_cost"]
-        return self.parse_response(message.content)
+        max_retries = 5
+        base_delay = 5  # seconds
+
+        for attempt in range(max_retries):
+            try:
+                res = completion(
+                    model=self.model, custom_llm_provider=self.provider, messages=messages
+                )
+                message = res.choices[0].message
+                self.messages.append(message.model_dump())
+                self.total_cost = res._hidden_params["response_cost"]
+                return self.parse_response(message.content)
+            except (ServiceUnavailableError, InternalServerError) as e:
+                # Both 503 and 500 errors - retry with exponential backoff
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)  # 5s, 10s, 20s, 40s, 80s
+                    error_type = "Service unavailable" if isinstance(e, ServiceUnavailableError) else "API overloaded"
+                    print(f"{error_type}, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                else:
+                    print(f"Service still unavailable after {max_retries} attempts, giving up.")
+                    raise
+            except RateLimitError as e:
+                # Rate limit - needs longer wait
+                if attempt < max_retries - 1:
+                    delay = 60 * (attempt + 1)  # 60s, 120s, 180s, 240s, 300s
+                    print(f"Rate limit hit, waiting {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                else:
+                    print(f"Rate limit still hit after {max_retries} attempts, giving up.")
+                    raise
+            except Exception as e:
+                # Any other error - don't retry
+                raise
 
     def reset(self, instruction: Optional[str] = None) -> str:
         self.messages = [
@@ -178,12 +234,41 @@ class VerifyUserSimulationEnv(LLMUserSimulationEnv):
     def generate_next_message(self, messages: List[Dict[str, Any]]) -> str:
         attempts = 0
         cur_message = None
+        max_retries = 5
+        base_delay = 5  # seconds
+
         while attempts < self.max_attempts:
-            res = completion(
-                model=self.model, custom_llm_provider=self.provider, messages=messages
-            )
-            cur_message = res.choices[0].message
-            self.total_cost = res._hidden_params["response_cost"]
+            for retry_attempt in range(max_retries):
+                try:
+                    res = completion(
+                        model=self.model, custom_llm_provider=self.provider, messages=messages
+                    )
+                    cur_message = res.choices[0].message
+                    self.total_cost = res._hidden_params["response_cost"]
+                    break  # Success, exit retry loop
+                except (ServiceUnavailableError, InternalServerError) as e:
+                    # Both 503 and 500 errors - retry with exponential backoff
+                    if retry_attempt < max_retries - 1:
+                        delay = base_delay * (2 ** retry_attempt)  # 5s, 10s, 20s, 40s, 80s
+                        error_type = "Service unavailable" if isinstance(e, ServiceUnavailableError) else "API overloaded"
+                        print(f"{error_type}, retrying in {delay} seconds... (attempt {retry_attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                    else:
+                        print(f"Service still unavailable after {max_retries} attempts, giving up.")
+                        raise
+                except RateLimitError as e:
+                    # Rate limit - needs longer wait
+                    if retry_attempt < max_retries - 1:
+                        delay = 60 * (retry_attempt + 1)  # 60s, 120s, 180s, 240s, 300s
+                        print(f"Rate limit hit, waiting {delay} seconds... (attempt {retry_attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                    else:
+                        print(f"Rate limit still hit after {max_retries} attempts, giving up.")
+                        raise
+                except Exception as e:
+                    # Any other error - don't retry
+                    raise
+
             if verify(self.model, self.provider, cur_message, messages):
                 self.messages.append(cur_message.model_dump())
                 return cur_message.content
@@ -229,7 +314,7 @@ def verify(
     )
     prompt = f"""You are a supervisor of the Agent in the conversation. You are given a Transcript of a conversation between a Customer and an Agent. The Customer has generated a Response, and you need to verify if it is satisfactory (true) or not (false).
 Your answer will be parsed, so do not include any other text than the classification (true or false).
-    
+
 # Transcript:
 {transcript}
 
@@ -239,12 +324,39 @@ Your answer will be parsed, so do not include any other text than the classifica
 -----
 
 Classification:"""
-    res = completion(
-        model=model,
-        custom_llm_provider=provider,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return "true" in res.choices[0].message.content.lower()
+    max_retries = 5
+    base_delay = 5  # seconds
+
+    for attempt in range(max_retries):
+        try:
+            res = completion(
+                model=model,
+                custom_llm_provider=provider,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            return "true" in res.choices[0].message.content.lower()
+        except (ServiceUnavailableError, InternalServerError) as e:
+            # Both 503 and 500 errors - retry with exponential backoff
+            if attempt < max_retries - 1:
+                delay = base_delay * (2 ** attempt)  # 5s, 10s, 20s, 40s, 80s
+                error_type = "Service unavailable" if isinstance(e, ServiceUnavailableError) else "API overloaded"
+                print(f"{error_type}, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                time.sleep(delay)
+            else:
+                print(f"Service still unavailable after {max_retries} attempts, giving up.")
+                raise
+        except RateLimitError as e:
+            # Rate limit - needs longer wait
+            if attempt < max_retries - 1:
+                delay = 60 * (attempt + 1)  # 60s, 120s, 180s, 240s, 300s
+                print(f"Rate limit hit, waiting {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                time.sleep(delay)
+            else:
+                print(f"Rate limit still hit after {max_retries} attempts, giving up.")
+                raise
+        except Exception as e:
+            # Any other error - don't retry
+            raise
 
 
 def reflect(
@@ -259,7 +371,7 @@ def reflect(
     prompt = f"""You are a supervisor of the Agent in the conversation. You are given a Transcript of a conversation between a (simulated) Customer and an Agent. The Customer generated a Response that was marked as unsatisfactory by you.
 You need to generate a Reflection on what went wrong in the conversation, and propose a new Response that should fix the issues.
 Your answer will be parsed, so do not include any other text than the classification (true or false).
-    
+
 # Transcript:
 {transcript}
 
@@ -273,13 +385,40 @@ Reflection:
 
 Response:
 <the response (this will be parsed and sent to the agent)>"""
-    res = completion(
-        model=model,
-        custom_llm_provider=provider,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    _, response = res.choices[0].message.content.split("Response:")
-    return response.strip()
+    max_retries = 5
+    base_delay = 5  # seconds
+
+    for attempt in range(max_retries):
+        try:
+            res = completion(
+                model=model,
+                custom_llm_provider=provider,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            _, response = res.choices[0].message.content.split("Response:")
+            return response.strip()
+        except (ServiceUnavailableError, InternalServerError) as e:
+            # Both 503 and 500 errors - retry with exponential backoff
+            if attempt < max_retries - 1:
+                delay = base_delay * (2 ** attempt)  # 5s, 10s, 20s, 40s, 80s
+                error_type = "Service unavailable" if isinstance(e, ServiceUnavailableError) else "API overloaded"
+                print(f"{error_type}, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                time.sleep(delay)
+            else:
+                print(f"Service still unavailable after {max_retries} attempts, giving up.")
+                raise
+        except RateLimitError as e:
+            # Rate limit - needs longer wait
+            if attempt < max_retries - 1:
+                delay = 60 * (attempt + 1)  # 60s, 120s, 180s, 240s, 300s
+                print(f"Rate limit hit, waiting {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                time.sleep(delay)
+            else:
+                print(f"Rate limit still hit after {max_retries} attempts, giving up.")
+                raise
+        except Exception as e:
+            # Any other error - don't retry
+            raise
 
 
 class ReflectionUserSimulationEnv(LLMUserSimulationEnv):

@@ -15,9 +15,13 @@ from tau_bench.envs.retail.tasks_test_modified2 import TASKS_TEST as RETAIL_TASK
 from tau_bench.envs.airline.tasks_test import TASKS as AIRLINE_TASKS_TEST
 from task_questions import TASK_QUESTIONS
 
+# Model configuration
+MODEL_NAME = "gpt-4o-2024-05-13"
+LLM_PROVIDER = "openai"
+
 # Task difficulty configuration
-EASY_TASK_INDICES = [53, 80, 15, 3, 65, 8, 44, 60, 95, 70]
-HARD_TASK_INDICES = [72, 20, 74, 29, 99, 79, 82, 27, 59, 101]
+EASY_TASK_INDICES = [0, 8, 16, 29, 44, 49, 74, 80, 94]
+HARD_TASK_INDICES = [20, 22, 30, 36, 39, 42, 72, 79, 99]
 
 
 def assign_random_tasks() -> List[int]:
@@ -31,15 +35,15 @@ def assign_random_tasks() -> List[int]:
 
 
 def get_api_key():
-    """Get Anthropic API key from Streamlit secrets or environment variables"""
+    """Get API key from Streamlit secrets or environment variables"""
     try:
         # Try to get from Streamlit secrets first
-        return st.secrets["ANTHROPIC_API_KEY"]
+        return st.secrets["OPENAI_API_KEY"]
     except (KeyError, FileNotFoundError):
         # Fall back to environment variable for local development
-        api_key = os.getenv("ANTHROPIC_API_KEY")
+        api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            st.error("❌ ANTHROPIC_API_KEY not found in secrets or environment variables!")
+            st.error("❌ OPENAI_API_KEY not found in secrets or environment variables!")
             st.info("Please add your API key to Streamlit secrets or set the environment variable.")
             st.stop()
         return api_key
@@ -190,7 +194,7 @@ def save_conversation_log(env, task_id: int, messages,
     time_str = datetime.now().strftime("%m%d%H%M%S")
     # Get the current task sequence number (1-4)
     task_sequence = st.session_state.get('current_task_index', 0) + 1
-    filename = f"streamlit-claude-3-5-sonnet-20241022-0.0_range_{task_id}-{task_id+1}_user-human-human_{time_str}_task{task_sequence}.json"
+    filename = f"streamlit-{MODEL_NAME}-0.0_range_{task_id}-{task_id+1}_user-human-human_{time_str}_task{task_sequence}.json"
     
     result = EnvRunResult(
         task_id=task_id,
@@ -300,7 +304,7 @@ def main():
     try:
         api_key = get_api_key()
         # Set environment variable for litellm to use
-        os.environ["ANTHROPIC_API_KEY"] = api_key
+        os.environ["OPENAI_API_KEY"] = api_key
     except Exception as e:
         st.error(f"API Key Error: {str(e)}")
         st.stop()
@@ -445,7 +449,7 @@ def main():
         # Model selection (fixed for now)
         model = st.selectbox(
             "Agent Model",
-            options=["claude-3-5-sonnet-20241022"],
+            options=[MODEL_NAME],
             index=0,
             disabled=True
         )
@@ -742,8 +746,8 @@ def main():
                 st.session_state.agent = ToolCallingAgent(
                     tools_info=st.session_state.env.tools_info,
                     wiki=st.session_state.env.wiki,
-                    model="claude-3-5-sonnet-20241022",
-                    provider="anthropic",
+                    model=MODEL_NAME,
+                    provider=LLM_PROVIDER,
                     temperature=0.0
                 )
                 
@@ -784,7 +788,7 @@ def main():
             except Exception as e:
                 st.error(f"Error starting conversation: {str(e)}")
                 if "api" in str(e).lower() or "key" in str(e).lower():
-                    st.error("Make sure your ANTHROPIC_API_KEY is properly configured in Streamlit secrets.")
+                    st.error("Make sure your OPENAI_API_KEY is properly configured in Streamlit secrets.")
     
     elif st.session_state.get('conversation_ended', False) and not st.session_state.conversation_started:
         # Show conversation history even after ending (before moving to next task)
@@ -921,8 +925,8 @@ def main():
                         with st.spinner("🤖 Agent is thinking..."):
                             res = completion(
                                 messages=st.session_state.agent_messages,
-                                model="claude-3-5-sonnet-20241022",
-                                custom_llm_provider="anthropic",
+                                model=MODEL_NAME,
+                                custom_llm_provider=LLM_PROVIDER,
                                 tools=st.session_state.env.tools_info,
                                 temperature=0.0,
                             )
@@ -1078,7 +1082,7 @@ def main():
                 except Exception as e:
                     st.error(f"Error processing agent response: {str(e)}")
                     if "api" in str(e).lower() or "key" in str(e).lower():
-                        st.error("Make sure your ANTHROPIC_API_KEY is properly configured in Streamlit secrets.")
+                        st.error("Make sure your OPENAI_API_KEY is properly configured in Streamlit secrets.")
         
         else:
             if st.session_state.all_tasks_completed:

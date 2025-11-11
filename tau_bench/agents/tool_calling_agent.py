@@ -1,7 +1,9 @@
 # Copyright Sierra
 
 import json
+import time
 from litellm import completion
+from litellm.exceptions import InternalServerError, RateLimitError, ServiceUnavailableError
 from typing import List, Optional, Dict, Any
 
 from tau_bench.agents.base import Agent
@@ -37,15 +39,44 @@ class ToolCallingAgent(Agent):
             {"role": "user", "content": obs},
         ]
         for _ in range(max_num_steps):
-            res = completion(
-                messages=messages,
-                model=self.model,
-                custom_llm_provider=self.provider,
-                tools=self.tools_info,
-                temperature=self.temperature,
-            )
+            max_retries = 5
+            base_delay = 5  # seconds
+
+            for attempt in range(max_retries):
+                try:
+                    res = completion(
+                        messages=messages,
+                        model=self.model,
+                        custom_llm_provider=self.provider,
+                        tools=self.tools_info,
+                        temperature=self.temperature,
+                    )
+                    break  # Success, exit retry loop
+                except (ServiceUnavailableError, InternalServerError) as e:
+                    # Both 503 and 500 errors - retry with exponential backoff
+                    if attempt < max_retries - 1:
+                        delay = base_delay * (2 ** attempt)  # 5s, 10s, 20s, 40s, 80s
+                        error_type = "Service unavailable" if isinstance(e, ServiceUnavailableError) else "API overloaded"
+                        print(f"{error_type}, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                    else:
+                        print(f"Service still unavailable after {max_retries} attempts, giving up.")
+                        raise
+                except RateLimitError as e:
+                    # Rate limit - needs longer wait
+                    if attempt < max_retries - 1:
+                        delay = 60 * (attempt + 1)  # 60s, 120s, 180s, 240s, 300s
+                        print(f"Rate limit hit, waiting {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                    else:
+                        print(f"Rate limit still hit after {max_retries} attempts, giving up.")
+                        raise
+                except Exception as e:
+                    # Any other error - don't retry
+                    raise
+
             next_message = res.choices[0].message.model_dump()
-            total_cost += res._hidden_params["response_cost"]
+            total_cost += res._hidden_params["response_cost"] or 0
             action = message_to_action(next_message)
             env_response = env.step(action)
             reward = env_response.reward
