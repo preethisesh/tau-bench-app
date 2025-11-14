@@ -16,8 +16,8 @@ from tau_bench.envs.airline.tasks_test import TASKS as AIRLINE_TASKS_TEST
 from task_questions import TASK_QUESTIONS
 
 # Model configuration
-MODEL_NAME = "claude-3-7-sonnet-20250219"
-LLM_PROVIDER = "anthropic"
+MODEL_NAME = "gpt-4o-2024-05-13"
+LLM_PROVIDER = "openai"
 
 # Task difficulty configuration
 EASY_TASK_INDICES = [0, 8, 16, 29, 44, 49, 74, 80, 94]
