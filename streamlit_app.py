@@ -21,7 +21,7 @@ LLM_PROVIDER = "openai"
 
 # Task difficulty configuration
 EASY_TASK_INDICES = [0, 8, 16, 29, 44, 49, 74, 80, 94]
-HARD_TASK_INDICES = [20, 22, 30, 36, 39, 42, 72, 79, 99]
+HARD_TASK_INDICES = [20, 22, 30, 36, 39, 42, 79, 99, 104] #72
 
 
 def assign_random_tasks() -> List[int]:

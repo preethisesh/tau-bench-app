@@ -1,32 +1,5 @@
 # Task-specific questions to display after completion
 
-TASK_QUESTIONS = {
-    72: "What is the street address for the user's place in Charlotte? Only include the street address and nothing else (no suite, city, or zip code information).",
-    20: "What is the size of the shoe? Write the number only.",
-    74: "What payment method was used for the laptop?",
-    29: "How tall is the original bamboo skateboard in inches? Write the number only.",
-    99: "How many pieces does the new jigsaw puzzle have? Write the number only.",
-    79: "What is the material for the 1000 mL bottle that was originally ordered?",
-    82: "What is the storage size of the more expensive tablet? Write the number only.",
-    19: "What is the price of the water bottle (including cents)?",
-    59: "Which item is in the older order?",
-    101: "What is the original color of the luggage set?",
-    27: "What is the status of the order before doing anything?",
-    37: "How many items were in the order (the one totaling more than 1160 dollars)? Write the number only.",
-    39: "What is the user's new address (the Phoenix address)? Only include the street address and nothing else (no suite, city, or zip code information)",
-    53: "What was the original payment method for the bicycle?",
-    55: "How many orders did you have in total? Write the number only.",
-    80: "Along how many dimensions/properties does the new t-shirt differ from the old one (e.g., size, color, etc.)?",
-    15: "What is the original size of the pending boots?",
-    3: "How many t-shirt material options are available? Write the number only.",
-    65: "What is the order status of the bookshelf?",
-    8: "What is the original size of the water bottle?",
-    44: "What is the original price of the desk lamp (including cents)?",
-    60: "What is the original color of the earbuds?",
-    95: "What is the processor on the original laptop?",
-    70: "What is the original size of the helmet?",
-}
-
 # [20, 22, 30, 36, 39, 42, 72, 79, 99], [0, 8, 16, 29, 44, 49, 74, 80, 94]
 TASK_QUESTIONS = {
     0: "Before exchange, what type of switch did your keyboard have? Answer with a single word.",
@@ -61,4 +34,5 @@ TASK_QUESTIONS = {
     95: "What is the processor on the original laptop? Write the processor only.",
     99: "How many pieces does the new jigsaw puzzle have? Write the number only.",
     101: "What is the original color of the luggage set? Write the color only.",
+    105: "What is the street address for the user's place in Chicago? Only include the street address and nothing else (no suite, city, or zip code information)."
 }

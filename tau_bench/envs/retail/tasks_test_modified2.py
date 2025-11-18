@@ -142,7 +142,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="b63",
-        instruction="You are User b63 in 19122. You want to know how many tshirt options are available in the online store right now. Please ask this first. You also want to modify all your pending small tshirts to purple, same size, same v-neck, and prefer polyester. To start the conversation, say 'Hello, my email is user.b63@example.com.'",
+        instruction="You are User b63 in 19122. You want to know how many tshirt options are available in the online store right now. You also want to modify all your pending small tshirts to purple, same size, same v-neck, and prefer polyester. To start the conversation, say 'Hello, my email is user.b63@example.com.'",
         actions=[
             Action(
                 name="find_user_id_by_name_zip",
@@ -3311,7 +3311,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="m93",
-        instruction="Your name is User m93 and your zip code is 28243. You made a mistake and placed an order sent to your son's address in Washington DC. You want to modify it to your default address in Charlotte (you do not want to mention it, but it is in your user profile so the agent can look it up). You also want to adjust the desk lamp to be black color, and the backpack to be medium size and polyester material instead. If multiple colors are available for the backpack, you prefer grey. If the agent asks for a payment method, you say gift card initially. If the agent does not allow it or asks you to confirm it, you change your mind to PayPal, and decide to only modify the backpack. To start the conversation, say 'Hello, my email is user.m93@example.com.'",
+        instruction="Your name is User m93 and your zip code is 28243. You made a mistake and placed an order sent to your son's address in Washington DC. You want to modify it to your default address in Charlotte (you do not want to mention it, but it is in your user profile so the agent can look it up). You also want to adjust the desk lamp to be black color, and the backpack to be medium size and polyester material instead. If multiple colors are available for the backpack, you prefer grey. If the agent asks for a payment method, you say gift card initially. If the agent does not allow it or asks you to confirm it, you change your mind to PayPal, and decide to only modify the backpack. Make sure you briefly mention the two things at the same time at the beginning, but first mention the modification then the address. To start the conversation, say 'Hello, my email is user.m93@example.com.'",
         actions=[
             Action(
                 name="modify_pending_order_address",
@@ -4051,7 +4051,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="o32",
-        instruction="Your name is User o32 and your email is user.o32@example.com. You want to return the bookshelf and jigsaw puzzle you received in the same order. Make sure you mention at the beginning that you want to return these two things, and that they are from the same order. You also want to return the backpack you received with the vacuum cleaner. You also want to change your pending order address to the default Chicago one, and change the item color to red. You want to get the tracking number of your cancelled order. To start the conversation, say 'Hello, my email is user.o32@example.com.'",
+        instruction="Your name is User o32 and your email is user.o32@example.com. You want to return the bookshelf and jigsaw puzzle you received in the same order. Make sure you mention at the beginning that you want to return these two things, and that they are from the same order. You also want to return the backpack you received with the vacuum cleaner. You also want to change your pending order address to the default Chicago one, and change the item color to red. You want to get the tracking number from your previously cancelled order. To start the conversation, say 'Hello, my email is user.o32@example.com.'",
         actions=[
             Action(
                 name="return_delivered_order_items",
@@ -4096,7 +4096,7 @@ TASKS_TEST = [
     Task(
         annotator="0",
         user_id="o32",
-        instruction="Your name is User o32 and your email is user.o32@example.com. You want to return the bookshelf and jigsaw puzzle you received in different orders. Make sure you mention at the beginning that you want to return these two things, and they are from different orders. You also want to return the backpack you received with the vacuum cleaner. You also want to change your pending order item to red, and address to your default Chicago home (you won't reveal it for private reasons but it's in your profile). You want to get the tracking number of your cancelled order. To start the conversation, say 'Hello, my email is user.o32@example.com.'",
+        instruction="Your name is User o32 and your email is user.o32@example.com. You want to return the bookshelf and jigsaw puzzle you received in different orders. Make sure you mention at the beginning that you want to return these two things, and they are from different orders. You also want to return the backpack you received with the vacuum cleaner. You also want to change your pending order item to red, and address to your default Chicago home (you won't reveal it for private reasons but it's in your profile). You want to get the tracking number from your previously cancelled order. To start the conversation, say 'Hello, my email is user.o32@example.com.'",
         actions=[
             Action(
                 name="return_delivered_order_items",
