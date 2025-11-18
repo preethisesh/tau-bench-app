@@ -34,5 +34,6 @@ TASK_QUESTIONS = {
     95: "What is the processor on the original laptop? Write the processor only.",
     99: "How many pieces does the new jigsaw puzzle have? Write the number only.",
     101: "What is the original color of the luggage set? Write the color only.",
+    104: "What is the street address for the user's place in Chicago? Only include the street address and nothing else (no suite, city, or zip code information).",
     105: "What is the street address for the user's place in Chicago? Only include the street address and nothing else (no suite, city, or zip code information)."
 }
