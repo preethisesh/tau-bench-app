@@ -163,27 +163,55 @@ def clean_agent_response(text):
     
     return text
 
-def save_conversation_log(env, task_id: int, messages, 
+def save_conversation_log(env, task_id: int, messages,
                          agent_actions: List[Action], trial: int = 0):
     """Save conversation log and offer download for Streamlit Cloud"""
-    
+
     # Calculate conversation duration
     conversation_end_time = datetime.now()
     start_time = st.session_state.get('conversation_start_time', conversation_end_time)
     duration_seconds = (conversation_end_time - start_time).total_seconds()
-    
-    # Calculate reward using existing environment logic
-    reward_result = env.calculate_reward()
+
+    # Check if we already have cached reward result from transfer_to_human_agents
+    if (hasattr(st.session_state, 'cached_reward_result') and
+        st.session_state.cached_reward_result is not None):
+        # Agent used transfer_to_human_agents - use cached values to avoid double calculation
+        reward_result = st.session_state.cached_reward_result
+        actual_data_hash = st.session_state.cached_actual_hash
+        gt_data_hash = st.session_state.cached_gt_hash
+        initial_data_hash = st.session_state.cached_initial_hash
+
+        # Clear cached values
+        st.session_state.cached_reward_result = None
+        st.session_state.cached_actual_hash = None
+        st.session_state.cached_gt_hash = None
+        st.session_state.cached_initial_hash = None
+    else:
+        # User ended conversation manually without transfer - calculate reward now
+        actual_data_hash = env.get_data_hash()
+        reward_result = env.calculate_reward()
+        gt_data_hash = env.get_data_hash()
+
+        # Get initial hash by resetting database again
+        env.data = env.data_load_func()
+        initial_data_hash = env.get_data_hash()
 
     # Replace with only successful actions (not attempted actions)
     reward_result.actions = st.session_state.successful_actions
-    
+
+    # Add database hashes to reward_info
+    reward_info_dict = reward_result.model_dump()
+    if 'info' in reward_info_dict and isinstance(reward_info_dict['info'], dict):
+        reward_info_dict['info']['initial_data_hash'] = initial_data_hash
+        reward_info_dict['info']['actual_data_hash'] = actual_data_hash
+        reward_info_dict['info']['gt_data_hash'] = gt_data_hash
+
     # Build info structure matching command-line version with timing info
     info = {
         "task": env.task.model_dump(),
         "source": "user",
         "user_cost": env.user.get_total_cost(),
-        "reward_info": reward_result.model_dump(),
+        "reward_info": reward_info_dict,
         # Add timing information
         "conversation_start_time": start_time.isoformat(),
         "conversation_end_time": conversation_end_time.isoformat(),
@@ -689,6 +717,16 @@ def main():
     if 'all_tasks_completed' not in st.session_state:
         st.session_state.all_tasks_completed = False
 
+    # Cached reward computation values (for fixing double calculate_reward bug)
+    if 'cached_reward_result' not in st.session_state:
+        st.session_state.cached_reward_result = None
+    if 'cached_actual_hash' not in st.session_state:
+        st.session_state.cached_actual_hash = None
+    if 'cached_gt_hash' not in st.session_state:
+        st.session_state.cached_gt_hash = None
+    if 'cached_initial_hash' not in st.session_state:
+        st.session_state.cached_initial_hash = None
+
     # Basic restoration without task details (will be completed later after sidebar config)
     # Always restore if no tasks are assigned (page rerun clears session state)
     if not st.session_state.assigned_tasks:
@@ -933,9 +971,32 @@ def main():
                         
                         agent_message = res.choices[0].message.model_dump()
                         agent_action = message_to_action(agent_message)
-                        
-                        # Execute action in environment first
+
+                        # Check if agent is using transfer_to_human_agents (which will trigger done=True and calculate_reward)
+                        is_transfer_action = (
+                            agent_message.get("tool_calls") and
+                            any(tool_call["function"]["name"] == "transfer_to_human_agents"
+                                for tool_call in agent_message["tool_calls"])
+                        )
+
+                        # If transfer action, capture hashes BEFORE env.step() calls calculate_reward()
+                        if is_transfer_action:
+                            # Capture actual database hash (agent's final state)
+                            st.session_state.cached_actual_hash = st.session_state.env.get_data_hash()
+
+                            # Capture initial database hash
+                            temp_data = st.session_state.env.data
+                            st.session_state.env.data = st.session_state.env.data_load_func()
+                            st.session_state.cached_initial_hash = st.session_state.env.get_data_hash()
+                            st.session_state.env.data = temp_data
+
+                        # Execute action in environment
                         env_response = st.session_state.env.step(agent_action)
+
+                        # If transfer action, cache the reward result and GT hash from env.step()
+                        if is_transfer_action and env_response.done:
+                            st.session_state.cached_reward_result = env_response.info.reward_info
+                            st.session_state.cached_gt_hash = st.session_state.env.get_data_hash()
 
                         # Track all attempted actions for backwards compatibility
                         if agent_action.name != RESPOND_ACTION_NAME and agent_action.name != "think":
