@@ -460,7 +460,7 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title("🤖 AI Agent Customer Assistance")
-    st.markdown("You will chat with an AI agent that provides retail assistance. Please follow the task instructions carefully and converse with the agent to complete the task. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). **Make sure to download your conversation logs for each task and upload them in the form.** You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
+    st.markdown("You will chat with an AI agent that provides retail assistance. The agent is there to help you complete the task and can look up information and make changes to your orders. Please follow the task instructions carefully and converse with the agent to complete the task. Use the 'End Conversation' button in the left sidebar to finish (it will appear when you begin the task). **Make sure to download your conversation logs for each task and upload them in the form.** You will also answer a question about each task in the form. The question will be shown in the left sidebar after task completion, and you will answer it in the form. **Make sure you answer the question before moving on to the next task, you won't be able to access it later.**")
     
     # Sidebar configuration
     with st.sidebar:
@@ -836,7 +836,7 @@ def main():
                 st.write(st.session_state.task_instruction)
             else:
                 st.write("Task instructions will appear here once you begin.")
-            st.write("**Instructions:** Please respond as the user described in the task instructions. **You want to complete all the requests mentioned in the instructions.** Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
+            st.write("**Instructions:** Please respond as the user described in the task instructions. **You want to complete all the requests mentioned in the instructions.** The agent is there to assist you with this. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
             st.write("**To begin the conversation, authenticate yourself by providing the user email provided in the instructions.**")
         
         # Display conversation history (read-only)
@@ -886,7 +886,7 @@ def main():
                 st.write(st.session_state.task_instruction)
             else:
                 st.write("No task loaded yet. Scroll down and click 'Begin Next Task' to start your first task.")
-            st.write("**Instructions:** Please respond as the user described in the task instructions. **You want to complete all the requests mentioned in the instructions.** Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
+            st.write("**Instructions:** Please respond as the user described in the task instructions. **You want to complete all the requests mentioned in the instructions.** The agent is there to assist you with this. Beyond this, please behave like yourself and converse naturally. Use the 'End Conversation' button in the left sidebar to finish your conversation. If you have made a genuine effort to complete the task and there is a glitch, you can move on to the next task by clicking 'End Conversation'.")
             st.write("**To begin the conversation, authenticate yourself by providing the user email provided in the instructions.**")
         
         # Display conversation history
